@@ -42,9 +42,6 @@ all_groups <- apply(all_traits_combn, 1, function(single_trait_combn) {
   agg_gr
 })
 
-all_groups <- all_groups[1:2]
-
-
 # read data ---------------------------------
 
 if(Sys.info()["nodename"] == "MICHALKOMP" )
@@ -65,7 +62,7 @@ too_short <- which(sapply(pos_seqs, length) < 80)
 pos_seqs <- pos_seqs[-c(too_short)]
 
 
-# cross-validation
+# cross-validation ---------------------------------
 
 fold_res <- pblapply(1L:10, function(dummy) {
   #assure the same proteins in each fold for each repetition
@@ -80,10 +77,9 @@ fold_res <- pblapply(1L:10, function(dummy) {
         c(prob = single_pred[["sp_probability"]], cs_pred = single_pred[["sp_end"]]))),
         cs_real = sapply(test_dat, function(i) 
           ifelse(is.null(attr(i, "sig")[2]), NA, attr(i, "sig")[2])))
-      print("dzialam")
       preds
     })
   })
 })
 
-save(fold_res, all_groups, file = paste0(pathway, "fold_res_df.RData"))
+save(fold_res, all_groups, file = paste0(pathway, "fold_res_MB1.RData"))
