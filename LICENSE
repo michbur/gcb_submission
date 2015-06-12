@@ -1,0 +1,26 @@
+This Template is based on the "LaTeX Template for PeerJ Journal and Pre-Print submissions" that has been created by WriteLaTeX and PeerJ.
+It is available under the Creative Commons CC BY 4.0 License (see [1] for Details). The original Template can be found at [2] and is also
+available under the Creative Commons CC BY 4.0 License.
+
+The original template consisted of the following files:
+    main.tex
+    results.pdf
+    samples.bib
+    view.jpg
+    wlpeerj.cls
+
+The following files were added to the template:
+    uaruhr.jpg
+
+The following files were removed the template:
+    view.jpg
+
+The following changes were made to the template:
+- main.tex has been renamed to paper.tex
+- wlpeerj.cls has been renamed to gcb15submissions.cls
+- The document is now twosided
+- Added headers that show conference and article title
+
+
+[1] https://creativecommons.org/licenses/by/4.0/
+[2] https://www.overleaf.com/latex/templates/latex-template-for-peerj-journal-and-pre-print-submissions/ptdwfrqxqzbn#.VL0M7TUR-9t
