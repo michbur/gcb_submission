@@ -129,7 +129,16 @@ Eukaryotic protein sequences and their annotations were properly prepared accord
 
 \subsection*{Clustering of amino acids}
 
-AAIndex
+The functionality of a signal peptide results not from specific amino acids, but more generally from their physicochemical properties. Henceforth, the usage of raw amino acid sequences is superflous and introduces too much noise. Firstly, we chose several attributes based on the previous studies of signal peptides. We selected hydrophobicity (important for the transfer of the tagged protein), probability of being in alpha-helix (all signal peptides are alpha helices)
+
+imposed by several  requirements, not by presence Using 
+
+To cluster amino acids we used several properties important for the structure and functionality of signal peptides. We chose:
+\begin{enumerate}[noitemsep] 
+\item hydrophobicity (important for )
+\end{enumerate}
+
+from AAIndex database (aaindexcitation). We divide properties into several groups of the interest based on the knowledge about signal peptides regional structure. The amino acids were clustered using euclidean distance and Ward's method.
 
 
 \subsection*{Subsection}
