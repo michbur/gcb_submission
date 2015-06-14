@@ -1,10 +1,12 @@
 library(seqinr)
-data(aaindex)
 library(signalHsmm)
 library(seqinr)
 library(cvTools)
 library(hmeasure)
 library(pbapply)
+
+data(aaindex)
+
 
 #normalized values of amino acids ----------------------------------------
 aa_nvals <- t(sapply(aaindex, function(i) {
@@ -25,6 +27,11 @@ traits <- list(size = c(63, 72, 109, 399),
                hydroph = c(54, 68, 151, 244),
                polarity = c(111, 321),
                alpha = c(3, 41, 253))
+
+# piece of code below is useful for getting the references of measures that we used
+# sapply(aaindex[unlist(traits)], function(i)
+#   c(i[c("A", "T")]))
+
 
 # clustering of amino acids -------------------------------------------------
 

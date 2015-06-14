@@ -119,8 +119,9 @@ You can make lists with automatic numbering \dots
 
 \section*{Methods}
 
-In a bioinformatics paper, the methods section should be the most important one.
-Therefore, feel free to have more than one method section or to choose a more meaningful title for it.
+\subsection*{The framework structure}
+
+The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superflous and introduces too much noise. Our algorithm is trained on the set of amino acids classified into several groups. We use hidden semi-Markov model as the stochastic framework, because it does not imply unrealistic assumptions. 
 
 
 \subsection*{Data selection}
@@ -129,7 +130,7 @@ Eukaryotic protein sequences and their annotations were properly prepared accord
 
 \subsection*{Clustering of amino acids}
 
-The functionality of a signal peptide results not from specific amino acids, but more generally from their physicochemical properties. Henceforth, the usage of raw amino acid sequences is superflous and introduces too much noise. Firstly, we chose several attributes based on the previous studies of signal peptides. We selected hydrophobicity (important for the transfer of the tagged protein), probability of being in alpha-helix (all signal peptides are alpha helices)
+Firstly, we chose several attributes based on the previous studies of signal peptides. We selected hydrophobicity (important for the transfer of the tagged protein), probability of being in alpha-helix (all signal peptides are alpha helices)
 
 imposed by several  requirements, not by presence Using 
 

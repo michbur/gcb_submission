@@ -1,0 +1,23 @@
+﻿@article{
+   author = {Prabhakaran, M.},
+   title = {The distribution of physical, chemical and conformational properties in signal and nascent peptides},
+   journal = {Biochem J},
+   volume = {269},
+   number = {3},
+   pages = {691-6},
+   note = {Prabhakaran, M
+ENGLAND
+Biochem J. 1990 Aug 1;269(3):691-6.},
+   abstract = {Signal peptides play a major role in an as-yet-undefined way in the translocation of proteins across membranes. The sequential arrangement of the chemical, physical and conformational properties of the signal and nascent amino acid sequences of the translocated proteins has been compiled and analysed in the present study. The sequence data of 126 signal peptides of length between 18 and 21 residues form the basis of this study. The statistical distribution of the following properties was studied hydrophobicity, Mr, bulkiness, chromatographic index and preference for adopting alpha-helical, beta-sheet and turn structures. The contribution of each property to the sequence arrangement was derived. A hydrophobic core sequence was found in all signal peptides investigated. The structural arrangement of the cleavage site was also clearly revealed by this study. Most of the physical properties of the individual sequences correlated (correlation coefficient approximately 0.4) very well with the average distribution. The preferred occupancy of amino acid residues in the signal and nascent sequences was also calculated and correlated with their property distribution. The periodic behaviour of the signal and nascent chains was revealed by calculating their hydrophobic moments for various repetitive conformations. A graphical analysis of average hydrophobic moments versus average hydrophobicity of peptides revealed the transmembrane characteristics of signal peptides and globular characteristics of the nascent peptides.},
+   keywords = {Amino Acid Sequence
+Amino Acids
+Chemistry, Physical
+DNA/genetics
+Molecular Sequence Data
+*Peptides
+Physicochemical Phenomena
+Protein Conformation
+*Protein Sorting Signals},
+   year = {1990}
+}
+
