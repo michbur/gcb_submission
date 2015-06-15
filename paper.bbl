@@ -1,5 +1,23 @@
 \begin{thebibliography}{}
 
+\bibitem[Chan et~al., 2001]{2001chanaberrant}
+Chan, D., Ho, M. S.~P., and Cheah, K. S.~E. (2001).
+\newblock Aberrant signal peptide cleavage of collagen x in schmid metaphyseal
+  chondrodysplasia: Implications for the molecular basis of the disease.
+\newblock {\em Journal of Biological Chemistry}, 276(11):7992--7997.
+
+\bibitem[Hofmann and Schultz, 1991]{1991hofmannmutations}
+Hofmann, K.~J. and Schultz, L.~D. (1991).
+\newblock Mutations of the alpha-galactosidase signal peptide which greatly
+  enhance secretion of heterologous proteins by yeast.
+\newblock {\em Gene}, 101(1):105--111.
+
+\bibitem[Huang et~al., 2010]{2010huangrole}
+Huang, Y., Wilkinson, G.~F., and Willars, G.~B. (2010).
+\newblock Role of the signal peptide in the synthesis and processing of the
+  glucagon-like peptide-1 receptor.
+\newblock {\em British Journal of Pharmacology}, 159(1):237--251.
+
 \bibitem[Nielsen and Krogh, 1998]{1998nielsenprediction}
 Nielsen, H. and Krogh, A. (1998).
 \newblock Prediction of signal peptides and signal anchors by a hidden markov
@@ -13,5 +31,13 @@ Palzkill, T., Le, Q.~Q., Wong, A., and Botstein, D. (1994).
 \newblock Selection of functional signal peptide cleavage sites from a library
   of random sequences.
 \newblock {\em Journal of Bacteriology}, 176(3):563--568.
+
+\bibitem[Zhang et~al., 2005]{2005zhangalteration}
+Zhang, L., Leng, Q., and Mixson, A.~J. (2005).
+\newblock Alteration in the il-2 signal peptide affects secretion of proteins
+  in vitro and in vivo.
+\newblock {\em J Gene Med}, 7(3):354--65.
+\newblock Zhang, Lei Leng, Qixin Mixson, A James CA 70394/CA/NCI NIH HHS/ CA
+  96984/CA/NCI NIH HHS/ England J Gene Med. 2005 Mar;7(3):354-65.
 
 \end{thebibliography}
