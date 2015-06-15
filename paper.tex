@@ -1,6 +1,7 @@
 \documentclass[fleqn,10pt,twoside]{gcb15submission}
 \usepackage{url}\urlstyle{same}
-
+\usepackage{booktabs}
+\usepackage{colortbl, xcolor}
 
 \title{signalHsmm - a novel semi-Markov model of signal peptides}
 
@@ -119,11 +120,15 @@ You can make lists with automatic numbering \dots
 
 \section*{Methods}
 
-\subsection*{The framework structure}
+\subsection*{Overview}
 
-The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superflous and introduces unnecessary information. To utilize this property of signal peptide recognision, we cluster amino acids into several groups based on the physicochemical properties of residues.
+The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superfluous and introduces unnecessary information. To utilize this property of signal peptide recognition, we cluster amino acids into several groups based on the physicochemical properties of residues.
 
-The pre-processed sequences are further analyzed by the heuristic algorithm~\citep{1998nielsenprediction}, which determines borders between three characteristic signal peptide regions. Next, two models are trained to recognize proteins with and without a signal peptide. The first one is a hidden semi-Markov model, in which each of three signal peptide regions is represented by a different hidden state. The additional fourth hidden state represents mature protein. Each state is described by the frequencies of amino acid groups  within that state. The distribution of hidden states durations, the number of amino acids related to each hidden state in signal peptide, is based on the empirical density of region lengths from the training set. The second model is a simple probabilistic approach in which no association between amino acids was assumed, and probability of amino acids groups occurrence was determined by their frequencies in mature proteins.
+The pre-processed sequences are further analyzed by the heuristic algorithm, which determines borders between three characteristic signal peptide regions, the enhanced version of algorithm presented in~\cite{1998nielsenprediction}. Using the current information from experimentalists, we refined the region recognition criteria.
+
+Next, two models are trained to recognize proteins with and without a signal peptide. The first one is a hidden semi-Markov model, in which each of three signal peptide regions is represented by a different hidden state. The additional fourth hidden state represents mature protein. Each state is described by the frequencies of amino acid groups  within that state. The distribution of hidden states durations, the number of amino acids related to each hidden state in signal peptide, is based on the empirical density of region lengths from the training set. 
+
+The second model is a simple probabilistic approach in which no association between amino acids was assumed, and probability of amino acids groups occurrence was determined by their frequencies in mature proteins.
 
 \subsection*{Data selection}
 
@@ -131,16 +136,34 @@ Eukaryotic protein sequences and their annotations were properly prepared accord
 
 \subsection*{Clustering of amino acids}
 
-We cluster amino acids using several criterions selected from AAindex database.
+We cluster amino acids using several criteria relevant for the architecture of signal peptide: hydrophobicity, frequency in alpha-helices, polarity and size. High values of hydrophobicity are required in the h-region, the core of signal peptides. Alpha-helix, the secondary structure of this region, is probably induced by the positively charged n-region. Polarity as well as size are important especially in the cleavage site~\citep{1994palzkillselection}.
 
-e chose several attributes based on the previous studies of signal peptides. We selected hydrophobicity (important for the transfer of the tagged protein), probability of being in alpha-helix (all signal peptides are alpha helices)
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \toprule
+Criterion name & Property name \\ 
+  \midrule
+Size & Size \\ 
+   \rowcolor[gray]{0.85}Size & Molecular weight \\ 
+  Size & Residue volume \\ 
+   \rowcolor[gray]{0.85}Size & Bulkiness \\ 
+  Hydrophobicity & Normalized hydrophobicity scales for alpha-proteins \\ 
+   \rowcolor[gray]{0.85}Hydrophobicity & Consensus normalized hydrophobicity scale \\ 
+  Hydrophobicity & Hydropathy index \\ 
+   \rowcolor[gray]{0.85}Hydrophobicity & Surrounding hydrophobicity in alpha-helix \\ 
+  Polarity & Polarity \\ 
+   \rowcolor[gray]{0.85}Polarity & Mean polarity \\ 
+  Frequency in alpha-helices & Signal sequence helical potential \\ 
+   \rowcolor[gray]{0.85}Frequency in alpha-helices & Normalized frequency of N-terminal helix \\ 
+  Frequency in alpha-helices & Relative frequency in alpha-helix \\ 
+   \bottomrule
+\end{tabular}
+\caption{Properties used in clusterization.} 
+\label{tab:aaprop}
+\end{table}
 
-To cluster amino acids we used several properties important for the structure and functionality of signal peptides. We chose:
-\begin{enumerate}[noitemsep] 
-\item hydrophobicity (important for )
-\end{enumerate}
-
-from AAIndex database (aaindexcitation). We divide properties into several groups of the interest based on the knowledge about signal peptides regional structure. The amino acids were clustered using euclidean distance and Ward's method.
+We selected 13 properties from AAIndex database (aaindexcitation) (see Table~\ref{tab:aaprop}). Each property was attributed to a single criterion. Considering all combinations of single properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. 
 
 
 \subsection*{Subsection}

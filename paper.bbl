@@ -8,4 +8,10 @@ Nielsen, H. and Krogh, A. (1998).
   Systems for Molecular Biology ; ISMB. International Conference on Intelligent
   Systems for Molecular Biology}, 6:122--130.
 
+\bibitem[Palzkill et~al., 1994]{1994palzkillselection}
+Palzkill, T., Le, Q.~Q., Wong, A., and Botstein, D. (1994).
+\newblock Selection of functional signal peptide cleavage sites from a library
+  of random sequences.
+\newblock {\em Journal of Bacteriology}, 176(3):563--568.
+
 \end{thebibliography}
