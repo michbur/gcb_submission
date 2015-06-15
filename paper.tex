@@ -86,7 +86,7 @@ Gadgets & 13
 \subsection*{Citations}
 
 LaTeX formats citations and references automatically using the bibliography records in your .bib file.
-Use the \verb|\cite| command for an inline citation, like \cite{MuellerRahmann+2003RobustEstimation}, and the \verb|\citep| command for a citation in parentheses \citep{MuellerRahmann+2003RobustEstimation}.
+Use the \verb|\cite| command for an inline citation, like 
 
 \subsection*{Mathematics}
 
@@ -121,18 +121,19 @@ You can make lists with automatic numbering \dots
 
 \subsection*{The framework structure}
 
-The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superflous and introduces too much noise. Our algorithm is trained on the set of amino acids classified into several groups. We use hidden semi-Markov model as the stochastic framework, because it does not imply unrealistic assumptions. 
+The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superflous and introduces unnecessary information. To utilize this property of signal peptide recognision, we cluster amino acids into several groups based on the physicochemical properties of residues.
 
+The pre-processed sequences are further analyzed by the heuristic algorithm~\citep{1998nielsenprediction}, which determines borders between three characteristic signal peptide regions. Next, two models are trained to recognize proteins with and without a signal peptide. The first one is a hidden semi-Markov model, in which each of three signal peptide regions is represented by a different hidden state. The additional fourth hidden state represents mature protein. Each state is described by the frequencies of amino acid groups  within that state. The distribution of hidden states durations, the number of amino acids related to each hidden state in signal peptide, is based on the empirical density of region lengths from the training set. The second model is a simple probabilistic approach in which no association between amino acids was assumed, and probability of amino acids groups occurrence was determined by their frequencies in mature proteins.
 
 \subsection*{Data selection}
 
-Eukaryotic protein sequences and their annotations were properly prepared according to the literature of the subject and downloaded from UniProt database release 2015\_06. The positive set contained 2589 sequences with an experimentally confirmed signal peptide and its cleavage site. Sequences with more than one cleavage site were excluded from the final data set. The negative set comprised 152272 sequences without any signal peptide. Protein sequences with ambiguous symbols: X, J, Z and B were removed from the final sets. Proteins with selenocysteine (U) were also excluded from data set, because there are no records of signal peptides containing this amino acid.
+Eukaryotic protein sequences and their annotations were properly prepared according to the literature of the subject and downloaded from UniProt database release 2015\_06. The positive set contained 2589 sequences with an experimentally confirmed signal peptide and its cleavage site. Sequences with more than one cleavage site were excluded from the final data set. The negative set comprised 152272 sequences without any signal peptide annotation. Protein sequences with ambiguous symbols: X, J, Z and B were removed from the final sets. Proteins with selenocysteine (U) were also excluded from data set, because there are no records of signal peptides containing this amino acid.
 
 \subsection*{Clustering of amino acids}
 
-Firstly, we chose several attributes based on the previous studies of signal peptides. We selected hydrophobicity (important for the transfer of the tagged protein), probability of being in alpha-helix (all signal peptides are alpha helices)
+We cluster amino acids using several criterions selected from AAindex database.
 
-imposed by several  requirements, not by presence Using 
+e chose several attributes based on the previous studies of signal peptides. We selected hydrophobicity (important for the transfer of the tagged protein), probability of being in alpha-helix (all signal peptides are alpha helices)
 
 To cluster amino acids we used several properties important for the structure and functionality of signal peptides. We chose:
 \begin{enumerate}[noitemsep] 
@@ -176,6 +177,6 @@ Please submit the final pdf file via EasyChair to the GCB'15 program committee b
 Thank you for your support!
 
 
-\bibliography{sample}
+\bibliography{lokalizom}
 
 \end{document}

@@ -2,7 +2,7 @@ library(dplyr)
 
 bib_lines <- readLines("lokalizom.txt")
 
-starts <- c(grep("@", bib_lines), length(bib_lines) + 1)
+starts <- c(grep("^@", bib_lines), length(bib_lines) + 1)
 
 bib_names <- sapply(1L:(length(starts) - 1), function(i) {
   pub_lines <- bib_lines[starts[i]:((starts[i + 1]) - 1)]
@@ -37,8 +37,8 @@ bib_names <- sapply(1L:(length(starts) - 1), function(i) {
 })
 
 bib_names <- paste0(bib_names, ",")
-bib_starts <- grep("@", bib_lines)
+bib_starts <- grep("^@", bib_lines)
 for(i in 1L:length(bib_starts)) {
-  bib_lines[bib_starts[i]] <- paste0(bib_lines[bib_starts[i]], bib_names[i])
+  bib_lines[bib_starts[i]] <- paste0("@article{", bib_names[i])
 }
 writeLines(bib_lines, "lokalizom.bib")
