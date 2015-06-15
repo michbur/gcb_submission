@@ -6,6 +6,40 @@ Chan, D., Ho, M. S.~P., and Cheah, K. S.~E. (2001).
   chondrodysplasia: Implications for the molecular basis of the disease.
 \newblock {\em Journal of Biological Chemistry}, 276(11):7992--7997.
 
+\bibitem[Futatsumori-Sugai and Tsumoto, 2010]{2010futatsumorisugaisignal}
+Futatsumori-Sugai, M. and Tsumoto, K. (2010).
+\newblock Signal peptide design for improving recombinant protein secretion in
+  the baculovirus expression vector system.
+\newblock {\em Biochem Biophys Res Commun}, 391(1):931--5.
+\newblock Futatsumori-Sugai, Mutsumi Tsumoto, Kouhei Biochem Biophys Res
+  Commun. 2010 Jan 1;391(1):931-5. doi: 10.1016/j.bbrc.2009.11.167. Epub 2009
+  Dec 5.
+
+\bibitem[He et~al., 2003]{2003heenhanced}
+He, X., Tsang, T.~C., Luo, P., Zhang, T., and Harris, D.~T. (2003).
+\newblock Enhanced tumor immunogenicity through coupling cytokine expression
+  with antigen presentation.
+\newblock {\em Cancer Gene Ther}, 10(9):669--77.
+\newblock He, Xianghui Tsang, Tom C Luo, Phoebe Zhang, Tong Harris, David T
+  England Cancer Gene Ther. 2003 Sep;10(9):669-77.
+
+\bibitem[Hegde and Bernstein, 2006]{2006hegdethe}
+Hegde, R.~S. and Bernstein, H.~D. (2006).
+\newblock The surprising complexity of signal sequences.
+\newblock {\em Trends in biochemical sciences}, 31:563--571.
+
+\bibitem[Hiller et~al., 2004]{2004hillerpredisi}
+Hiller, K., Grote, A., Scheer, M., Münch, R., and Jahn, D. (2004).
+\newblock Predisi: prediction of signal peptides and their cleavage positions.
+\newblock {\em Nucleic Acids Research}, 32:W375--W379.
+
+\bibitem[Hiss and Schneider, 2009]{2009hissarchitecture}
+Hiss, J.~A. and Schneider, G. (2009).
+\newblock Architecture, function and prediction of long signal peptides.
+\newblock {\em Brief Bioinform}, 10(5):569--78.
+\newblock Hiss, Jan A Schneider, Gisbert England Brief Bioinform. 2009
+  Sep;10(5):569-78. doi: 10.1093/bib/bbp030. Epub 2009 Jun 17.
+
 \bibitem[Hofmann and Schultz, 1991]{1991hofmannmutations}
 Hofmann, K.~J. and Schultz, L.~D. (1991).
 \newblock Mutations of the alpha-galactosidase signal peptide which greatly
@@ -18,6 +52,85 @@ Huang, Y., Wilkinson, G.~F., and Willars, G.~B. (2010).
   glucagon-like peptide-1 receptor.
 \newblock {\em British Journal of Pharmacology}, 159(1):237--251.
 
+\bibitem[Izard and Kendall, 1994]{1994izardsignal}
+Izard, J.~W. and Kendall, D.~A. (1994).
+\newblock Signal peptides: exquisitely designed transport promoters.
+\newblock {\em Molecular Microbiology}, 13(5):765--773.
+
+\bibitem[Kapp, 2000]{2000kappposttargeting}
+Kapp, K.; Schrempf S.;~Lemberg, M. K. D.~B. (2000).
+\newblock Post-targeting functions of signal peptides.
+
+\bibitem[Kerzerho et~al., 2013]{2013kerzerhothe}
+Kerzerho, J., Schneider, A., Favry, E., Castelli, F.~A., and Maillere, B.
+  (2013).
+\newblock The signal peptide of the tumor-shared antigen midkine hosts cd4+ t
+  cell epitopes.
+\newblock {\em J Biol Chem}, 288(19):13370--7.
+\newblock Kerzerho, Jerome Schneider, Aurelie Favry, Emmanuel Castelli,
+  Florence Anne Maillere, Bernard J Biol Chem. 2013 May 10;288(19):13370-7.
+  doi: 10.1074/jbc.M112.427302. Epub 2013 Apr 3.
+
+\bibitem[Käll et~al., 2004]{2004klla}
+Käll, L., Krogh, A., and Sonnhammer, E. L.~L. (2004).
+\newblock A combined transmembrane topology and signal peptide prediction
+  method.
+\newblock {\em Journal of molecular biology}, 338:1027--1036.
+
+\bibitem[Lin et~al., 2002]{2002linamino}
+Lin, K., May, A.~C., and Taylor, W.~R. (2002).
+\newblock Amino acid encoding schemes from protein structure alignments:
+  multi-dimensional vectors to describe residue types.
+\newblock {\em J Theor Biol}, 216(3):361--65.
+\newblock Lin, Kuang May, Alex C W Taylor, William R England J Theor Biol. 2002
+  Jun 7;216(3):361-65.
+
+\bibitem[Moeller et~al., 2009]{2009moellera}
+Moeller, L., Gan, Q., and Wang, K. (2009).
+\newblock A bacterial signal peptide is functional in plants and directs
+  proteins to the secretory pathway.
+\newblock {\em J Exp Bot}, 60(12):3337--52.
+\newblock Moeller, Lorena Gan, Qinglei Wang, Kan England J Exp Bot.
+  2009;60(12):3337-52. doi: 10.1093/jxb/erp167. Epub 2009 Jun 2.
+
+\bibitem[Moeller et~al., 2010]{2010moellerwetmilling}
+Moeller, L., Taylor-Vokes, R., Fox, S., Gan, Q., Johnson, L., and Wang, K.
+  (2010).
+\newblock Wet-milling transgenic maize seed for fraction enrichment of
+  recombinant subunit vaccine.
+\newblock {\em Biotechnol Prog}, 26(2):458--65.
+\newblock Moeller, Lorena Taylor-Vokes, Raye Fox, Steve Gan, Qinglei Johnson,
+  Lawrence Wang, Kan Biotechnol Prog. 2010 Mar-Apr;26(2):458-65. doi:
+  10.1002/btpr.326.
+
+\bibitem[Nagano and Masuda, 2014]{2014naganoestablishment}
+Nagano, R. and Masuda, K. (2014).
+\newblock Establishment of a signal peptide with cross-species compatibility
+  for functional antibody expression in both escherichia coli and chinese
+  hamster ovary cells.
+\newblock {\em Biochem Biophys Res Commun}, 447(4):655--9.
+\newblock Nagano, Ryuma Masuda, Kazuhiro Biochem Biophys Res Commun. 2014 May
+  16;447(4):655-9. doi: 10.1016/j.bbrc.2014.04.060. Epub 2014 Apr 19.
+
+\bibitem[Neto~Ade et~al., 2012]{2012netoadeimproving}
+Neto~Ade, M., Alvarenga, D.~A., Rezende, A.~M., Resende, S.~S., Ribeiro~Rde,
+  S., Fontes, C.~J., Carvalho, L.~H., and de~Brito, C.~F. (2012).
+\newblock Improving n-terminal protein annotation of plasmodium species based
+  on signal peptide prediction of orthologous proteins.
+\newblock {\em Malar J}, 11:375.
+\newblock Neto, Armando de Menezes Alvarenga, Denise A Rezende, Antonio M
+  Resende, Sarah S Ribeiro, Ricardo de Souza Fontes, Cor J F Carvalho, Luzia H
+  de Brito, Cristiana F Alves England Malar J. 2012 Nov 15;11:375. doi:
+  10.1186/1475-2875-11-375.
+
+\bibitem[Ng and Sarkar, 2013]{2013ngengineering}
+Ng, D.~T. and Sarkar, C.~A. (2013).
+\newblock Engineering signal peptides for enhanced protein secretion from
+  lactococcus lactis.
+\newblock {\em Appl Environ Microbiol}, 79(1):347--56.
+\newblock Ng, Daphne T W Sarkar, Casim A Appl Environ Microbiol. 2013
+  Jan;79(1):347-56. doi: 10.1128/AEM.02667-12. Epub 2012 Nov 2.
+
 \bibitem[Nielsen and Krogh, 1998]{1998nielsenprediction}
 Nielsen, H. and Krogh, A. (1998).
 \newblock Prediction of signal peptides and signal anchors by a hidden markov
@@ -26,11 +139,74 @@ Nielsen, H. and Krogh, A. (1998).
   Systems for Molecular Biology ; ISMB. International Conference on Intelligent
   Systems for Molecular Biology}, 6:122--130.
 
+\bibitem[Paetzel et~al., 2002]{2002paetzelsignal}
+Paetzel, M., Karla, A., Strynadka, N.~C., and Dalbey, R.~E. (2002).
+\newblock Signal peptidases.
+\newblock {\em Chem Rev}, 102(12):4549--80.
+\newblock Paetzel, Mark Karla, Andrew Strynadka, Natalie C J Dalbey, Ross E
+  GM63862/GM/NIGMS NIH HHS/ Chem Rev. 2002 Dec;102(12):4549-80.
+
 \bibitem[Palzkill et~al., 1994]{1994palzkillselection}
 Palzkill, T., Le, Q.~Q., Wong, A., and Botstein, D. (1994).
 \newblock Selection of functional signal peptide cleavage sites from a library
   of random sequences.
 \newblock {\em Journal of Bacteriology}, 176(3):563--568.
+
+\bibitem[Petersen et~al., 2011]{2011petersensignalp}
+Petersen, T.~N., Brunak, S., von Heijne, G., and Nielsen, H. (2011).
+\newblock Signalp 4.0: discriminating signal peptides from transmembrane
+  regions.
+\newblock {\em Nature methods}, 8:785--786.
+
+\bibitem[Rabiner, 1989]{1989rabinera}
+Rabiner, L.~R. (1989).
+\newblock A tutorial on hidden markov models and selected applications in
+  speech recognition.
+\newblock pages 257--286.
+
+\bibitem[Rapoport, 2007]{2007rapoportprotein}
+Rapoport, T.~A. (2007).
+\newblock Protein translocation across the eukaryotic endoplasmic reticulum and
+  bacterial plasma membranes.
+\newblock {\em Nature}, 450(7170):663--9.
+\newblock Rapoport, Tom A England Nature. 2007 Nov 29;450(7170):663-9.
+
+\bibitem[Reynolds et~al., 2008]{2008reynoldstransmembrane}
+Reynolds, S.~M., Kall, L., Riffle, M.~E., Bilmes, J.~A., and Noble, W.~S.
+  (2008).
+\newblock Transmembrane topology and signal peptide prediction using dynamic
+  bayesian networks.
+\newblock {\em PLoS Comput Biol}, 4(11):e1000213.
+\newblock Reynolds, Sheila M Kall, Lukas Riffle, Michael E Bilmes, Jeff A
+  Noble, William Stafford P41-RR11823/RR/NCRR NIH HHS/ R01-EB007057/EB/NIBIB
+  NIH HHS/ PLoS Comput Biol. 2008 Nov;4(11):e1000213. doi:
+  10.1371/journal.pcbi.1000213. Epub 2008 Nov 7.
+
+\bibitem[Shen and Chou, 2007]{2007shensignall}
+Shen, H.-B. and Chou, K.-C. (2007).
+\newblock Signal-3l: A 3-layer approach for predicting signal peptides.
+\newblock {\em Biochemical and biophysical research communications},
+  363:297--303.
+
+\bibitem[Szczesna-Skorupa et~al., 1988]{1988szczesnaskorupapositive}
+Szczesna-Skorupa, E., Browne, N., Mead, D., and Kemper, B. (1988).
+\newblock Positive charges at the nh2 terminus convert the membrane-anchor
+  signal peptide of cytochrome p-450 to a secretory signal peptide.
+\newblock {\em Proc Natl Acad Sci U S A}, 85(3):738--742.
+\newblock 3422456[pmid] Proc Natl Acad Sci U S A.
+
+\bibitem[von Heijne and Gavel, 1988]{1988vonheijnetopogenic}
+von Heijne, G. and Gavel, Y. (1988).
+\newblock Topogenic signals in integral membrane proteins.
+\newblock {\em European Journal of Biochemistry}, 174(4):671--8.
+\newblock von Heijne, G Gavel, Y GERMANY, WEST Eur J Biochem. 1988 Jul
+  1;174(4):671-8.
+
+\bibitem[Voss et~al., 2013]{2013vossmechanism}
+Voss, M., Schröder, B., and Fluhrer, R. (2013).
+\newblock Mechanism, specificity, and physiology of signal peptide peptidase
+  (spp) and spp-like proteases.
+\newblock {\em Biochimica et biophysica acta}, 1828:2828--2839.
 
 \bibitem[Zhang et~al., 2005]{2005zhangalteration}
 Zhang, L., Leng, Q., and Mixson, A.~J. (2005).
@@ -39,5 +215,17 @@ Zhang, L., Leng, Q., and Mixson, A.~J. (2005).
 \newblock {\em J Gene Med}, 7(3):354--65.
 \newblock Zhang, Lei Leng, Qixin Mixson, A James CA 70394/CA/NCI NIH HHS/ CA
   96984/CA/NCI NIH HHS/ England J Gene Med. 2005 Mar;7(3):354-65.
+
+\bibitem[Zhang et~al., 2014]{2014zhangprediction}
+Zhang, S.-W., Zhang, T.-H., Zhang, J.-N., and Huang, Y. (2014).
+\newblock Prediction of signal peptide cleavage sites with subsite-coupled and
+  template matching fusion algorithm.
+\newblock {\em Molecular Informatics}, 33:230--239.
+
+\bibitem[Zheng et~al., 2012]{2012zhengsignalbnf}
+Zheng, Z., Chen, Y., Chen, L., Guo, G., Fan, Y., and Kong, X. (2012).
+\newblock Signal-bnf: a bayesian network fusing approach to predict signal
+  peptides.
+\newblock {\em Journal of biomedicine & biotechnology}, 2012:492174.
 
 \end{thebibliography}
