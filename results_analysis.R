@@ -96,12 +96,11 @@ p1_dat <- rep_res %>% filter(encoding %in% unique(unlist(best_enc)), measure %in
   group_by(encoding, measure) %>% summarize(mean = mean(value)) %>%
   dcast(encoding ~ measure, value.var = "mean")
 
-p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding)) +
+p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding)) +
   geom_point(size = 5) +
   #geom_text(size = 9, position = "jitter") +
   scale_x_continuous("Sensitivity") +
   scale_y_continuous("Specificity\n") + 
-  guides(colour = FALSE) +
   my_theme +
   coord_flip()
 

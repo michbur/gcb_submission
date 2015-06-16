@@ -21,6 +21,11 @@ Cid, H., Bunster, M., Canales, M., and Gazitua, F. (1992).
 \newblock Hydrophobicity and structural classes in proteins.
 \newblock {\em Protein Eng}, 5(5):373--5.
 
+\bibitem[Durbin et~al., 1998]{Durbin98biologicalsequence}
+Durbin, R., Eddy, S., Krogh, A., and Mitchison, G. (1998).
+\newblock Biological sequence analysis: probabilistic models of proteins and
+  nucleic acids. cambridge univ.
+
 \bibitem[Eisenberg, 1984]{1984eisenbergthreedimensional}
 Eisenberg, D. (1984).
 \newblock Three-dimensional structure of membrane and surface proteins.
@@ -66,7 +71,7 @@ Hiss, J.~A. and Schneider, G. (2009).
 
 \bibitem[Hofmann and Schultz, 1991]{1991hofmannmutations}
 Hofmann, K.~J. and Schultz, L.~D. (1991).
-\newblock Mutations of the α-galactosidase signal peptide which greatly
+\newblock Mutations of the $\alpha$-galactosidase signal peptide which greatly
   enhance secretion of heterologous proteins by yeast.
 \newblock {\em Gene}, 101(1):105--111.
 
@@ -234,6 +239,12 @@ Voss, M., Schröder, B., and Fluhrer, R. (2013).
   (spp) and spp-like proteases.
 \newblock {\em Biochimica et biophysica acta}, 1828:2828--2839.
 
+\bibitem[Yu, 2010]{Yu2010215}
+Yu, S.-Z. (2010).
+\newblock Hidden semi-markov models.
+\newblock {\em Artificial Intelligence}, 174(2):215 -- 243.
+\newblock Special Review Issue.
+
 \bibitem[Zhang et~al., 2005]{2005zhangalteration}
 Zhang, L., Leng, Q., and Mixson, A.~J. (2005).
 \newblock Alteration in the il-2 signal peptide affects secretion of proteins
@@ -250,7 +261,7 @@ Zhang, S.-W., Zhang, T.-H., Zhang, J.-N., and Huang, Y. (2014).
 Zheng, Z., Chen, Y., Chen, L., Guo, G., Fan, Y., and Kong, X. (2012).
 \newblock Signal-bnf: a bayesian network fusing approach to predict signal
   peptides.
-\newblock {\em Journal of biomedicine & biotechnology}, 2012:492174.
+\newblock {\em Journal of biomedicine \& biotechnology}, 2012:492174.
 
 \bibitem[Zimmerman et~al., 1968]{1968zimmermanthe}
 Zimmerman, J.~M., Eliezer, N., and Simha, R. (1968).

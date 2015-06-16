@@ -1,3 +1,7 @@
+
+#' Run from command line
+#' Rscript aminoacid_encoding.R runID numberOfCrossValidationRuns
+
 library(seqinr)
 library(signalHsmm)
 library(seqinr)
@@ -7,6 +11,11 @@ library(pbapply)
 
 data(aaindex)
 
+args <- commandArgs(trailingOnly = TRUE)
+runID <- as.numeric(args[1])
+numberRuns <- as.numeric(args[2])
+message(paste0("aminoacid_encoding.R is running with run ID ", runID, ". Number of
+               cross-validation runs is ", numberRuns))
 
 #normalized values of amino acids ----------------------------------------
 aa_nvals <- t(sapply(aaindex, function(i) {
@@ -66,6 +75,12 @@ if(Sys.info()["nodename"] == "MICHALKOMP" )
 if(Sys.info()["nodename"] == "phobos" )
   pathway <- "/home/michal/Dropbox/signal-peptide2_data/"
 
+if(Sys.info()["nodename"] == "tobit" )
+  pathway <- "/home/piotr//Dropbox/signal-peptide2_data (1)//"
+
+if(Sys.info()["nodename"] == "sobczyk-pc"  )
+  pathway <- "/home/sobczyk/Dropbox//signal-peptide2_data (1)//"
+
 
 pos_seqs <- read_uniprot(paste0(pathway, "signal_peptides.txt"), euk = TRUE, what = "signal")
 neg_seqs <- read.fasta(paste0(pathway, "nonsignal_peptides.fasta"), seqtype = "AA")
@@ -80,7 +95,7 @@ pos_seqs <- pos_seqs[-c(too_short)]
 
 # cross-validation ---------------------------------
 
-fold_res <- pblapply(1L:10, function(dummy) {
+fold_res <- pblapply(1L:numberRuns, function(dummy) {
   #assure the same proteins in each fold for each repetition
   pos_ids <- cvFolds(length(pos_seqs), K = 5)
   cv_neg <- neg_seqs[sample(1L:length(neg_seqs), length(pos_seqs))]
@@ -98,4 +113,18 @@ fold_res <- pblapply(1L:10, function(dummy) {
   })
 })
 
-save(fold_res, all_groups, file = paste0(pathway, "fold_res_MB1.RData"))
+
+if(Sys.info()["nodename"] == "MICHALKOMP" )
+  output <- paste0("fold_res_MB", runID, ".RData")
+
+if(Sys.info()["nodename"] == "phobos" )
+  output <- paste0("fold_res_MB", runID, ".RData")
+
+if(Sys.info()["nodename"] == "tobit" )
+  output <- paste0("fold_res_PS", runID, ".RData")
+
+if(Sys.info()["nodename"] == "sobczyk-pc"  )
+  output <- paste0("fold_res_PS", runID, ".RData")
+
+save(fold_res, all_groups, file = paste0(pathway, output))
+message(paste0("Results were saved to file ", pathway, output))
