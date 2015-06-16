@@ -4,7 +4,7 @@ bib_lines <- readLines("lokalizom.txt")
 
 starts <- c(grep("^@", bib_lines), length(bib_lines) + 1)
 
-bib_names <- sapply(1L:(length(starts) - 1), function(i) {
+bib_list <- lapply(1L:(length(starts) - 1), function(i) {
   pub_lines <- bib_lines[starts[i]:((starts[i + 1]) - 1)]
   author_line <- pub_lines[grep("author = ", pub_lines)]
   if(length(author_line) > 0) {
@@ -33,12 +33,19 @@ bib_names <- sapply(1L:(length(starts) - 1), function(i) {
     final_title <- c()
   }
   
-  paste0(final_year, final_author, final_title)
+  #first line
+  pub_lines[1] <- paste0("@article{", final_year, final_author, final_title, ",")
+  
+  #remove note
+  note_start <- grep("note = {", pub_lines, fixed = TRUE)
+  if(length(note_start) > 0) {
+    pub_lines[-(note_start:(note_start + grep("\\},$", pub_lines[note_start:length(pub_lines)])[1] - 1))]
+  } else {
+    pub_lines
+  }
 })
 
-bib_names <- paste0(bib_names, ",")
-bib_starts <- grep("^@", bib_lines)
-for(i in 1L:length(bib_starts)) {
-  bib_lines[bib_starts[i]] <- paste0("@article{", bib_names[i])
-}
-writeLines(bib_lines, "lokalizom.bib")
+# bib_names <- paste0(bib_names, ",")
+# bib_starts <- grep("^@", bib_lines)
+
+writeLines(unlist(bib_list), "lokalizom.bib")
