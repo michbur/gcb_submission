@@ -10,6 +10,11 @@ Bendtsen, J.~D., Nielsen, H., von Heijne, G., and Brunak, S. (2004).
 \newblock Improved prediction of signal peptides: Signalp 3.0.
 \newblock {\em J Mol Biol}, 340(4):783--95.
 
+\bibitem[Burdukiewicz et~al., 2015]{biogramPackage}
+Burdukiewicz, M., Sobczyk, P., and Lauber, C. (2015).
+\newblock {\em biogram: analysis of biological sequences using n-grams}.
+\newblock R package version 1.2.
+
 \bibitem[Chan et~al., 2001]{2001chanaberrant}
 Chan, D., Ho, M. S.~P., and Cheah, K. S.~E. (2001).
 \newblock Aberrant signal peptide cleavage of collagen x in schmid metaphyseal

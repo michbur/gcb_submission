@@ -132,8 +132,8 @@ To compare encodings we performed a 5-fold cross-validation training a new insta
 
 \subsection*{Hidden semi-Markov model}
 
-Let us first define Hidden Markov Model (HMM). Suppose you have a sequence of observations e.g. amino acids. What is of interest is
-understanding underlying cause of their occurrence. 
+Let us first focus on Hidden Markov Model (HMM). 
+Suppose you have a sequence of observations e.g. amino acids. What is of interest is understanding underlying cause of their occurrence. 
 HMM aims to answer that by assuming a specific yet flexible structure of the problem.
 HMM consists of two stochastic processes. First is discrete Markov chain $X_{t=1}^T$ on the set of so called hidden states $\{S_1, \dots S_n\}$.
 These are "the cause" for the observations. At every step, hidden state might change according to transition matrix
@@ -149,7 +149,7 @@ For a good reference on HMM see~\citep{1989rabinera}.
 In regular HMM, hidden state duration -- number of observations emitted by the hidden state, has geometric distribution.
 \citep{Durbin98biologicalsequence} shows how to extend it for some different distributions without significant increase in computational 
 complexity. Similar ideas were used for signal peptide recognition, for example in~\citep{2004klla}. 
-It is However still not flexible enough. Empirical regions length distributions (see figure~\ref{fig:reglen})
+It is, however, still not flexible enough. Empirical regional length distributions (see figure~\ref{fig:reglen})
 are difficult to capture in that way.
 
 %rysunek pokazujący o co chodzi w HMM
@@ -209,14 +209,14 @@ are difficult to capture in that way.
 \end{figure}
 
 The model we use is Hidden semi-Markov Model(HSMM)~\citep{Yu2010215}. It extends HMM by allowing 
-any given hidden state length distribution. Scheme is shown in figure~\ref{fig:hsmm}.
-Model is given by matrices $A$ and $B$ as before, as well as probabilities of duration length in hidden states.
+any given hidden state duration distribution. Scheme is shown in figure~\ref{fig:hsmm}.
+In addition to matrices $A$ and $B$, model is given by probabilities of duration length in hidden states.
 $$\mathcal{P}(\text{duration in state} = d | \text{state is } S_i), \;\; i = 1, \dots, n, \;\; d = 1, \dots, D$$
-$D$ is maximal allowed duration.
+where $D$ is maximal allowed duration.
 As our datasets are of reasonable size, $D$ is small -- around 30, computational effort is not much 
-higher than in the regular HMM. 
+higher than with the regular HMM. 
 
-The gain is not only a better fit to the data but also, as 
+The advantage of HSMM model is not only a better performance but also, as 
 model structure (see figure~\ref{fig:model_hsmm}) is straightforward, easier interpretation 
 for researcher without mathematical background.
 
@@ -291,7 +291,7 @@ The rigid structure of n-grams may mirror cleavage sites, which are more
 conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
 Scheme of extended HSMM can be seen in figure~\ref{fig:model_hsmm_kMer}.
 
-Using the biogram software (BIOGRAM CITATION) we extracted n-grams from cleavage sites of signal peptides. 
+Using the biogram software~\citep{biogramPackage} we extracted n-grams from cleavage sites of signal peptides. 
 XXX n-grams were further used in the analysis
 
 \section*{Results}
