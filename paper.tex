@@ -132,14 +132,9 @@ To compare encodings we performed a 5-fold cross-validation training a new insta
 
 \subsection*{Hidden semi-Markov model}
 
-Hidden Markov Model(HMM) is a widely used machine learning technique which, in contrast to black-box methods like neural network used by SignalP, 
-is easy to interpret and allows researcher to analyze and understand structure of modeled phenomenon. 
-In case of signal-peptide, we might wish to verify whether regions really describe it. Also we might capture
-structure for some special subgroups and with HMM we can verify biological hypothesis.
-
-Suppose you have a sequence of observations e.g. amino acids. What is of interest is
+Let us first define Hidden Markov Model (HMM). Suppose you have a sequence of observations e.g. amino acids. What is of interest is
 understanding underlying cause of their occurrence. 
-HMM aims to answer that question by assuming a specific yet flexible structure of the problem.
+HMM aims to answer that by assuming a specific yet flexible structure of the problem.
 HMM consists of two stochastic processes. First is discrete Markov chain $X_{t=1}^T$ on the set of so called hidden states $\{S_1, \dots S_n\}$.
 These are "the cause" for the observations. At every step, hidden state might change according to transition matrix
 $A= (a)_{i,j=1}^n$, where $a_{i,j} = \mathcal{P}(X_{t+1} = S_j | X_t = S_i)$. In our application hidden states are signal peptide regions.
@@ -154,8 +149,8 @@ For a good reference on HMM see~\citep{1989rabinera}.
 In regular HMM, hidden state duration -- number of observations emitted by the hidden state, has geometric distribution.
 \citep{Durbin98biologicalsequence} shows how to extend it for some different distributions without significant increase in computational 
 complexity. Similar ideas were used for signal peptide recognition, for example in~\citep{2004klla}. 
-However it still not flexible enough. Empirical regions length distributions (see Figure~\ref{fig:reglen}),
-is difficult to capture in that way.
+It is However still not flexible enough. Empirical regions length distributions (see figure~\ref{fig:reglen})
+are difficult to capture in that way.
 
 %rysunek pokazujący o co chodzi w HMM
 \begin{figure}[h]
@@ -221,16 +216,83 @@ $D$ is maximal allowed duration.
 As our datasets are of reasonable size, $D$ is small -- around 30, computational effort is not much 
 higher than in the regular HMM. 
 
-The gain is not only a better fit to the data but also, as number of hidden states is smaller, easier interpretation 
+The gain is not only a better fit to the data but also, as 
+model structure (see figure~\ref{fig:model_hsmm}) is straightforward, easier interpretation 
 for researcher without mathematical background.
 
-HSMM can be further extend to use some specific knowledge of motives - n-grams.
-
+%model structure
+\begin{figure}
+ \begin{minipage}{.5\linewidth} 
+ \caption{Scheme of signalHsmm}
+     \resizebox{6.5cm}{!}{%
+    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
+    \label{fig:model_hsmm}
+      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=4.5mm, -latex']
+      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\itshape,
+         align=center,  top color=white, bottom color=blue!50!black!70 ] %font=\sffamily\small\bfseries,
+      %nodes
+      \node[main node]            (start') 	[]						{Start};	     
+      \node[main node, bottom color=purple!70!black!70] 	(nregion') 	[right of=start',xshift=-5mm, yshift=15mm] 	{n-region};
+      \node[main node, bottom color=pink!70!black!70] 	(hregion') 	[right of=nregion',xshift=-5mm,yshift=15mm] 	{h-region};
+      \node[main node, bottom color=gray!70!black!70] 	(cregion') 	[right of=hregion',xshift=-5mm,yshift=-15mm] 	{c-region};
+      \node[main node, bottom color=green!70!black!70] 	(mature') 	[right of=cregion',xshift=-5mm, yshift=-15mm] 	{Mature protein};
+      
+      %lines
+      \path [line] (start')   edge node [left, color=black] {} (nregion');
+      \path [line] (nregion') edge node [below, color=black] { } (hregion');
+      \path [line] (hregion') edge node [below, color=black] { } (cregion');
+      \path [line] (cregion') edge node [left, color=black] { } (mature');
+      \draw [line] (start') to[out=340,in=200] (mature');
+    \end{tikzpicture} }
+\end{minipage}
+ \begin{minipage}{.5\linewidth}
+   \caption{Scheme of signalHsmm with cleavage site motives}
+     \resizebox{6.5cm}{!}{%
+    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
+    \label{fig:model_hsmm_kMer}
+      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=4.5mm, -latex']
+      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\itshape,
+         align=center,  top color=white, bottom color=blue!50!black!70 ] %font=\sffamily\small\bfseries,
+      %nodes
+      \node[main node]            (start')   []  					{Start};	     
+      \node[main node, bottom color=purple!70!black!70] 	(nregion') 	[right of=start',xshift=-25mm, yshift=35mm] 	{n-region};
+      \node[main node, bottom color=pink!70!black!70] 	(hregion') 	[right of=nregion',xshift=-25mm,yshift=35mm] 	{h-region};
+      \node[main node, bottom color=gray!70!black!70] 	(cregion') 	[right of=hregion',xshift=-10mm,yshift=-25mm] 	{c-region};
+      \node[main node, bottom color=green!70!black!70] 	(mature') 	[below of=hregion',xshift=15mm, yshift=-90mm] 	{Mature protein};
+      
+      \node[main node, bottom color=yellow!70!black!70]   (kmer1) 	[below of=cregion',xshift=35mm,yshift=30mm] 	{Aminoacid 1};
+      \node[main node, bottom color=yellow!70!black!70]   (kmer2) 	[below of=kmer1,xshift=-5mm,yshift=5mm] 	{Aminoacid 2};
+      \node[main node, bottom color=yellow!70!black!70]   (kmer3) 	[below of=kmer2,xshift=-5mm,yshift=5mm] 	{Aminoacid 3};
+      %lines
+      \path [line] (start')   edge node [left, color=black] {} (nregion');
+      \path [line] (nregion') edge node [below, color=black] { } (hregion');
+      \path [line] (hregion') edge node [below, color=black] { } (cregion');
+      \path [line] (cregion') to[out=230,in=90] (mature');
+      \draw [line] (start') to[out=300,in=180] (mature');
+      
+      \draw [line] (cregion') edge node [below, color=black] { } (kmer1);
+      \draw [line] (kmer1) edge node [left, color=black] {} (kmer2);
+      \draw [line] (kmer2) edge node [left, color=black] {} (kmer3);
+      \draw [line] (kmer3) edge node [left, color=black] {} (mature');
+      
+      %\draw [decorate,line width=3pt,decoration={brace,amplitude=10pt}] ([xshift=5mm, yshift=5mm]kmer1) -- ([yshift=-25mm]kmer3) node [black,midway,xshift=0.6cm] {\footnotesize $P_1$};
+      \draw[decoration={brace,amplitude=10pt, raise=5pt},decorate, line width=2pt]  
+      ([yshift=1mm]kmer1.east) -- ([yshift=-5mm]kmer3.east) node [black,midway,xshift=0.6cm] {\large \color{yellow!50!black!90} k-mer};
+    \end{tikzpicture} }
+    \end{minipage}
+\end{figure}
+    
 \subsection*{n-gram extension}
 
-n-grams (k-mers) are vectors of n characters derived from input sequences. They can be added as the new hidden state to the hidden semi-Markov model. The rigid structure of n-grams may mirror cleavage sites, whose are more conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
+HSMM can be further extended to use some specific motives that might occur in proximity of cleavage site.
+Such an extension requires defining additional hidden states. 
+To find such motives we analyze n-grams (k-mers) -- vectors of n characters derived from input sequences. 
+The rigid structure of n-grams may mirror cleavage sites, which are more 
+conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
+Scheme of extended HSMM can be seen in figure~\ref{fig:model_hsmm_kMer}.
 
-Using the biogram software (BIOGRAM CITATION) we extracted n-grams from cleavage sites of signal peptides. XXX n-grams were further used in the analysis
+Using the biogram software (BIOGRAM CITATION) we extracted n-grams from cleavage sites of signal peptides. 
+XXX n-grams were further used in the analysis
 
 \section*{Results}
 
