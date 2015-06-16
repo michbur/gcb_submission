@@ -50,6 +50,12 @@ if(Sys.info()["nodename"] == "MICHALKOMP" )
 if(Sys.info()["nodename"] == "phobos" )
   pathway <- "/home/michal/Dropbox/signal-peptide2_data/"
 
+if(Sys.info()["nodename"] == "tobit" )
+  pathway <- "/home/piotr//Dropbox/signal-peptide2_data (1)//"
+
+if(Sys.info()["nodename"] == "sobczyk-pc"  )
+  pathway <- "/home/sobczyk/Dropbox//signal-peptide2_data (1)//"
+
 
 pos_seqs <- read_uniprot(paste0(pathway, "signal_peptides.txt"), euk = TRUE, what = "signal")
 neg_seqs <- read.fasta(paste0(pathway, "nonsignal_peptides.fasta"), seqtype = "AA")
@@ -64,7 +70,7 @@ pos_seqs <- pos_seqs[-c(too_short)]
 
 # cross-validation ---------------------------------
 
-fold_res <- pblapply(1L:10, function(dummy) {
+fold_res <- pblapply(1L:20, function(dummy) {
   #assure the same proteins in each fold for each repetition
   pos_ids <- cvFolds(length(pos_seqs), K = 5)
   cv_neg <- neg_seqs[sample(1L:length(neg_seqs), length(pos_seqs))]
@@ -82,4 +88,17 @@ fold_res <- pblapply(1L:10, function(dummy) {
   })
 })
 
-save(fold_res, all_groups, file = paste0(pathway, "fold_res_MB1.RData"))
+
+if(Sys.info()["nodename"] == "MICHALKOMP" )
+  output <- "fold_res_MB1.RData"
+
+if(Sys.info()["nodename"] == "phobos" )
+  output <- "fold_res_MB1.RData"
+
+if(Sys.info()["nodename"] == "tobit" )
+  output <- "fold_res_PS1.RData"
+
+if(Sys.info()["nodename"] == "sobczyk-pc"  )
+  output <- "fold_res_PS1.RData"
+
+save(fold_res, all_groups, file = paste0(pathway, output))
