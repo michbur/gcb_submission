@@ -92,13 +92,21 @@ best_enc <- lapply(c("AUC", "Sens", "Spec"), function(i)
 #   scale_y_continuous("Value") + 
 #   my_theme
 
-p1_dat <- rep_res %>% filter(encoding %in% unique(unlist(best_enc)), measure %in% c("AUC", "Spec", "Sens")) %>% droplevels %>%
+p1_dat <- rep_res %>% filter(#encoding %in% unique(unlist(best_enc)), 
+  measure %in% c("AUC", "Spec", "Sens")) %>% droplevels %>%
   group_by(encoding, measure) %>% summarize(mean = mean(value)) %>%
   dcast(encoding ~ measure, value.var = "mean")
 
+p1_dat <- p1_dat[!duplicated(p1_dat[, -1]), ]
+p1_dat[, "encoding"] <- rep("", nrow(p1_dat))
+p1_dat[p1_dat[, "Sens"] > 0.95, "encoding"] <- "1"
+p1_dat[p1_dat[, "Sens"] > 0.935 & p1_dat[, "Spec"] > 0.85, "encoding"] <- "2"
+p1_dat[p1_dat[, "Spec"] > 0.93, "encoding"] <- "3"
+p1_dat[, "encoding"] <- as.factor(p1_dat[, "encoding"])
+
 p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding)) +
-  geom_point(size = 5) +
-  #geom_text(size = 9, position = "jitter") +
+  geom_point(size = 5, colour = "blue", fill = adjustcolor("blue", 0.25), shape = 21) +
+  geom_text(size = 9, hjust = -0.4, vjust = -0.1) +
   scale_x_continuous("Sensitivity") +
   scale_y_continuous("Specificity\n") + 
   my_theme +
@@ -109,5 +117,6 @@ png("./figures/cvres.png", width = 2257*0.5, height = 1201*0.5)
 print(p1)
 dev.off()
 
-
-
+mean(p1_dat[p1_dat[, "encoding"] == "1", "AUC"])
+mean(p1_dat[p1_dat[, "encoding"] == "2", "AUC"])
+mean(p1_dat[p1_dat[, "encoding"] == "3", "AUC"])
