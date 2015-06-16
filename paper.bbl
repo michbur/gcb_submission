@@ -6,6 +6,11 @@ Chan, D., Ho, M. S.~P., and Cheah, K. S.~E. (2001).
   chondrodysplasia: Implications for the molecular basis of the disease.
 \newblock {\em Journal of Biological Chemistry}, 276(11):7992--7997.
 
+\bibitem[Durbin et~al., 1998]{Durbin98biologicalsequence}
+Durbin, R., Eddy, S., Krogh, A., and Mitchison, G. (1998).
+\newblock Biological sequence analysis: probabilistic models of proteins and
+  nucleic acids. cambridge univ.
+
 \bibitem[Futatsumori-Sugai and Tsumoto, 2010]{2010futatsumorisugaisignal}
 Futatsumori-Sugai, M. and Tsumoto, K. (2010).
 \newblock Signal peptide design for improving recombinant protein secretion in
@@ -35,7 +40,7 @@ Hiss, J.~A. and Schneider, G. (2009).
 
 \bibitem[Hofmann and Schultz, 1991]{1991hofmannmutations}
 Hofmann, K.~J. and Schultz, L.~D. (1991).
-\newblock Mutations of the α-galactosidase signal peptide which greatly
+\newblock Mutations of the $\alpha$-galactosidase signal peptide which greatly
   enhance secretion of heterologous proteins by yeast.
 \newblock {\em Gene}, 101(1):105--111.
 
@@ -173,6 +178,12 @@ Voss, M., Schröder, B., and Fluhrer, R. (2013).
   (spp) and spp-like proteases.
 \newblock {\em Biochimica et biophysica acta}, 1828:2828--2839.
 
+\bibitem[Yu, 2010]{Yu2010215}
+Yu, S.-Z. (2010).
+\newblock Hidden semi-markov models.
+\newblock {\em Artificial Intelligence}, 174(2):215 -- 243.
+\newblock Special Review Issue.
+
 \bibitem[Zhang et~al., 2005]{2005zhangalteration}
 Zhang, L., Leng, Q., and Mixson, A.~J. (2005).
 \newblock Alteration in the il-2 signal peptide affects secretion of proteins
@@ -189,6 +200,6 @@ Zhang, S.-W., Zhang, T.-H., Zhang, J.-N., and Huang, Y. (2014).
 Zheng, Z., Chen, Y., Chen, L., Guo, G., Fan, Y., and Kong, X. (2012).
 \newblock Signal-bnf: a bayesian network fusing approach to predict signal
   peptides.
-\newblock {\em Journal of biomedicine & biotechnology}, 2012:492174.
+\newblock {\em Journal of biomedicine \& biotechnology}, 2012:492174.
 
 \end{thebibliography}

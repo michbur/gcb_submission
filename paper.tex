@@ -3,6 +3,14 @@
 \usepackage{booktabs}
 \usepackage{colortbl, xcolor}
 
+% rysunki
+\usepackage{tikz}
+\usepackage{ifthen}
+\usepackage{xxcolor}
+\usetikzlibrary{arrows}
+\usetikzlibrary[topaths]
+\usetikzlibrary{decorations.pathreplacing}
+
 \title{signalHsmm - a novel semi-Markov model of eukaryotic signal peptides}
 
 \author[1]{Micha\l{}  Burdukiewicz}
@@ -124,7 +132,99 @@ To compare encodings we performed a 5-fold cross-validation training a new insta
 
 \subsection*{Hidden semi-Markov model}
 
-Tu troche matematyki o ukrytych modelach Markowa~\citep{1989rabinera}.
+Hidden Markov Model(HMM) is a widely used machine learning technique which, in contrast to black-box methods like neural network used by SignalP, 
+is easy to interpret and allows researcher to analyze and understand structure of modeled phenomenon. 
+In case of signal-peptide, we might wish to verify whether regions really describe it. Also we might capture
+structure for some special subgroups and with HMM we can verify biological hypothesis.
+
+Suppose you have a sequence of observations e.g. amino acids. What is of interest is
+understanding underlying cause of their occurrence. 
+HMM aims to answer that question by assuming a specific yet flexible structure of the problem.
+HMM consists of two stochastic processes. First is discrete Markov chain $X_{t=1}^T$ on the set of so called hidden states $\{S_1, \dots S_n\}$.
+These are "the cause" for the observations. At every step, hidden state might change according to transition matrix
+$A= (a)_{i,j=1}^n$, where $a_{i,j} = \mathcal{P}(X_{t+1} = S_j | X_t = S_i)$. In our application hidden states are signal peptide regions.
+Second process $E_{t=1}^T$ is observation process, defined on the set of possible observations $\{O_1, \dots, O_m\}$. 
+Observations are assumed to occur independently. Their distribution depends only on hidden state which emits it. 
+Probabilities are given by a matrix $B$, $b_{i,k} = \mathcal{P}(E_t = O_k | X_t = S_i)$.
+In our case, observations are (degenerated) amino acids.
+Main goal in signalHsmm is to find, for a given peptide, most probable regions boundaries. This is achieved with
+Viterbi algorithm.
+For a good reference on HMM see~\citep{1989rabinera}.
+
+In regular HMM, hidden state duration -- number of observations emitted by the hidden state, has geometric distribution.
+\citep{Durbin98biologicalsequence} shows how to extend it for some different distributions without significant increase in computational 
+complexity. Similar ideas were used for signal peptide recognition, for example in~\citep{2004klla}. 
+However it still not flexible enough. Empirical regions length distributions (see Figure~\ref{fig:reglen}),
+is difficult to capture in that way.
+
+%rysunek pokazujący o co chodzi w HMM
+\begin{figure}[h]
+\centering
+\tikzstyle{block} = [draw,shape=circle, top color=white, bottom color=green!50!red!70 ,minimum size=4em]
+\tikzstyle{blockComp} = [draw,shape=circle, top color=white, bottom color=red!50!black!70 ,minimum size=2.5em]
+% diameter of semicircle used to indicate that two lines are not connected
+\def\radius{.7mm} 
+\tikzstyle{branch}=[shape=rectangle, top color=white, bottom color=green!50!red!70 ,minimum size=3pt,inner sep=0pt]
+\tikzstyle{branch2}=[shape=rectangle, top color=white, bottom color=red!50!black!70 ,minimum size=3pt,inner sep=0pt]
+\def\n{11}
+ \tikzstyle{line} = [draw=black, color=black!30!white!50, line width=1.5mm, -latex'] 
+ \tikzstyle{line2} = [draw=black, color=red!30!black!50, line width=1.5mm, -latex']
+\tikzstyle{frame}=[text=black,above, bottom color=white, top color=blue!50!black!70  ]
+\tikzstyle{frameComp}=[text=black,below, bottom color=white, top color=red!50!black!70  ]
+ \tikzstyle{line3} = [color=green!50!red!70, line width=1.5mm]
+\def\names{{"$O_{1,1}$","...","$O_{1,d_1}$", "...","$O_{k, 1}$", "...", "$O_{k, d_k}$"}}%
+\begin{tikzpicture}[>=latex']
+%wąsate nawiasy
+\draw [decorate, decoration={brace,amplitude=10pt},line3,xshift=0pt,yshift=0pt] (2.5,1) -> (10.5,1) node [branch,midway,yshift=0.8cm,color=black] 
+	{\textbf{Hidden states}};
+% \draw [->,decoration={brace,mirror,amplitude=10pt},line2,xshift=0pt,yshift=0pt] (11,-3) -- (3,-3) node [branch2,midway,yshift=-0.6cm,color=black] 
+% 	{\textbf{Kierunek odczytu na nici Cricka ($3' \to 5'$)}}; 
+   % Draw blocks, inputs and outputs
+ 
+\node[block, text width=3em] at (1+2,0) (block1) {\footnotesize 1st hidden state};
+\node[blockComp] at (-.5+2,-2)  (komp1) {\footnotesize \pgfmathparse{\names[0]}\pgfmathresult};
+\node[blockComp] at (1+2,-2)  (komp2) {\footnotesize \pgfmathparse{\names[1]}\pgfmathresult};
+\node[blockComp] at (2.5+2,-2)  (komp3) {\footnotesize \pgfmathparse{\names[2]}\pgfmathresult};
+\draw[line,->]  (block1) --  (komp1);
+\draw[line,->]  (block1) --  (komp2);
+\draw[line,->]  (block1) --  (komp3);
+\draw[line3,->] (block1.east) -- +(2,0) node [branch,midway,yshift=0.2cm,xshift=-0.2cm,color=black] {\footnotesize \textbf{transition}};
+
+\node[block, bottom color=green!50!red!80,] at (4.5+2,0) (block2) {...};
+\draw[line3,->] (block2.east) -- +(2,0) node [branch,midway,yshift=0.2cm,xshift=-0.2cm,color=black] {\footnotesize \textbf{transition}};
+\node[blockComp] at (4.5+2,-2)  (komp4) {\footnotesize \pgfmathparse{\names[3]}\pgfmathresult};
+\draw[line,->]  (block2) --  (komp4) ;
+
+\node[block,text width=3.5em, bottom color=green!50!red!90] at (8+2,0) (block3) {\footnotesize $k^{th}$ hidden state};
+\node[blockComp] at (6.5+2,-2)  (komp5) {\footnotesize \pgfmathparse{\names[4]}\pgfmathresult};
+\node[blockComp] at (8+2,-2)  (komp6) {\footnotesize \pgfmathparse{\names[5]}\pgfmathresult};
+\node[blockComp] at (9.5+2,-2)  (komp7) {\footnotesize \pgfmathparse{\names[6]}\pgfmathresult};
+\draw[line,->]  (block3) --  (komp5);
+\draw[line,->]  (block3) --  (komp6);
+\draw[line,->]  (block3) --  (komp7);
+
+% \draw[<->, color=red!30!black!50, line width=1.5mm] (komp1) |- +(5,-1.5) node[line2, yshift=-0.5cm] {\textbf{Observations}} -| (komp7); 
+
+\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=20pt,mirror,raise=10pt},yshift=-10pt]
+(1,-1.8) -- (12,-1.8) node [branch2, midway, yshift=-1.5cm,color=black] {\textbf{Observations, $\sum_{i=1}^k d_i = T$}};
+
+\end{tikzpicture}
+\caption{Hidden semi-Markov Model scheme}
+\label{fig:hsmm}
+\end{figure}
+
+The model we use is Hidden semi-Markov Model(HSMM)~\citep{Yu2010215}. It extends HMM by allowing 
+any given hidden state length distribution. Scheme is shown in figure~\ref{fig:hsmm}.
+Model is given by matrices $A$ and $B$ as before, as well as probabilities of duration length in hidden states.
+$$\mathcal{P}(\text{duration in state} = d | \text{state is } S_i), \;\; i = 1, \dots, n, \;\; d = 1, \dots, D$$
+$D$ is maximal allowed duration.
+As our datasets are of reasonable size, $D$ is small -- around 30, computational effort is not much 
+higher than in the regular HMM. 
+
+The gain is not only a better fit to the data but also, as number of hidden states is smaller, easier interpretation 
+for researcher without mathematical background.
+
+HSMM can be further extend to use some specific knowledge of motives - n-grams.
 
 
 \section*{Results}
