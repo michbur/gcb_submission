@@ -217,7 +217,7 @@ As our datasets are of reasonable size, $D$ is small -- around 30, computational
 higher than in the regular HMM. 
 
 The gain is not only a better fit to the data but also, as 
-model structure (see figure \ref{fig:model_hsmm}) is straightforward, easier interpretation 
+model structure (see figure~\ref{fig:model_hsmm}) is straightforward, easier interpretation 
 for researcher without mathematical background.
 
 %model structure
@@ -281,17 +281,18 @@ for researcher without mathematical background.
     \end{tikzpicture} }
     \end{minipage}
 \end{figure}
-
-HSMM can be further extend to use some specific motives that might occur in proximity of cleavage site.
-Such an extension requires defining additional hidden states. 
-It proves to be extremely useful in recognizing cleavage site.
-Scheme can be seen in figure \ref{fig:model_hsmm_kMer}.
     
 \subsection*{n-gram extension}
 
-n-grams (k-mers) are vectors of n characters derived from input sequences. They can be added as the new hidden state to the hidden semi-Markov model. The rigid structure of n-grams may mirror cleavage sites, whose are more conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
+HSMM can be further extended to use some specific motives that might occur in proximity of cleavage site.
+Such an extension requires defining additional hidden states. 
+To find such motives we analyze n-grams (k-mers) -- vectors of n characters derived from input sequences. 
+The rigid structure of n-grams may mirror cleavage sites, which are more 
+conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
+Scheme of extended HSMM can be seen in figure~\ref{fig:model_hsmm_kMer}.
 
-Using the biogram software (BIOGRAM CITATION) we extracted n-grams from cleavage sites of signal peptides. XXX n-grams were further used in the analysis
+Using the biogram software (BIOGRAM CITATION) we extracted n-grams from cleavage sites of signal peptides. 
+XXX n-grams were further used in the analysis
 
 \section*{Results}
 
