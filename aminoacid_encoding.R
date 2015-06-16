@@ -1,10 +1,12 @@
 library(seqinr)
-data(aaindex)
 library(signalHsmm)
 library(seqinr)
 library(cvTools)
 library(hmeasure)
 library(pbapply)
+
+data(aaindex)
+
 
 #normalized values of amino acids ----------------------------------------
 aa_nvals <- t(sapply(aaindex, function(i) {
@@ -25,6 +27,20 @@ traits <- list(size = c(63, 72, 109, 399),
                hydroph = c(54, 68, 151, 244),
                polarity = c(111, 321),
                alpha = c(3, 41, 253))
+
+# piece of code below is useful for getting the references of measures that we used
+# sapply(aaindex[unlist(traits)], function(i)
+#   c(i[c("A", "T")]))
+# tab <- data.frame(criterion = names(unlist(traits)), name = unlist(lapply(aaindex[unlist(traits)], function(i)
+#   c(i[c("D")]))), row.names = NULL)
+# tab[["criterion"]] <- factor(sapply(as.character(tab[["criterion"]]), function(i) substr(i, 0, nchar(i) - 1)))
+# levels(tab[["criterion"]]) <- c("Frequency in alpha-helices", "Hydrophobicity", "Polarity", "Size")
+# tab[["name"]] <- sapply(strsplit(as.character(tab[["name"]]), " (", fixed = TRUE), function(i) i[[1]])
+# rws <- seq(1, nrow(tab) - 1, by = 2)
+# col <- rep("\\rowcolor[gray]{0.85}", length(rws))
+# colnames(tab) <- c("Criterion name", "Property name")
+# print(xtable(tab, "Properties used in clusterization.", label = "tab:aaprop"), include.rownames = FALSE, booktabs = TRUE,
+#       add.to.row = list(pos = as.list(rws), command = col))
 
 # clustering of amino acids -------------------------------------------------
 

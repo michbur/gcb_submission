@@ -1,8 +1,9 @@
 \documentclass[fleqn,10pt,twoside]{gcb15submission}
 \usepackage{url}\urlstyle{same}
+\usepackage{booktabs}
+\usepackage{colortbl, xcolor}
 
-
-\title{signalHsmm - a novel semi-Markov model of signal peptides}
+\title{signalHsmm - a novel semi-Markov model of eukaryotic signal peptides}
 
 \author[1]{Micha\l{}  Burdukiewicz}
 \author[2]{Piotr Sobczyk}
@@ -11,16 +12,16 @@
 \affil[1]{University of Wroc\l{}aw, Department of Genomics, Poland}
 \affil[2]{Wroc\l{}aw University of Technology, Department of Mathematics, Poland}
 
-\keywords{Keyword1, Keyword2, Keyword3}
+\keywords{signal petide prediction; n-gram; hidden semi-Markov models}
 
 \begin{abstract}
-The proper localization of proteins in a cell is essential to perform their desired function. Information about the protein destination is included within the very protein in the form of short peptides called targeting signals. Ones of them are signal peptides, diverse N-terminal sequences, which are responsible for targeting of proteins to endomembrane system and their export outside the cell. Proteins equipped with signal peptides constitute a substantial fraction of the whole proteome and play crucial roles in metabolism, maintenance of tissue structure, immune response and regulation of other organismal functions. Moreover, the transport of proteins through the endomembrane system is important for their correct folding and posttranslational modifications. A common model of classical signal peptides assumes that they start with a positively charged n-region, followed by a hydrophobic h-region and a c-region ended with a cleavage site recognised by a signal peptidase.
+The proper localization of proteins in a cell is essential to maintain their desired function. Information about the protein destination is included within the very protein in the form of short peptides called targeting signals. Ones of them are signal peptides, diverse N-terminal sequences, which are responsible for targeting of proteins to endomembrane system and their export outside the cell. Proteins equipped with signal peptides play crucial roles in metabolism, maintenance of tissue structure, immune response and regulation of other organismal functions. Moreover, the transport of proteins through the endomembrane system is important for their correct folding and posttranslational modifications. 
 
-However, our studies of many protein sequences representing the wide range of diversified taxonomic organisms indicate a variability of signal peptides. Therefore, the main goal of the study is to design a new probabilistic model for signal peptides, which will include knowledge about their organization, amino acid composition and variation.
+A common model of classical signal peptides assumes that they start with a positively charged n-region, followed by a hydrophobic h-region and a c-region ended with a cleavage site recognised by a signal peptidase. However, our studies of many protein sequences representing the wide range of diversified taxonomic organisms indicate a variability of signal peptides. Therefore, we designed a new, more univeral probabilistic model for eukaryotic signal peptides, which includes knowledge about their organisation, amino acid composition and variation.
 
-The proposed model will be based on hidden semi-Markov models (HSMMs) and use intrinsic knowledge about signal peptides. The big advantage of the algorithm is a possibility to incorporate unique regions in the architecture of signal peptides. Therefore, HSMMs can be useful in recognition of atypical and artificial signal peptides. An aggregation of amino acids into physicochemical groups using the neural gas algorithm with k-fold cross-validation will reduce dimensionality of the problem and enable to learn the algorithm even on smaller data sets. The reduction will allow to use more complex probabilistic models and models specialized in the detection of signal peptides in different taxonomic groups of organisms, which improve the efficiency of the whole predictor. The n-gram and position-specific weight matrix methods will add more details to the probabilistic model.
+The proposed model is based on hidden semi-Markov models (HSMMs) and use intrinsic knowledge about signal peptides. The big advantage of the algorithm is its extensibility. Using the n-grams (k-mers) we point how the general model can be attuned to yield not only better results, but also more information about signal peptides.
 
-Our preliminary model has showed the largest AUC=0.98 in comparison to other software and appeared very stable in the recovery of signal peptides after training even on very small data sets. Thanks to that, our model does not need to be permanently retrained with the continuous expansion of sequence databases. It should be emphasised that our model describes signal peptides from medically significant malaria parasites Plasmodium and their relatives (AUC = 0.92) more accurately than popular programs (0.84).
+Our model was validated a signal peptide pedictor. It has showed the largest AUC=0.98 in comparison to other software and appeared very stable in the recovery of signal peptides after training even on very small data sets. Thanks to that, our model does not need to be permanently retrained with the continuous expansion of sequence databases. It should be emphasised that our model describes signal peptides from medically significant malaria parasites Plasmodium and their relatives (AUC = 0.92) more accurately than popular programs (0.84).
 
 \end{abstract}
 
@@ -32,140 +33,112 @@ Our preliminary model has showed the largest AUC=0.98 in comparison to other sof
 
 \section*{Introduction}
 
-Your introduction goes here.
-Some examples of commonly used {\LaTeX} commands and features are listed below, to help you get started.
+\subsection*{Signal peptides}
 
-All \textbf{accepted} submissions will be published as a \textbf{preprint collection} with \textbf{PeerJ} (\url{http://www.peerj.com}).
-It will be clearly visible that the work
-\begin{enumerate}
-\item is a preprint (although reviewed and accepted by the GCB program committee)
-\item has been presented at GCB'15
-\end{enumerate}
-by including a special GCB logo in the final version
+Proteins of eukaryotes are encoded in nuclear genomes and are synthetized in ribosomes located in the cytosol or bounded by the endoplasmic reticulum. After the translation process, proteins have to be targeted to specific subcellular compartments or exported outside the cell to the extracellular environment. The proper localization of proteins is essential to perform their desired function. Information about protein destination is included within the very protein in the form of short peptides or stretches of amino acid residues called targeting or sorting signals. Ones of them are signal peptides, which are located at the N-terminus of proteins.
 
-If you decide to submit a full version after GCB to PeerJ or to PeerJ Computer Science, the procedure is very easy.
-Of course, you are free to submit your paper to any other journal that allows existing preprints.
+Signal peptides are responsible for targeting of proteins via the Sec61 translocation channel~\citep{2007rapoportprotein} to endomembrane system, which includes endoplasmic reticulum, Golgi apparatus and endosomes. Such proteins can stay inside of these compartments, or can be inserted into cellular membranes or exported outside the cell. Proteins equipped with signal peptides constitute a substantial fraction of the whole proteome. They play crucial roles in metabolism ($\beta$ galactosidase, pepsins)~\citep{1991hofmannmutations}, maintenance of tissue structure (collagen)~\citep{2001chanaberrant}, immune response (interferons, interleukins)~\citep{2005zhangalteration} and regulation of other organismal functions (prolactin, glucagon)~\citep{2010huangrole}. Moreover, passing proteins through the endomembrane system is important for their correct folding and posttranslational modification such as glycosylation and phosphorylation.
 
-
-\subsection*{About PeerJ}
-
-PeerJ is an award-winning open access publisher covering both computer science and the biological and medical sciences. 
-PeerJ provides authors with three publication venues: PeerJ and PeerJ Computer Science (peer-reviewed academic journals) and PeerJ PrePrints (a 'pre-print server'). See \url{https://peerj.com/about/publications/} for more information.
-
-The PeerJ model allows an author to publish articles in their peer-reviewed journal via the purchase of a lifetime Publication Plan. Prices start from just \$99 (a one-off payment) which entitles an author to the lifetime ability to publish 1 article per year for free.
-The fee applies to all authors of an article, which encourages a reasonable number of co-authors and is generally less than for other open-access publishers.
-
-
-\section*{Some \LaTeX{} Examples}
-\label{sec:examples}
-
-Use section and subsection commands to organize your document. \LaTeX{} handles all the formatting and numbering automatically. Use ref and label commands for cross-references.
-
-\subsection*{Figures and Tables}
-
-Use the table environment and the tabular command for basic tables --- see Table~\ref{tab:widgets}, for example.
-
-To include a figure in your document, use the figure environment and the includegraphics command as in the code for Figure~\ref{fig:uaruhr}.
+Although signal peptides are quite variable, some general architecture were proposed~\citep{1994izardsignal, 2013vossmechanism} - Fig. \ref{fig:sparch}. It is assumed that signal peptides start with a positively charged sequence of amino acid residues, called the n-region with the length of about 5-8 residues. They probably enforce a proper topology on the polypeptide during translocation through membrane based on the positive-inside rule~\citep{1988vonheijnetopogenic}. The first region is followed by a stretch of hydrophobic amino acids (h-region) with the length of about 8-12 residues. It constitutes a core region of signal peptide and has a tendency to form $\alpha$-helix. The third part of a signal peptide, usually 6 residues long, is a polar, but uncharged c-region ended with a cleavage site recognized by the signal peptidase. The amino acid composition and the length of these regions vary between signal peptides, which influences the efficiency of protein secretion~\citep{2006hegdethe}.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.6\textwidth]{uaruhr}
-\caption{An example image.}
-\label{fig:uaruhr}
+\includegraphics[width=0.55\textwidth]{SP.png}
+\caption{The organization of signal peptide.}
+\label{fig:sparch}
 \end{figure}
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
+During or after translocation of the protein into the lumen of endoplasmic reticulum, the typical signal peptide is cleaved by a signal peptidase~\citep{2002paetzelsignal} and next degraded by specific proteases, whereas the rest (mature) part of protein stays in the lumen or is passed to other compartments. The cleavage site is characterized by a very variable amino acid composition. It typically contains small and neutral residues at -3 and -1 positions~\citep{1994palzkillselection}. The site is, however, absent from some membrane proteins in which the first transmembrane-domain acts both as signal peptides and signal anchor~\citep{1988szczesnaskorupapositive}.
 
-\subsection*{Citations}
+Some data indicate that signal peptides may be universal. It was found, for example, that even bacterial signal peptides targeted correctly transgenic proteins to the plant~\citep{2009moellera} or mammalian secretory system~\citep{2014naganoestablishment}. On the other hand, signal peptides show great variation and the description presented above (Fig. \ref{fig:sparch}) refers to the most ‘typical’ signal peptides. There are also exceptionally long signal peptides, which fulfil more sophisticated roles~\citep{2009hissarchitecture}. For example, the fragment of signal peptide from preprolactin probably takes part in the regulation of prolactin secretion. Other examples are signal peptides of MHC class I, which inhibit activity of NK cells. Interesting functions have signal peptides of viral origin, which are involved in the immune evasion or viral life cycle~\citep{2000kappposttargeting}. Such diverse functions are restricted not only to the long signal peptides. The peptides from midkine, a protein contributing to the tumor progression, contains epitopes recognized by CD4+ T cells~\citep{2013kerzerhothe}. It indicates that the signal peptide may participate in a tumor immunity. The functional significance of these targeting signals makes that the prediction of signal peptide-containing proteins is also an important step in the drug development~\citep{2005zhangalteration, 2012netoadeimproving, 2010moellerwetmilling}.
 
-LaTeX formats citations and references automatically using the bibliography records in your .bib file.
-Use the \verb|\cite| command for an inline citation, like \cite{MuellerRahmann+2003RobustEstimation}, and the \verb|\citep| command for a citation in parentheses \citep{MuellerRahmann+2003RobustEstimation}.
 
-\subsection*{Mathematics}
+\subsection*{Signal peptide predicting software}
 
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-$$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i$$
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+Although many experimental methods determining the subcellular localization of proteins were devised, they are time consuming and laborious. Therefore, the development of new approaches in the field of computational biology and bioinformatics is desirable. They are not only a good support, complement or alternative for the experimental methods but also enable to understand rules encoding information about protein targeting, which is contained in the predicted targeting signals. However, many of the present predictors disregard full biological information carrying by signal peptides.
 
-\subsection*{Lists}
+Having functional importance and specific features, signal peptides became the subject of many programs to their prediction based on different methods. The state of the art software for predicting the presence of signal peptides often incorporates ‘black-box’ models, as neural networks~\citep{2011petersensignalp}, support vector machines~\citep{2014zhangprediction}, Bayesian networks~\citep{2012zhengsignalbnf} or k-nearest neighbours~\citep{2007shensignall}. Such models neither utilize biological information about signal peptides nor work properly on atypical signal peptides. 
 
-You can make lists with automatic numbering \dots
+The other type of software incorporates into the prediction process theoretical knowledge about the structure of signal peptides. Although these programs do not share innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their more abstract variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (not supported SignalP 3.0, Philius and Phobius) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane}, which reflect regions of signal peptides without realizing limitations of this probabilistic framework. However, the HMMs imply geometric distribution for duration of region length. We replicated the rules for extracting regions' boundaries from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the mentioned assumption is not in concordance with the reality because every region revealed the length distribution other than geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid region scheme (Fig. \ref{fig:sparch}) does not describe extremely long or short signal peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also unusual structures, but such probabilistic frameworks have not still been implemented.
 
-\begin{enumerate}[noitemsep] 
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}[noitemsep] 
-\item Like this,
-\item and like this.
-\end{itemize}
-\dots or with words and descriptions \dots
-\begin{description}
-\item[Word] Definition
-\item[Concept] Explanation
-\item[Idea] Text
-\end{description}
+\begin{figure}[ht]\centering
+\includegraphics[width=0.9\textwidth]{reglen.png}
+\caption{A) Distribution of lengths of signal peptides. B) Distribution of the lengths of signal peptide regions. The data was extracted from 2~589 signal peptide sequences derived from UniProt database (see \textbf{Data selection} in \textbf{Methods}).}.
+\label{fig:reglen}
+\end{figure}
 
+
+Another feature, shared by majority of the signal peptide predicting software, is orthogonal encoding of amino acids, in which a vector of 20 digits represents every amino acid. This method of encoding, however, does not preserve relationships between amino acids. The distance between residues is the same regardless of the similarity of their physicochemical properties. Such behaviour is especially undesired in signal peptides models because their regions are defined by specific features of amino acid residues and not by the simple occurrence of specific amino acids. In addition to this, such sparse encoding enforces larger data sets, which hinders their management and analysis~\citep{2002linamino}.
+
+All programs used in signal peptide recognition are trained on real protein sequences. Therefore, they succeed in the recognition of peptides similar to those in the learning set, but fail in the case of artificial signal peptides. Such peptides are designed to increase effectiveness of protein secretion~\citep{2010futatsumorisugaisignal}. They are especially important in industrial applications to increase yield of proteins. Therefore, only explicit knowledge about the organization of signal peptides allows creating sequences that will be the most efficient in the export of proteins~\citep{2013ngengineering}. Signal peptides have also an important application in gene therapy. Mimicking the natural mechanism of protein export, artificial signal peptides with tumor epitopes increase the antitumor immune response~\citep{2003heenhanced}. Such epitopes must be properly inserted into a signal peptide without decreasing its secretion properties through disruption of the regional structure. Instead of time-consuming and expensive laboratory experiments, it would be very useful to survey in silico many artificial peptides to select the ones that would fulfil the designed role.
 
 
 \section*{Methods}
 
-In a bioinformatics paper, the methods section should be the most important one.
-Therefore, feel free to have more than one method section or to choose a more meaningful title for it.
+\subsection*{Overview}
 
+The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superfluous and introduces unnecessary information. To utilize this property of signal peptide recognition, we cluster amino acids into several groups based on the physicochemical properties of residues.
+
+The pre-processed sequences are further analyzed by the heuristic algorithm, which determines borders between three characteristic signal peptide regions, the enhanced version of algorithm presented in~\cite{1998nielsenprediction}. Using the current information from experimentalists, we refined the region recognition criteria.
+
+Next, two models are trained to recognize proteins with and without a signal peptide. The first one is a hidden semi-Markov model, in which each of three signal peptide regions is represented by a different hidden state. The additional fourth hidden state represents mature protein. Each state is described by the frequencies of amino acid groups  within that state. The distribution of hidden states durations, the number of amino acids related to each hidden state in signal peptide, is based on the empirical density of region lengths from the training set. 
+
+The second model is a simple probabilistic approach in which no association between amino acids was assumed, and probability of amino acids groups occurrence was determined by their frequencies in mature proteins.
 
 \subsection*{Data selection}
 
-Eukaryotic protein sequences and their annotations were properly prepared according to the literature of the subject and downloaded from UniProt database release 2015\_06. The positive set contained 2589 sequences with an experimentally confirmed signal peptide and its cleavage site. Sequences with more than one cleavage site were excluded from the final data set. The negative set comprised 152272 sequences without any signal peptide. Protein sequences with ambiguous symbols: X, J, Z and B were removed from the final sets. Proteins with selenocysteine (U) were also excluded from data set, because there are no records of signal peptides containing this amino acid.
+
+Eukaryotic protein sequences and their annotations were properly prepared according to the literature of the subject and downloaded from UniProt database release 2015\_06. The positive set contained 2~589 sequences with an experimentally confirmed signal peptide and its cleavage site. Sequences with more than one cleavage site were excluded from the final data set. The negative set comprised 152~272 sequences without any signal peptide annotation. Protein sequences with ambiguous symbols: X, J, Z and B were removed from the final sets. Proteins with selenocysteine (U) were also excluded from data set, because there are no records of signal peptides containing this amino acid.
 
 \subsection*{Clustering of amino acids}
 
-AAIndex
+Amino acids were clustered using several criteria relevant for the architecture of signal peptide: hydrophobicity, frequency in alpha-helices, polarity and size. High values of hydrophobicity are required in the h-region, the core of signal peptides. Alpha-helix, the secondary structure of this region, is probably induced by the positively charged n-region. Polarity as well as size are important especially in the cleavage site~\citep{1994palzkillselection}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \toprule
+Criterion name & Property name \\ 
+  \midrule
+Size & Size \\ 
+   \rowcolor[gray]{0.85}Size & Molecular weight \\ 
+  Size & Residue volume \\ 
+   \rowcolor[gray]{0.85}Size & Bulkiness \\ 
+  Hydrophobicity & Normalized hydrophobicity scales for alpha-proteins \\ 
+   \rowcolor[gray]{0.85}Hydrophobicity & Consensus normalized hydrophobicity scale \\ 
+  Hydrophobicity & Hydropathy index \\ 
+   \rowcolor[gray]{0.85}Hydrophobicity & Surrounding hydrophobicity in alpha-helix \\ 
+  Polarity & Polarity \\ 
+   \rowcolor[gray]{0.85}Polarity & Mean polarity \\ 
+  Frequency in alpha-helices & Signal sequence helical potential \\ 
+   \rowcolor[gray]{0.85}Frequency in alpha-helices & Normalized frequency of N-terminal helix \\ 
+  Frequency in alpha-helices & Relative frequency in alpha-helix \\ 
+   \bottomrule
+\end{tabular}
+\caption{Properties used in clusterization.} 
+\label{tab:aaprop}
+\end{table}
+
+We selected 13 properties from AAIndex database (aaindexcitation) (see Table~\ref{tab:aaprop}), each attributed to a single criterion. Considering all combinations of single properties for every criterion, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. 
+
+To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide. The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
+
+\subsection*{Hidden semi-Markov model}
+
+Tu troche matematyki o ukrytych modelach Markowa~\citep{1989rabinera}.
 
 
-\subsection*{Subsection}
-
-Here is an interesting equation that may be helpful in some situations:
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname2}
-\end{equation}
-
-\paragraph{Paragraph}
-Nothing to see here. Move on.
-
-\paragraph{Paragraph}
-Really.
-See Figure~\ref{fig:results} for more interesting results.
-
-\begin{figure}[ht]\centering
-\includegraphics[width=0.6\textwidth]{results}
-\caption{Can you guess which function this is?}
-\label{fig:results}
-\end{figure}
-
-
-
-\section*{Results and Discussion}
+\section*{Results}
 
 You may want to separate results, discussion and conclusion, according to your needs.
 
 Please submit the final pdf file via EasyChair to the GCB'15 program committee by June 30, 2015. 
 
+\section*{Discussion}
 
 \section*{Acknowledgments}
 Thank you for your support!
 
 
-\bibliography{sample}
+\bibliography{lokalizom}
 
 \end{document}
