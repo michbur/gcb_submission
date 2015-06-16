@@ -1,3 +1,7 @@
+
+#' Run from command line
+#' Rscript aminoacid_encoding.R runID numberOfCrossValidationRuns
+
 library(seqinr)
 library(signalHsmm)
 library(seqinr)
@@ -7,6 +11,11 @@ library(pbapply)
 
 data(aaindex)
 
+args <- commandArgs(trailingOnly = TRUE)
+runID <- as.numeric(args[1])
+numberRuns <- as.numeric(args[2])
+message(paste0("aminoacid_encoding.R is running with run ID ", runID, ". Number of
+               cross-validation runs is ", numberRuns))
 
 #normalized values of amino acids ----------------------------------------
 aa_nvals <- t(sapply(aaindex, function(i) {
@@ -86,7 +95,7 @@ pos_seqs <- pos_seqs[-c(too_short)]
 
 # cross-validation ---------------------------------
 
-fold_res <- pblapply(1L:20, function(dummy) {
+fold_res <- pblapply(1L:numberRuns, function(dummy) {
   #assure the same proteins in each fold for each repetition
   pos_ids <- cvFolds(length(pos_seqs), K = 5)
   cv_neg <- neg_seqs[sample(1L:length(neg_seqs), length(pos_seqs))]
@@ -106,15 +115,16 @@ fold_res <- pblapply(1L:20, function(dummy) {
 
 
 if(Sys.info()["nodename"] == "MICHALKOMP" )
-  output <- "fold_res_MB1.RData"
+  output <- paste0("fold_res_MB", runID, ".RData")
 
 if(Sys.info()["nodename"] == "phobos" )
-  output <- "fold_res_MB1.RData"
+  output <- paste0("fold_res_MB", runID, ".RData")
 
 if(Sys.info()["nodename"] == "tobit" )
-  output <- "fold_res_PS1.RData"
+  output <- paste0("fold_res_PS", runID, ".RData")
 
 if(Sys.info()["nodename"] == "sobczyk-pc"  )
-  output <- "fold_res_PS1.RData"
+  output <- paste0("fold_res_PS", runID, ".RData")
 
 save(fold_res, all_groups, file = paste0(pathway, output))
+message(paste0("Results were saved to file ", pathway, output))
