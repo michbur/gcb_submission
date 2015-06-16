@@ -42,7 +42,7 @@ Signal peptides are responsible for targeting of proteins via the Sec61 transloc
 Although signal peptides are quite variable, some general architecture were proposed~\citep{1994izardsignal, 2013vossmechanism} - Fig. \ref{fig:sparch}. It is assumed that signal peptides start with a positively charged sequence of amino acid residues, called the n-region with the length of about 5-8 residues. They probably enforce a proper topology on the polypeptide during translocation through membrane based on the positive-inside rule~\citep{1988vonheijnetopogenic}. The first region is followed by a stretch of hydrophobic amino acids (h-region) with the length of about 8-12 residues. It constitutes a core region of signal peptide and has a tendency to form $\alpha$-helix. The third part of a signal peptide, usually 6 residues long, is a polar, but uncharged c-region ended with a cleavage site recognized by the signal peptidase. The amino acid composition and the length of these regions vary between signal peptides, which influences the efficiency of protein secretion~\citep{2006hegdethe}.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.55\textwidth]{SP.png}
+\includegraphics[width=0.55\textwidth]{figures/SP.png}
 \caption{The organization of signal peptide.}
 \label{fig:sparch}
 \end{figure}
@@ -58,16 +58,16 @@ Although many experimental methods determining the subcellular localization of p
 
 Having functional importance and specific features, signal peptides became the subject of many programs to their prediction based on different methods. The state of the art software for predicting the presence of signal peptides often incorporates ‘black-box’ models, as neural networks~\citep{2011petersensignalp}, support vector machines~\citep{2014zhangprediction}, Bayesian networks~\citep{2012zhengsignalbnf} or k-nearest neighbours~\citep{2007shensignall}. Such models neither utilize biological information about signal peptides nor work properly on atypical signal peptides. 
 
-The other type of software incorporates into the prediction process theoretical knowledge about the structure of signal peptides. Although these programs do not share innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their more abstract variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (not supported SignalP 3.0, Philius and Phobius) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane}, which reflect regions of signal peptides without realizing limitations of this probabilistic framework. However, the HMMs imply geometric distribution for duration of region length. We replicated the rules for extracting regions' boundaries from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the mentioned assumption is not in concordance with the reality because every region revealed the length distribution other than geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid region scheme (Fig. \ref{fig:sparch}) does not describe extremely long or short signal peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also unusual structures, but such probabilistic frameworks have not still been implemented.
+The other type of software incorporates into the prediction process theoretical knowledge about the structure of signal peptides. Although these programs do not share innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their more abstract variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (Phobius, Philius and not supported SignalP 3.0) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane, 2004bendtsenimproved}, which reflect regions of signal peptides without realizing limitations of this probabilistic framework. However, the HMMs imply geometric distribution for duration of region length. We replicated the rules for extracting regions' boundaries from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the mentioned assumption is not in concordance with the reality because every region revealed the length distribution other than geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid region scheme (Fig. \ref{fig:sparch}) does not describe extremely long or short signal peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also unusual structures, but such probabilistic frameworks have not still been implemented.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.9\textwidth]{reglen.png}
-\caption{A) Distribution of lengths of signal peptides. B) Distribution of the lengths of signal peptide regions. The data was extracted from 2~589 signal peptide sequences derived from UniProt database (see \textbf{Data selection} in \textbf{Methods}).}.
+\includegraphics[width=0.9\textwidth]{figures/reglen.png}
+\caption{A) Distribution of lengths of signal peptides. B) Distribution of the lengths of signal peptide regions. The measure of the length is a number of amino acids in the subsequence. The data was extracted from 2~589 signal peptide sequences derived from UniProt database (see \textbf{Data selection} in \textbf{Methods}).}
 \label{fig:reglen}
 \end{figure}
 
 
-Another feature, shared by majority of the signal peptide predicting software, is orthogonal encoding of amino acids, in which a vector of 20 digits represents every amino acid. This method of encoding, however, does not preserve relationships between amino acids. The distance between residues is the same regardless of the similarity of their physicochemical properties. Such behaviour is especially undesired in signal peptides models because their regions are defined by specific features of amino acid residues and not by the simple occurrence of specific amino acids. In addition to this, such sparse encoding enforces larger data sets, which hinders their management and analysis~\citep{2002linamino}.
+Another feature, shared by majority of the signal peptide predicting software, is the orthogonal encoding of amino acids, in which a vector of 20 digits represents every amino acid. This method of encoding, however, does not preserve relationships between amino acids. The distance between residues is the same regardless of the similarity of their physicochemical properties. Such behaviour is especially undesired in signal peptides models because their regions are defined by specific features of amino acid residues and not by the simple occurrence of specific amino acids. In addition to this, such sparse encoding enforces larger data sets, which hinders their management and analysis~\citep{2002linamino}.
 
 All programs used in signal peptide recognition are trained on real protein sequences. Therefore, they succeed in the recognition of peptides similar to those in the learning set, but fail in the case of artificial signal peptides. Such peptides are designed to increase effectiveness of protein secretion~\citep{2010futatsumorisugaisignal}. They are especially important in industrial applications to increase yield of proteins. Therefore, only explicit knowledge about the organization of signal peptides allows creating sequences that will be the most efficient in the export of proteins~\citep{2013ngengineering}. Signal peptides have also an important application in gene therapy. Mimicking the natural mechanism of protein export, artificial signal peptides with tumor epitopes increase the antitumor immune response~\citep{2003heenhanced}. Such epitopes must be properly inserted into a signal peptide without decreasing its secretion properties through disruption of the regional structure. Instead of time-consuming and expensive laboratory experiments, it would be very useful to survey in silico many artificial peptides to select the ones that would fulfil the designed role.
 
@@ -101,24 +101,24 @@ Criterion name & Property name \\
   \midrule
 Size & Size \\ 
    \rowcolor[gray]{0.85}Size & Molecular weight \\ 
-  Size & Residue volume \\ 
-   \rowcolor[gray]{0.85}Size & Bulkiness \\ 
-  Hydrophobicity & Normalized hydrophobicity scales for alpha-proteins \\ 
-   \rowcolor[gray]{0.85}Hydrophobicity & Consensus normalized hydrophobicity scale \\ 
-  Hydrophobicity & Hydropathy index \\ 
-   \rowcolor[gray]{0.85}Hydrophobicity & Surrounding hydrophobicity in alpha-helix \\ 
-  Polarity & Polarity \\ 
-   \rowcolor[gray]{0.85}Polarity & Mean polarity \\ 
-  Frequency in alpha-helices & Signal sequence helical potential \\ 
+  Size & Residue volume~\citep{1973goldsackcontribution} \\ 
+   \rowcolor[gray]{0.85}Size & Bulkiness~\citep{1968zimmermanthe} \\ 
+  Hydrophobicity & Normalized hydrophobicity scales for alpha-proteins~\citep{1992cidhydrophobicity} \\ 
+   \rowcolor[gray]{0.85}Hydrophobicity & Consensus normalized hydrophobicity scale~\citep{1984eisenbergthreedimensional} \\ 
+  Hydrophobicity & Hydropathy index~\citep{1982kytea} \\ 
+   \rowcolor[gray]{0.85}Hydrophobicity & Surrounding hydrophobicity in alpha-helix~\citep{1980ponnuswamyhydrophobic} \\ 
+  Polarity & Polarity~\citep{1974granthamamino} \\ 
+   \rowcolor[gray]{0.85}Polarity & Mean polarity~\citep{1988radzickainfluences} \\ 
+  Frequency in alpha-helices & Signal sequence helical potential~\citep{1982argosstructural} \\ 
    \rowcolor[gray]{0.85}Frequency in alpha-helices & Normalized frequency of N-terminal helix \\ 
-  Frequency in alpha-helices & Relative frequency in alpha-helix \\ 
+  Frequency in alpha-helices & Relative frequency in alpha-helix~\citep{1990prabhakaranthe} \\ 
    \bottomrule
 \end{tabular}
 \caption{Properties used in clusterization.} 
 \label{tab:aaprop}
 \end{table}
 
-We selected 13 properties from AAIndex database (aaindexcitation) (see Table~\ref{tab:aaprop}), each attributed to a single criterion. Considering all combinations of single properties for every criterion, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. 
+We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. Considering all combinations of single properties for every criterion, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. 
 
 To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide. The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
 
@@ -126,17 +126,32 @@ To compare encodings we performed a 5-fold cross-validation training a new insta
 
 Tu troche matematyki o ukrytych modelach Markowa~\citep{1989rabinera}.
 
+\subsection*{n-gram extension}
+
+n-grams (k-mers) are vectors of n characters derived from input sequences. They can be added as the new hidden state to the hidden semi-Markov model. The rigid structure of n-grams may mirror cleavage sites, whose are more conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
+
+Using the biogram software (BIOGRAM CITATION) we extracted n-grams from cleavage sites of signal peptides. XXX n-grams were further used in the analysis
 
 \section*{Results}
 
-You may want to separate results, discussion and conclusion, according to your needs.
+\begin{figure}[ht]\centering
+\includegraphics[width=0.9\textwidth]{figures/cvres.png}
+\caption{Results of cross-validation for 15 best performing amino acid encodings.}
+\label{fig:cvres}
+\end{figure}
 
-Please submit the final pdf file via EasyChair to the GCB'15 program committee by June 30, 2015. 
+ 
 
 \section*{Discussion}
 
+Despite the presence of signal peptide predicting software, there are no exhaustive studies devoted to the analysis of the signal peptide structure and taxonomical variability. Our research focuses on a transparent model of signal peptide instead of a ‘black-box’ solution.
+
+The proposed algorithm recognizing various signal peptides will reduce costs and speed up searching appropriate artificial signal peptides designed for protein secretion in expensive and time-consuming laboratory experiments. Moreover, the algorithm can be applied in recognition any sequence types on the nucleotide and amino acid levels, represented by small sets. Accessible as a stand-alone and browser-based software, its useful both for researches interested in the analysis of signal peptides.
+
+
 \section*{Acknowledgments}
-Thank you for your support!
+PS and PB devised the HSMM model of signal peptide. MB and PS co-wrote the software. MB gathered data and carried the analysis.
+MB, PS and PM drafted the manuscript. All authors revised the manuscript and approved the final version.
 
 
 \bibliography{lokalizom}
