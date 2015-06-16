@@ -131,8 +131,11 @@ We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (se
 To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide. The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
 
 \subsection*{Hidden semi-Markov model}
-
-Let us first focus on Hidden Markov Model (HMM). 
+Hidden semi-Markov model (HSMM) is an extension of popular method  hidden Markov model (HMM).
+In many fields it proved to yield better accuracy of bioinformatics algorithms.
+Gene recognition~\citep{Pachter02applicationsof}, protein secondary structure prediction  \citep{16571137}
+or automatic detection of heartbeats~\citep{7043102}.
+Let us first focus on hidden Markov model (HMM). 
 Suppose you have a sequence of observations e.g. amino acids. What is of interest is understanding underlying cause of their occurrence. 
 HMM aims to answer that by assuming a specific yet flexible structure of the problem.
 HMM consists of two stochastic processes. First is discrete Markov chain $X_{t=1}^T$ on the set of so called hidden states $\{S_1, \dots S_n\}$.
@@ -190,7 +193,7 @@ are difficult to capture in that way.
 \node[blockComp] at (4.5+2,-2)  (komp4) {\footnotesize \pgfmathparse{\names[3]}\pgfmathresult};
 \draw[line,->]  (block2) --  (komp4) ;
 
-\node[block,text width=3.5em, bottom color=green!50!red!90] at (8+2,0) (block3) {\footnotesize $k^{th}$ hidden state};
+\node[block,text width=3em, bottom color=green!50!red!90] at (8+2,0) (block3) {\footnotesize $k^{th}$ hidden state};
 \node[blockComp] at (6.5+2,-2)  (komp5) {\footnotesize \pgfmathparse{\names[4]}\pgfmathresult};
 \node[blockComp] at (8+2,-2)  (komp6) {\footnotesize \pgfmathparse{\names[5]}\pgfmathresult};
 \node[blockComp] at (9.5+2,-2)  (komp7) {\footnotesize \pgfmathparse{\names[6]}\pgfmathresult};
