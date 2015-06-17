@@ -215,3 +215,5 @@ print(arrangeGrob(textGrob("A", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p1,
                   textGrob("B", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p2, 
                   nrow = 2, ncol = 2, widths = c(0.05, 0.95)))
 dev.off()
+
+
