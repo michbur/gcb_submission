@@ -99,7 +99,7 @@ Eukaryotic protein sequences and their annotations were properly prepared accord
 
 \subsection*{Clustering of amino acids}
 
-Amino acids were clustered using several criteria relevant for the architecture of signal peptide: hydrophobicity, frequency in alpha-helices, polarity and size. High values of hydrophobicity are required in the h-region, the core of signal peptides. Alpha-helix, the secondary structure of this region, is probably induced by the positively charged n-region. Polarity as well as size are important especially in the cleavage site~\citep{1994palzkillselection}.
+Amino acids were clustered using several criteria relevant for the architecture of signal peptide: hydrophobicity, frequency in alpha-helices, polarity and size. High hydrophobicity is a determinant of the h-region, the core of signal peptides. Alpha-helix, the secondary structure of the h-region, is probably induced by the positively charged n-region. High polarity as well as smaller size are important features of the residues in the cleavage site~\citep{1994palzkillselection}.
 
 \begin{table}[ht]
 \centering
@@ -126,9 +126,16 @@ Size & Size \\
 \label{tab:aaprop}
 \end{table}
 
-We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. Considering all combinations of single properties for every criterion, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. 
+We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. We created 96 permutations of the properties, where each permutation contains only one property associated with a given criterion. Considering all permutations of properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Further, we cut the clusterings to create four-group encodings.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.9\textwidth]{figures/cvres.png}
+\caption{Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = 0.9346, MCC = 0.6479). 3. An encoding providing the best specificity (AUC = 0.9687, MCC = 0.8689).}
+\label{fig:cvres}
+\end{figure}
 
 To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide. The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
+
 
 \subsection*{Hidden semi-Markov model}
 Hidden semi-Markov model (HSMM) is an extension of popular method  hidden Markov model (HMM).
@@ -220,7 +227,7 @@ As our datasets are of reasonable size, $D$ is small -- around 30, computational
 higher than with the regular HMM. 
 
 The advantage of HSMM model is not only a better performance but also, as 
-model structure (see figure~\ref{fig:model_hsmm}) is straightforward, easier interpretation 
+model structure (see figure~\ref{fig:hsmm}) is straightforward, easier interpretation 
 for researcher without mathematical background.
 
 %model structure
@@ -302,12 +309,6 @@ XXX n-grams were further used in the analysis
 \section*{Results}
 
 \subsection*{Cross-validation}
-
-\begin{figure}[ht]\centering
-\includegraphics[width=0.9\textwidth]{figures/cvres.png}
-\caption{}
-\label{fig:cvres}
-\end{figure}
 
 
 

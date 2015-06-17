@@ -53,10 +53,10 @@ cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
     group_by(measure) %>% summarise(max(mean_value))
 )
 
-#0.95 the best specificity/sensitivity
+#0.05 the best specificity/sensitivity
 
 
-rep_res <- perf_rep(fold_res[1L:2], 0.95)
+rep_res <- perf_rep(fold_res, 0.05)
 
 # rep_res %>% filter(measure %in% c("Sens")) %>% 
 #   group_by(encoding) %>% 
@@ -111,15 +111,15 @@ best_enc <- lapply(c("AUC", "Sens", "Spec"), function(i)
 #   my_theme
 
 p1_dat <- rep_res %>% filter(#encoding %in% unique(unlist(best_enc)), 
-  measure %in% c("AUC", "Spec", "Sens")) %>% droplevels %>%
+  measure %in% c("AUC", "Spec", "Sens", "mcc")) %>% droplevels %>%
   group_by(encoding, measure) %>% summarize(mean = mean(value)) %>%
   dcast(encoding ~ measure, value.var = "mean")
 
 p1_dat <- p1_dat[!duplicated(p1_dat[, -1]), ]
 p1_dat[, "encoding"] <- rep("", nrow(p1_dat))
-p1_dat[p1_dat[, "Sens"] > 0.95, "encoding"] <- "1"
-p1_dat[p1_dat[, "Sens"] > 0.94 & p1_dat[, "Spec"] > 0.85, "encoding"] <- "2"
-p1_dat[p1_dat[, "Spec"] > 0.93, "encoding"] <- "3"
+p1_dat[p1_dat[, "Spec"] > 0.955, "encoding"] <- "1"
+#p1_dat[p1_dat[, "Sens"] > 0.85 & p1_dat[, "Spec"] > 0.94, "encoding"] <- "3"
+p1_dat[p1_dat[, "Sens"] > 0.93, "encoding"] <- "2"
 p1_dat[, "encoding"] <- as.factor(p1_dat[, "encoding"])
 
 p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding)) +
@@ -127,8 +127,7 @@ p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding)) +
   geom_text(size = 9, hjust = -0.4, vjust = -0.1) +
   scale_x_continuous("Sensitivity") +
   scale_y_continuous("Specificity\n") + 
-  my_theme +
-  coord_flip()
+  my_theme
 
 
 png("./figures/cvres.png", width = 2257*0.5, height = 1201*0.5)
@@ -138,9 +137,11 @@ dev.off()
 #caption for cvres
 paste0("Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = ", 
        round(mean(p1_dat[p1_dat[, "encoding"] == "1", "AUC"]), 4),
-       "). 2. A group of encodings with be best sensitivity/specificity ratio (mean AUC = ", 
-       round(mean(p1_dat[p1_dat[, "encoding"] == "2", "AUC"]), 4),
+       ", MCC = ", 
+       round(mean(p1_dat[p1_dat[, "encoding"] == "1", "mcc"]), 4),
        "). 3. An encoding providing the best specificity (AUC = ", 
-       round(mean(p1_dat[p1_dat[, "encoding"] == "3", "AUC"]), 4),
+       round(mean(p1_dat[p1_dat[, "encoding"] == "2", "AUC"]), 4),
+       ", MCC = ", 
+       round(mean(p1_dat[p1_dat[, "encoding"] == "2", "mcc"]), 4),
        ").")
 
