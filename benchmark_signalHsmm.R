@@ -1,5 +1,8 @@
 library(dplyr)
 library(biogram)
+library(signalHsmm)
+library(seqinr)
+library(hmeasure)
 
 other_soft <- read.csv2("benchmark_other_new.csv")
 
@@ -21,7 +24,7 @@ all_preds <- data.frame(other_soft,
                        signalHsmm1989 = pred2df(predict(signalHsmm1989, benchmark_data2))[["sp.probability"]])
 
 bench_metrics <- HMeasure(real_labels, all_preds,
-                          threshold = c(rep(0.5, 5), 0.05, 0.05))[["metrics"]]
+                          threshold = c(rep(0.5, 5), 0.1, 0.1))[["metrics"]]
 
 all_preds[["signalHsmm2010"]] <- all_preds[["signalHsmm2010"]] > 0.05
 all_preds[["signalHsmm1989"]] <- all_preds[["signalHsmm1989"]] > 0.05
