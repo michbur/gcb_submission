@@ -156,6 +156,9 @@ group_worst <- all_groups[int_enc][[1]]
 group_worst <- group_worst[c(2, 3, 4, 1)]
 
 
+group_worst <- all_groups[int_enc][[1]]
+#re-arrange group for better comparision
+group_worst <- group_worst[c(2, 3, 4, 1)]
 
 # tables of groups for interesting encodings --------------------------------
 group2df <- function(group_list, caption = NULL, label = NULL) {
@@ -186,7 +189,6 @@ group_properties <- function(group) {
 }
 
 dat_best <- group_properties(all_groups[int_enc][[2]])
-
 dat_worst <- group_properties(group_worst)
 
 p1 <- ggplot(dat_best, aes(x = critertion, y = value, label = variable)) +
