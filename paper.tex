@@ -226,7 +226,6 @@ for researcher without mathematical background.
 %model structure
 \begin{figure}
  \begin{minipage}{.5\linewidth} 
- \caption{Scheme of signalHsmm}
      \resizebox{6.5cm}{!}{%
     \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
     \label{fig:model_hsmm}
@@ -247,9 +246,10 @@ for researcher without mathematical background.
       \path [line] (cregion') edge node [left, color=black] { } (mature');
       \draw [line] (start') to[out=340,in=200] (mature');
     \end{tikzpicture} }
+    \caption{The diagram of signalHsmm.}
+    \label{fig:signalHsmm}
 \end{minipage}
  \begin{minipage}{.5\linewidth}
-   \caption{Scheme of signalHsmm with cleavage site motives}
      \resizebox{6.5cm}{!}{%
     \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
     \label{fig:model_hsmm_kMer}
@@ -282,6 +282,8 @@ for researcher without mathematical background.
       \draw[decoration={brace,amplitude=10pt, raise=5pt},decorate, line width=2pt]  
       ([yshift=1mm]kmer1.east) -- ([yshift=-5mm]kmer3.east) node [black,midway,xshift=0.6cm] {\large \color{yellow!50!black!90} k-mer};
     \end{tikzpicture} }
+    \caption{Scheme of signalHsmm extended wtich the n-gram cleavage site model.}
+    \label{fig:ngramext}
     \end{minipage}
 \end{figure}
     
@@ -299,13 +301,15 @@ XXX n-grams were further used in the analysis
 
 \section*{Results}
 
+\subsection*{Cross-validation}
+
 \begin{figure}[ht]\centering
 \includegraphics[width=0.9\textwidth]{figures/cvres.png}
-\caption{Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = 0.9337). 2. A group of encodings with be best sensitivity/specificity ratio (mean AUC = 0.9650). 3. An encoding providing the best specificity (AUC = 0.9686).}
+\caption{}
 \label{fig:cvres}
 \end{figure}
 
- 
+
 
 \section*{Discussion}
 

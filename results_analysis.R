@@ -6,6 +6,17 @@ library(magrittr)
 library(pbapply)
 
 load(paste0(pathway, "fold_res_MB1.RData"))
+fold_res1 <- fold_res
+
+load(paste0(pathway, "fold_res_PS1.RData"))
+fold_res2 <- fold_res
+
+load(paste0(pathway, "fold_res_PS4.RData"))
+fold_res3 <- fold_res
+
+fold_res <- c(fold_res1,
+              fold_res2,
+              fold_res3)
 
 source("plot_tools.R")
 
@@ -14,9 +25,16 @@ perf_rep <- function(folds, threshold = 0.5)
   do.call(rbind, lapply(1L:length(folds), function(repetition_id) {
     res <- t(sapply(folds[[repetition_id]], function(single_fold)
       rowMeans(sapply(single_fold, function(single_group) {
-        unlist(HMeasure(as.numeric(!is.na(single_group[, "cs_real"]) - 1),
-                        single_group[, "prob"], threshold = threshold)[["metrics"]])
-        }))))
+        metrics <- unlist(HMeasure(as.numeric(!is.na(single_group[, "cs_real"])),
+                                   single_group[, "prob"], threshold = threshold)[["metrics"]])
+        TP <- metrics["TP"]
+        TN <- metrics["TN"]
+        FP <- metrics["FP"]
+        FN <- metrics["FN"]
+        
+        c(metrics, 
+          mcc = unname((TP*TN - FP*FN)/sqrt((TP + FP)*(TP + FN)*(TN + FP)*(TN + FN))))
+      }))))
     
     res <- melt(res)
     
@@ -29,8 +47,8 @@ perf_rep <- function(folds, threshold = 0.5)
 
 
 
-cutoff_opt <- pblapply(c(0.5, 0.8, 0.9, 0.95, 0.99), function(i)
-  perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec")) %>%
+cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
+  perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
     group_by(encoding, measure) %>% summarise(mean_value = mean(value)) %>%
     group_by(measure) %>% summarise(max(mean_value))
 )
@@ -38,7 +56,7 @@ cutoff_opt <- pblapply(c(0.5, 0.8, 0.9, 0.95, 0.99), function(i)
 #0.95 the best specificity/sensitivity
 
 
-rep_res <- perf_rep(fold_res, 0.95)
+rep_res <- perf_rep(fold_res[1L:2], 0.95)
 
 # rep_res %>% filter(measure %in% c("Sens")) %>% 
 #   group_by(encoding) %>% 
@@ -100,7 +118,7 @@ p1_dat <- rep_res %>% filter(#encoding %in% unique(unlist(best_enc)),
 p1_dat <- p1_dat[!duplicated(p1_dat[, -1]), ]
 p1_dat[, "encoding"] <- rep("", nrow(p1_dat))
 p1_dat[p1_dat[, "Sens"] > 0.95, "encoding"] <- "1"
-p1_dat[p1_dat[, "Sens"] > 0.935 & p1_dat[, "Spec"] > 0.85, "encoding"] <- "2"
+p1_dat[p1_dat[, "Sens"] > 0.94 & p1_dat[, "Spec"] > 0.85, "encoding"] <- "2"
 p1_dat[p1_dat[, "Spec"] > 0.93, "encoding"] <- "3"
 p1_dat[, "encoding"] <- as.factor(p1_dat[, "encoding"])
 
@@ -117,6 +135,12 @@ png("./figures/cvres.png", width = 2257*0.5, height = 1201*0.5)
 print(p1)
 dev.off()
 
-mean(p1_dat[p1_dat[, "encoding"] == "1", "AUC"])
-mean(p1_dat[p1_dat[, "encoding"] == "2", "AUC"])
-mean(p1_dat[p1_dat[, "encoding"] == "3", "AUC"])
+#caption for cvres
+paste0("Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = ", 
+       round(mean(p1_dat[p1_dat[, "encoding"] == "1", "AUC"]), 4),
+       "). 2. A group of encodings with be best sensitivity/specificity ratio (mean AUC = ", 
+       round(mean(p1_dat[p1_dat[, "encoding"] == "2", "AUC"]), 4),
+       "). 3. An encoding providing the best specificity (AUC = ", 
+       round(mean(p1_dat[p1_dat[, "encoding"] == "3", "AUC"]), 4),
+       ").")
+
