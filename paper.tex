@@ -69,7 +69,7 @@ Having functional importance and specific features, signal peptides became the s
 The other type of software incorporates into the prediction process theoretical knowledge about the structure of signal peptides. Although these programs do not share innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their more abstract variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (Phobius, Philius and not supported SignalP 3.0) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane, 2004bendtsenimproved}, which reflect regions of signal peptides without realizing limitations of this probabilistic framework. However, the HMMs imply geometric distribution for duration of region length. We replicated the rules for extracting regions' boundaries from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the mentioned assumption is not in concordance with the reality because every region revealed the length distribution other than geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid region scheme (Fig. \ref{fig:sparch}) does not describe extremely long or short signal peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also unusual structures, but such probabilistic frameworks have not still been implemented.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.9\textwidth]{figures/reglen.png}
+\includegraphics[width=0.95\textwidth]{figures/reglen.png}
 \caption{A) Distribution of lengths of signal peptides. B) Distribution of the lengths of signal peptide regions. The measure of the length is a number of amino acids in the subsequence. The data was extracted from 2~589 signal peptide sequences derived from UniProt database (see \textbf{Data selection} in \textbf{Methods}).}
 \label{fig:reglen}
 \end{figure}
@@ -210,11 +210,10 @@ are difficult to capture in that way.
 \draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
 (8,-1.8) -- (12,-1.8) node [branch2, midway, yshift=-1cm,color=black] {\textbf{Duration of length $d_k$}};
 
-\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=20pt,mirror,raise=10pt},yshift=-10pt]
 (1,-2.8) -- (12,-2.8) node [branch2, midway, yshift=-1.5cm,color=black] {\textbf{Observations, $\sum_{i=1}^k d_i = T$}};
 
 \end{tikzpicture}
-\caption{General scheme of hidden semi-Markov model}
+\caption{General scheme of hidden semi-Markov model.}
 \label{fig:hsmm}
 \end{figure}
 
@@ -314,7 +313,7 @@ XXX n-grams were further used in the analysis
 \subsection*{Cross-validation}
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.9\textwidth]{figures/cvres.png}
+\includegraphics[width=0.95\textwidth]{figures/cvres.png}
 \caption{Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = 0.9687, MCC = 0.8689). 2. An encoding providing the best specificity (AUC = 0.9346, MCC = 0.6479).}
 \label{fig:cvres}
 \end{figure}
@@ -328,13 +327,13 @@ We used four performance measures to evaluate results of cross-validation: speci
   \toprule
 Groups \\ 
   \midrule
-A, E, K, Q, R \\ 
-   \rowcolor[gray]{0.85}D, G, N, P, S, T \\ 
-  C, H, I, L, M, V \\ 
-   \rowcolor[gray]{0.85}F, W, Y \\ 
+D, E, H, K, N, Q, R \\ 
+   \rowcolor[gray]{0.85}G, P, S, T, Y \\ 
+  F, I, L, M, V, W \\ 
+   \rowcolor[gray]{0.85}A, C \\ 
    \bottomrule
 \end{tabular}
-\caption{Best-sensitivity (final) encoding} 
+\caption{The best sensitivity (final) encoding.} 
 \label{tab:best}
 \end{minipage}
 \begin{minipage}{.5\linewidth} 
@@ -343,17 +342,23 @@ A, E, K, Q, R \\
   \toprule
 Groups \\ 
   \midrule
-A, C \\ 
-   \rowcolor[gray]{0.85}D, E, H, K, N, Q, R \\ 
-  G, P, S, T, Y \\ 
-   \rowcolor[gray]{0.85}F, I, L, M, V, W \\ 
+A, E, K, Q, R \\ 
+   \rowcolor[gray]{0.85}D, G, N, P, S, T \\ 
+  C, H, I, L, M, V \\ 
+   \rowcolor[gray]{0.85}F, W, Y \\ 
    \bottomrule
 \end{tabular}
-\caption{Best-specificity encoding} 
+\caption{The worst sensitivity encoding.} 
 \label{tab:worst}
 \end{minipage}
 \end{table}
 
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.95\textwidth]{figures/enccomp.png}
+\caption{A comparision of encodings. A) Properties of amino acids in the best and the worst sensitivity encoding. B) Frequencies of amino acids beloning to the encodings in regions of signal peptide and mature protein.}
+\label{fig:enccomp}
+\end{figure}
 
 \section*{Discussion}
 

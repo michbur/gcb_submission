@@ -47,11 +47,11 @@ perf_rep <- function(folds, threshold = 0.5)
 
 # optimize cut-off
 
-cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
-  perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
-    group_by(encoding, measure) %>% summarise(mean_value = mean(value)) %>%
-    group_by(measure) %>% summarise(max(mean_value))
-)
+# cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
+#   perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
+#     group_by(encoding, measure) %>% summarise(mean_value = mean(value)) %>%
+#     group_by(measure) %>% summarise(max(mean_value))
+# )
 
 #0.05 the best specificity/sensitivity
 
@@ -149,27 +149,8 @@ paste0("Results of cross-validation. 1. The encoding providing the best sensitiv
        round(mean(p1_dat[p1_dat[, "encoding"] == "2", "mcc"]), 4),
        ").")
 
-#interesting encodings
-int_enc <- as.numeric(rownames(p1_dat[p1_dat[, "encoding"] != "", ]))
-all_groups[int_enc]
-all_traits_combn[int_enc, ]
 
-group2df <- function(group_list, caption = NULL, label = NULL) {
-  tab <- data.frame(Groups = sapply(group_list, function(i)
-    paste0(toupper(sort(i)), collapse = ", ")))
-  rws <- seq(1, nrow(tab) - 1, by = 2)
-  col <- rep("\\rowcolor[gray]{0.85}", length(rws))
-  print(xtable(tab, caption = caption, label = label), include.rownames = FALSE, booktabs = TRUE,
-        add.to.row = list(pos = as.list(rws), command = col), print.results = FALSE)
-}
 
-cat(group2df(all_groups[int_enc][[2]],
-             "Best-sensitivity (final) encoding",
-             "tab:best"))
-
-cat(group2df(all_groups[int_enc][[1]],
-             "Best-specificity encoding",
-             "tab:worst"))
-
+rep_res
 
 
