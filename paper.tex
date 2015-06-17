@@ -132,15 +132,15 @@ To compare encodings we performed a 5-fold cross-validation training a new insta
 The analysis was carried using also redundant encodings, but results are not shown (HSMM is a deterministic algorithm and predictions for identical groupings of amino acids were the same). The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
 
 \subsection*{Hidden semi-Markov model}
-Hidden semi-Markov model (HSMM) is an extension of hidden Markov model (HMM).
-As such, it proved to yield better performance in many fields of bioinformatics including
-gene recognition~\citep{Pachter02applicationsof}, protein secondary structure prediction~\citep{16571137}
+Hidden semi-Markov model (HSMM) is an extension of popular method  hidden Markov model (HMM).
+In many fields it proved to yield better accuracy of bioinformatics algorithms.
+Gene recognition~\citep{Pachter02applicationsof}, protein secondary structure prediction  \citep{16571137}
 or automatic detection of heartbeats~\citep{7043102}.
-Let us first briefly describe the idea that lies behind HMM. 
-Suppose you have a sequence of observations e.g. amino acids, and you are interested in understanding underlying cause of their occurrence. 
-HMM aims to answer that question by assuming a specific, yet flexible, structure of the problem.
+Let us first focus on hidden Markov model (HMM). 
+Suppose you have a sequence of observations e.g. amino acids. What is of interest is understanding underlying cause of their occurrence. 
+HMM aims to answer that by assuming a specific yet flexible structure of the problem.
 HMM consists of two stochastic processes. First is discrete Markov chain $X_{t=1}^T$ on the set of so called hidden states $\{S_1, \dots S_n\}$.
-They are "the cause" of the observations. At every step $t$, hidden state might change according to transition matrix
+These are "the cause" for the observations. At every step, hidden state might change according to transition matrix
 $A= (a)_{i,j=1}^n$, where $a_{i,j} = \mathcal{P}(X_{t+1} = S_j | X_t = S_i)$. In our application hidden states are signal peptide regions.
 Second process $E_{t=1}^T$ is observation process, defined on the set of possible observations $\{O_1, \dots, O_m\}$. 
 Observations are assumed to occur independently. Their distribution depends only on hidden state which emits it. 
@@ -204,34 +204,25 @@ are difficult to capture in that way.
 
 % \draw[<->, color=red!30!black!50, line width=1.5mm] (komp1) |- +(5,-1.5) node[line2, yshift=-0.5cm] {\textbf{Observations}} -| (komp7); 
 
-\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
-(1,-1.8) -- (5,-1.8) node [branch2, midway, yshift=-1cm,color=black] {\textbf{Duration of length $d_1$}};
-
-\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
-(8,-1.8) -- (12,-1.8) node [branch2, midway, yshift=-1cm,color=black] {\textbf{Duration of length $d_k$}};
-
 \draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=20pt,mirror,raise=10pt},yshift=-10pt]
-(1,-2.8) -- (12,-2.8) node [branch2, midway, yshift=-1.5cm,color=black] {\textbf{Observations, $\sum_{i=1}^k d_i = T$}};
+(1,-1.8) -- (12,-1.8) node [branch2, midway, yshift=-1.5cm,color=black] {\textbf{Observations, $\sum_{i=1}^k d_i = T$}};
 
 \end{tikzpicture}
-\caption{General scheme of hidden semi-Markov model}
+\caption{Hidden semi-Markov Model scheme}
 \label{fig:hsmm}
 \end{figure}
 
 The model we use is Hidden semi-Markov Model(HSMM)~\citep{Yu2010215}. It extends HMM by allowing 
-any given hidden state duration distribution. Diagram of HSMM is presented in figure~\ref{fig:hsmm}.
+any given hidden state duration distribution. Scheme is shown in figure~\ref{fig:hsmm}.
 In addition to matrices $A$ and $B$, model is given by probabilities of duration length in hidden states.
 $$\mathcal{P}(\text{duration in state} = d | \text{state is } S_i), \;\; i = 1, \dots, n, \;\; d = 1, \dots, D$$
-where $D$ is maximum allowed duration.
+where $D$ is maximal allowed duration.
 As our datasets are of reasonable size, $D$ is small -- around 30, computational effort is not much 
 higher than with the regular HMM. 
 
-The model we use has a very specific structure. Hidden states are signal peptide regions.
-Almost all entries in transition matrix $A$ are zeros, because regions are sequential.
-Possible transitions are depicted as arrows in figure~\ref{fig:signalHsmm}.
-Probabilities of observations for hidden states and hidden states durations were estimated from training data.
-The advantage of HSMM model is not only a better performance but also its straightforwardness.
-Figure~\ref{fig:signalHsmm} is easy to interpret for a researcher without any mathematical background.
+The advantage of HSMM model is not only a better performance but also, as 
+model structure (see figure~\ref{fig:hsmm}) is straightforward, easier interpretation 
+for researcher without mathematical background.
 
 %model structure
 \begin{figure}
@@ -292,7 +283,7 @@ Figure~\ref{fig:signalHsmm} is easy to interpret for a researcher without any ma
       \draw[decoration={brace,amplitude=10pt, raise=5pt},decorate, line width=2pt]  
       ([yshift=1mm]kmer1.east) -- ([yshift=-5mm]kmer3.east) node [black,midway,xshift=0.6cm] {\large \color{yellow!50!black!90} k-mer};
     \end{tikzpicture} }
-    \caption{The diagram of signalHsmm extended with the n-gram cleavage site model.}
+    \caption{Scheme of signalHsmm extended wtich the n-gram cleavage site model.}
     \label{fig:ngramext}
     \end{minipage}
 \end{figure}
@@ -304,7 +295,7 @@ Such an extension requires defining additional hidden states.
 To find such motives we analyze n-grams (k-mers) -- vectors of n characters derived from input sequences. 
 The rigid structure of n-grams may mirror cleavage sites, which are more 
 conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
-Scheme of extended HSMM can be seen in figure~\ref{fig:ngramext}.
+Scheme of extended HSMM can be seen in figure~\ref{fig:model_hsmm_kMer}.
 
 Using the biogram software~\citep{biogramPackage} we extracted n-grams from cleavage sites of signal peptides. 
 XXX n-grams were further used in the analysis
