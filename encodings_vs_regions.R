@@ -74,7 +74,7 @@ p3 <- ggplot(deg_region, aes(x = group, y = freq, fill = enc, colour = enc)) +
 data(aaindex)
 group_properties <- function(group) {
   res <- do.call(rbind, lapply(1L:length(group), function(subgroup_id)
-    melt(data.frame(group = paste0("Group ", as.character(rep(subgroup_id, 4))), critertion = c("size", "hydroph", "polarity", "alpha"),
+    melt(data.frame(group = as.character(rep(subgroup_id, 4)), critertion = c("size", "hydroph", "polarity", "alpha"),
                     aa_nvals[unlist(all_traits_combn[int_enc[2], ]), group[[subgroup_id]]]))))
   levels(res[["variable"]]) <- toupper(levels(res[["variable"]]))
   res
@@ -104,12 +104,20 @@ dat_bestworst <- cbind(enc = unlist(lapply(c("best", "worst"), function(i) rep(i
 #   scale_y_continuous("Value") + 
 #   my_theme
 
-p1 <- ggplot(dat_bestworst, aes(x = critertion, y = value, col = enc, fill = enc)) +
+facet_names <- list("size" = "Size",
+                    "hydroph" = "Hydrophobicity",
+                    "polarity" = "Polarity",
+                    "alpha" = expression(paste(alpha, "-helix")))
+
+facet_labeller <- function(variable, value) 
+  facet_names[value]
+
+
+p1 <- ggplot(dat_bestworst, aes(x = group, y = value, col = enc, fill = enc)) +
   geom_point(size = 5, shape = 21, position = position_dodge(width=0.5)) +
   #geom_text(hjust = -1) +
-  facet_grid(~group) +
-  scale_x_discrete("Criterion\n", labels = c("size" = "Size","hydroph" = "Hydroph.",
-                                  "polarity" = "Polarity","alpha" = expression(paste(alpha, "-helix")))) +
+  facet_grid(~critertion, labeller = facet_labeller) +
+  scale_x_discrete("Group\n") +
   scale_y_continuous("Value") + 
   scale_colour_manual("Encoding: ", values = c("red", "blue")) +
   scale_fill_manual("Encoding: ", values = c(adjustcolor("red", 0.25), adjustcolor("blue", 0.25))) + 
