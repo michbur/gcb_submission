@@ -47,11 +47,11 @@ perf_rep <- function(folds, threshold = 0.5)
 
 # optimize cut-off
 
-cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
-  perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
-    group_by(encoding, measure) %>% summarise(mean_value = mean(value)) %>%
-    group_by(measure) %>% summarise(max(mean_value))
-)
+# cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
+#   perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
+#     group_by(encoding, measure) %>% summarise(mean_value = mean(value)) %>%
+#     group_by(measure) %>% summarise(max(mean_value))
+# )
 
 #0.05 the best specificity/sensitivity
 
@@ -149,11 +149,7 @@ paste0("Results of cross-validation. 1. The encoding providing the best sensitiv
        round(mean(p1_dat[p1_dat[, "encoding"] == "2", "mcc"]), 4),
        ").")
 
-#interesting encodings -------------------------------------
-int_enc <- as.numeric(rownames(p1_dat[p1_dat[, "encoding"] != "", ]))
-group_worst <- all_groups[int_enc][[1]]
-#re-arrange group for better comparision
-group_worst <- group_worst[c(2, 3, 4, 1)]
+
 
 
 
