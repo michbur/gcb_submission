@@ -117,9 +117,9 @@ p1_dat <- rep_res %>% filter(#encoding %in% unique(unlist(best_enc)),
 
 p1_dat <- p1_dat[!duplicated(p1_dat[, -1]), ]
 p1_dat[, "encoding"] <- rep("", nrow(p1_dat))
-p1_dat[p1_dat[, "Spec"] > 0.955, "encoding"] <- "1"
+p1_dat[p1_dat[, "Spec"] > 0.955, "encoding"] <- "2"
 #p1_dat[p1_dat[, "Sens"] > 0.85 & p1_dat[, "Spec"] > 0.94, "encoding"] <- "3"
-p1_dat[p1_dat[, "Sens"] > 0.93, "encoding"] <- "2"
+p1_dat[p1_dat[, "Sens"] > 0.93, "encoding"] <- "1"
 p1_dat[, "encoding"] <- as.factor(p1_dat[, "encoding"])
 
 p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding == "", fill = encoding == "")) +
@@ -127,8 +127,8 @@ p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding
   geom_text(size = 9, hjust = -0.5, vjust = 0) +
   scale_colour_manual(values = c("red","blue")) + 
   scale_fill_manual(values = c(adjustcolor("red", 0.25), adjustcolor("blue", 0.25))) + 
-  scale_x_continuous("Sensitivity") +
-  scale_y_continuous("Specificity\n") + 
+  scale_x_continuous("Sensitivity\n") +
+  scale_y_continuous("Specificity") + 
   my_theme +
   guides(colour = FALSE, fill = FALSE)
   
@@ -139,13 +139,37 @@ print(p1)
 dev.off()
 
 #caption for cvres
-paste0("Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = ", 
+paste0("Results of cross-validation. 1. The encoding providing the best sensitivity (AUC = ", 
        round(mean(p1_dat[p1_dat[, "encoding"] == "1", "AUC"]), 4),
        ", MCC = ", 
        round(mean(p1_dat[p1_dat[, "encoding"] == "1", "mcc"]), 4),
-       "). 3. An encoding providing the best specificity (AUC = ", 
+       "). 2. The encoding providing the best specificity (AUC = ", 
        round(mean(p1_dat[p1_dat[, "encoding"] == "2", "AUC"]), 4),
        ", MCC = ", 
        round(mean(p1_dat[p1_dat[, "encoding"] == "2", "mcc"]), 4),
        ").")
+
+#interesting encodings
+int_enc <- as.numeric(rownames(p1_dat[p1_dat[, "encoding"] != "", ]))
+all_groups[int_enc]
+all_traits_combn[int_enc, ]
+
+group2df <- function(group_list, caption = NULL, label = NULL) {
+  tab <- data.frame(Groups = sapply(group_list, function(i)
+    paste0(toupper(sort(i)), collapse = ", ")))
+  rws <- seq(1, nrow(tab) - 1, by = 2)
+  col <- rep("\\rowcolor[gray]{0.85}", length(rws))
+  print(xtable(tab, caption = caption, label = label), include.rownames = FALSE, booktabs = TRUE,
+        add.to.row = list(pos = as.list(rws), command = col), print.results = FALSE)
+}
+
+cat(group2df(all_groups[int_enc][[2]],
+             "Best-sensitivity (final) encoding",
+             "tab:best"))
+
+cat(group2df(all_groups[int_enc][[1]],
+             "Best-specificity encoding",
+             "tab:worst"))
+
+
 
