@@ -151,7 +151,10 @@ paste0("Results of cross-validation. 1. The encoding providing the best sensitiv
 
 #interesting encodings -------------------------------------
 int_enc <- as.numeric(rownames(p1_dat[p1_dat[, "encoding"] != "", ]))
-all_groups[int_enc]
+group_worst <- all_groups[int_enc][[1]]
+#re-arrange group for better comparision
+group_worst <- group_worst[c(2, 3, 4, 1)]
+
 
 
 # tables of groups for interesting encodings --------------------------------
@@ -168,7 +171,7 @@ cat(group2df(all_groups[int_enc][[2]],
              "Best-sensitivity (final) encoding",
              "tab:best"))
 
-cat(group2df(all_groups[int_enc][[1]],
+cat(group2df(group_worst,
              "Worst-sensitivity encoding",
              "tab:worst"))
 
@@ -183,9 +186,6 @@ group_properties <- function(group) {
 }
 
 dat_best <- group_properties(all_groups[int_enc][[2]])
-group_worst <- all_groups[int_enc][[1]]
-#re-arrange group for better comparision
-group_worst <- group_worst[c(2, 3, 4, 1)]
 
 dat_worst <- group_properties(group_worst)
 
