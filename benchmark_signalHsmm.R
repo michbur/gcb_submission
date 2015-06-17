@@ -3,6 +3,10 @@ library(biogram)
 
 other_soft <- read.csv2("benchmark_other_new.csv")
 
+group_best <- list(`1` = c("r", "n", "d", "q", "e", "h", "k"), 
+     `2` = c("g", "p", "s", "t", "y"), `3` = c("i", "l", "m", "f", "w", "v"), 
+     `4` = c("a", "c"))
+
 signalHsmm2010 <- train_hsmm(read_uniprot("sp1950_2010.txt", euk = TRUE, what = "signal"), 
                              aa_group = group_best)
 signalHsmm1989 <- train_hsmm(read_uniprot("sp1950_1989.txt", euk = TRUE, what = "signal"), 
