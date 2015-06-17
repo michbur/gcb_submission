@@ -149,11 +149,12 @@ paste0("Results of cross-validation. 1. The encoding providing the best sensitiv
        round(mean(p1_dat[p1_dat[, "encoding"] == "2", "mcc"]), 4),
        ").")
 
-#interesting encodings
+#interesting encodings -------------------------------------
 int_enc <- as.numeric(rownames(p1_dat[p1_dat[, "encoding"] != "", ]))
 all_groups[int_enc]
-all_traits_combn[int_enc, ]
 
+
+# tables of groups for interesting encodings --------------------------------
 group2df <- function(group_list, caption = NULL, label = NULL) {
   tab <- data.frame(Groups = sapply(group_list, function(i)
     paste0(toupper(sort(i)), collapse = ", ")))
@@ -168,8 +169,47 @@ cat(group2df(all_groups[int_enc][[2]],
              "tab:best"))
 
 cat(group2df(all_groups[int_enc][[1]],
-             "Best-specificity encoding",
+             "Worst-sensitivity encoding",
              "tab:worst"))
 
+#figure comparing encodings
+data(aaindex)
+group_properties <- function(group) {
+  res <- do.call(rbind, lapply(1L:length(group), function(subgroup_id)
+    melt(data.frame(group = paste0("Group ", as.character(rep(subgroup_id, 4))), critertion = c("size", "hydroph", "polarity", "alpha"),
+                    aa_nvals[unlist(all_traits_combn[int_enc[2], ]), group[[subgroup_id]]]))))
+  levels(res[["variable"]]) <- toupper(levels(res[["variable"]]))
+  res
+}
+
+dat_best <- group_properties(all_groups[int_enc][[2]])
+group_worst <- all_groups[int_enc][[1]]
+#re-arrange group for better comparision
+group_worst <- group_worst[c(2, 3, 4, 1)]
+
+dat_worst <- group_properties(group_worst)
+
+p1 <- ggplot(dat_best, aes(x = critertion, y = value, label = variable)) +
+  geom_point(size = 5, shape = 21, colour = "blue", fill = adjustcolor("blue", 0.25)) +
+  #geom_text(hjust = -1) +
+  facet_wrap(~group, ncol = 4) +
+  scale_x_discrete("", labels = c("size" = "Size","hydroph" = "Hydroph.",
+                                  "polarity" = "Polarity","alpha" = expression(paste(alpha, "-helix")))) +
+  scale_y_continuous("Value\n") + 
+  my_theme
 
 
+p2 <- ggplot(dat_worst, aes(x = critertion, y = value, label = variable)) +
+  geom_point(size = 5, shape = 21, colour = "blue", fill = adjustcolor("blue", 0.25)) +
+  #geom_text(hjust = -1) +
+  facet_wrap(~group, ncol = 4) +
+  scale_x_discrete("", labels = c("size" = "Size","hydroph" = "Hydroph.",
+                                  "polarity" = "Polarity","alpha" = expression(paste(alpha, "-helix")))) +
+  scale_y_continuous("Value") + 
+  my_theme
+
+png("./figures/enccomp.png", width = 2257*0.5, height = 1201*0.5)
+print(arrangeGrob(textGrob("A", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p1, 
+                  textGrob("B", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p2, 
+                  nrow = 2, ncol = 2, widths = c(0.05, 0.95)))
+dev.off()
