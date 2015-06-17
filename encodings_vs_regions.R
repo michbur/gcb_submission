@@ -16,12 +16,12 @@ pos_seqs <- read_uniprot(paste0(pathway, "signal_peptides.txt"), euk = TRUE, wha
 #interesting encodings -------------------------------------
 #p1_dat comes from results_analysis.R
 int_enc <- as.numeric(rownames(p1_dat[p1_dat[, "encoding"] != "", ]))
-group_worst <- all_groups[int_enc][[1]]
+group_best <- all_groups[int_enc][[1]]
 #re-arrange group for better comparision
-group_worst <- group_worst[c(2, 3, 4, 1)]
-names(group_worst) <- 1L:4
+group_best <- group_best[c(2, 3, 4, 1)]
+names(group_best) <- 1L:4
 
-group_best <- all_groups[int_enc][[2]]
+group_worst <- all_groups[int_enc][[2]]
 
 nhc_borders <- t(sapply(pos_seqs, find_nhc))
 
