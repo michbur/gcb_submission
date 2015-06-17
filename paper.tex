@@ -126,7 +126,7 @@ Size & Size \\
 \label{tab:aaprop}
 \end{table}
 
-We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. We created 96 permutations of the properties, where each permutation contains only one property associated with a given criterion. Considering all permutations of properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Further, we cut the clusterings to create four-group encodings.
+We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. We established 96 permutations of the properties, where each permutation contains only one property associated with a given criterion. Considering all permutations of properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Further, we cut the clusterings to create four-group encodings. As expected, some encodings (31\%) were identical.
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.9\textwidth]{figures/cvres.png}
@@ -134,7 +134,10 @@ We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (se
 \label{fig:cvres}
 \end{figure}
 
-To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide. The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
+To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide.
+The analysis was carried using also redundant encodings, but results are not shown (HSMM is a deterministic algorithm and predictions for identical groupings of amino acids were the same). The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
+
+As the performance measure interest we choose
 
 
 \subsection*{Hidden semi-Markov model}

@@ -45,7 +45,7 @@ perf_rep <- function(folds, threshold = 0.5)
   }))
 
 
-
+# optimize cut-off
 
 cutoff_opt <- pblapply(c(0.5, 0.2, 0.1, 0.05, 0.01), function(i)
   perf_rep(fold_res, threshold = i) %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
@@ -122,12 +122,16 @@ p1_dat[p1_dat[, "Spec"] > 0.955, "encoding"] <- "1"
 p1_dat[p1_dat[, "Sens"] > 0.93, "encoding"] <- "2"
 p1_dat[, "encoding"] <- as.factor(p1_dat[, "encoding"])
 
-p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding)) +
-  geom_point(size = 5, colour = "blue", fill = adjustcolor("blue", 0.25), shape = 21) +
-  geom_text(size = 9, hjust = -0.4, vjust = -0.1) +
+p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding == "", fill = encoding == "")) +
+  geom_point(size = 5, shape = 21) +
+  geom_text(size = 9, hjust = -0.5, vjust = 0) +
+  scale_colour_manual(values = c("red","blue")) + 
+  scale_fill_manual(values = c(adjustcolor("red", 0.25), adjustcolor("blue", 0.25))) + 
   scale_x_continuous("Sensitivity") +
   scale_y_continuous("Specificity\n") + 
-  my_theme
+  my_theme +
+  guides(colour = FALSE, fill = FALSE)
+  
 
 
 png("./figures/cvres.png", width = 2257*0.5, height = 1201*0.5)
