@@ -27,10 +27,22 @@ Chan, D., Ho, M. S.~P., and Cheah, K. S.~E. (2001).
   chondrodysplasia: Implications for the molecular basis of the disease.
 \newblock {\em Journal of Biological Chemistry}, 276(11):7992--7997.
 
+\bibitem[Chou and Fasman, 1978]{chou1978prediction}
+Chou, P.~Y. and Fasman, G.~D. (1978).
+\newblock Prediction of the secondary structure of proteins from their amino
+  acid sequence.
+\newblock {\em Advances in enzymology and related areas of molecular biology},
+  47:45--148.
+
 \bibitem[Cid et~al., 1992]{1992cidhydrophobicity}
 Cid, H., Bunster, M., Canales, M., and Gazitua, F. (1992).
 \newblock Hydrophobicity and structural classes in proteins.
 \newblock {\em Protein Eng}, 5(5):373--5.
+
+\bibitem[Dawson, 1972]{dawson1972size}
+Dawson, D.~M. (1972).
+\newblock {\em Size}.
+\newblock Academic Press, New York.
 
 \bibitem[Durbin et~al., 1998]{Durbin98biologicalsequence}
 Durbin, R., Eddy, S., Krogh, A., and Mitchison, G. (1998).
@@ -41,6 +53,11 @@ Durbin, R., Eddy, S., Krogh, A., and Mitchison, G. (1998).
 Eisenberg, D. (1984).
 \newblock Three-dimensional structure of membrane and surface proteins.
 \newblock {\em Annu Rev Biochem}, 53:595--623.
+
+\bibitem[Fasman, 1976]{fasman1976handbook}
+Fasman, G.~D. (1976).
+\newblock {\em Proteins}, volume~1.
+\newblock CRC Press, Cleveland, 3rd edition.
 
 \bibitem[Futatsumori-Sugai and Tsumoto, 2010]{2010futatsumorisugaisignal}
 Futatsumori-Sugai, M. and Tsumoto, K. (2010).
@@ -131,6 +148,13 @@ Lin, K., May, A.~C., and Taylor, W.~R. (2002).
 \newblock Amino acid encoding schemes from protein structure alignments:
   multi-dimensional vectors to describe residue types.
 \newblock {\em J Theor Biol}, 216(3):361--65.
+
+\bibitem[Maetschke et~al., 2005]{maetschke2005blomap}
+Maetschke, S., Towsey, M., and Bodén, M. (2005).
+\newblock Blomap: An encoding of amino acids which improves signal peptide
+  cleavage site prediction.
+\newblock In {\em In Chen Y., Wong L: Proc. 3 rd AsiaPacific Bioinformatics
+  Conference, Imperial}, pages 141--150. College Press.
 
 \bibitem[Moeller et~al., 2009]{2009moellera}
 Moeller, L., Gan, Q., and Wang, K. (2009).

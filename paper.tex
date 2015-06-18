@@ -84,7 +84,7 @@ All programs used in signal peptide recognition are trained on real protein sequ
 
 \subsection*{Overview}
 
-The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superfluous and introduces unnecessary information. To utilize this property of signal peptide recognition, we cluster amino acids into several groups based on the physicochemical properties of residues.
+The functionality of a signal peptide depends not on exact sequence of specific amino acids, but on the physicochemical properties of residues in a given region. Henceforth, the usage of raw amino acid sequences is superfluous and introduces unnecessary information. To utilize this property of signal peptide recognition, we cluster amino acids into several groups based on the physicochemical features of residues.
 
 The pre-processed sequences are further analyzed by the heuristic algorithm, which determines borders between three characteristic signal peptide regions, the enhanced version of algorithm presented in~\cite{1998nielsenprediction}. Using the current information from experimentalists, we refined the region recognition criteria.
 
@@ -99,7 +99,9 @@ Eukaryotic protein sequences and their annotations were properly prepared accord
 
 \subsection*{Clustering of amino acids}
 
-Amino acids were clustered using several criteria relevant for the architecture of signal peptide: hydrophobicity, frequency in alpha-helices, polarity and size. High hydrophobicity is a determinant of the h-region, the core of signal peptides. Alpha-helix, the secondary structure of the h-region, is probably induced by the positively charged n-region. High polarity as well as smaller size are important features of the residues in the cleavage site~\citep{1994palzkillselection}.
+It is worth to note, that signalHsmm is not a first software to use amino acid encoding in signal peptide prediction. BLOMAP~\citep{maetschke2005blomap} also employed similar strategy, but considered only encodings based on the substitution matrices. Substitution matrices are computed using protein sequences and knowning how atypical signal peptides are, we had chosen different approach.
+
+Instead amino acids were clustered using several criteria relevant for the architecture of signal peptide: hydrophobicity, frequency in alpha-helices, polarity and size. High hydrophobicity is a determinant of the h-region, the core of signal peptides. Alpha-helix, the secondary structure of the h-region, is probably induced by the positively charged n-region. High polarity as well as smaller size are important features of the residues in the cleavage site~\citep{1994palzkillselection}.
 
 \begin{table}[ht]
 \centering
@@ -107,8 +109,8 @@ Amino acids were clustered using several criteria relevant for the architecture 
   \toprule
 Criterion name & Property name \\ 
   \midrule
-Size & Size \\ 
-   \rowcolor[gray]{0.85}Size & Molecular weight \\ 
+Size & Size~\citep{dawson1972size} \\ 
+   \rowcolor[gray]{0.85}Size & Molecular weight~\citep{fasman1976handbook}\\ 
   Size & Residue volume~\citep{1973goldsackcontribution} \\ 
    \rowcolor[gray]{0.85}Size & Bulkiness~\citep{1968zimmermanthe} \\ 
   Hydrophobicity & Normalized hydrophobicity scales for alpha-proteins~\citep{1992cidhydrophobicity} \\ 
@@ -118,7 +120,7 @@ Size & Size \\
   Polarity & Polarity~\citep{1974granthamamino} \\ 
    \rowcolor[gray]{0.85}Polarity & Mean polarity~\citep{1988radzickainfluences} \\ 
   Frequency in alpha-helices & Signal sequence helical potential~\citep{1982argosstructural} \\ 
-   \rowcolor[gray]{0.85}Frequency in alpha-helices & Normalized frequency of N-terminal helix \\ 
+   \rowcolor[gray]{0.85}Frequency in alpha-helices & Normalized frequency of N-terminal helix~\citep{chou1978prediction} \\ 
   Frequency in alpha-helices & Relative frequency in alpha-helix~\citep{1990prabhakaranthe} \\ 
    \bottomrule
 \end{tabular}
@@ -126,7 +128,7 @@ Size & Size \\
 \label{tab:aaprop}
 \end{table}
 
-We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. We established 96 permutations of the properties, where each permutation contains only one property associated with a given criterion. Considering all permutations of properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Further, we cut the clusterings to create four-group encodings. As expected, some encodings (31\%) were identical.
+We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Tab.~\ref{tab:aaprop}), each attributed to a single criterion. We established 96 permutations of the properties, where each permutation contains only one property associated with a given criterion. Considering all permutations of properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Further, we cut the clusterings to create four-group encodings. As expected, some encodings (31\%) were identical.
 
 To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide.
 The analysis was carried using also redundant encodings, but results are not shown (HSMM is a deterministic algorithm and predictions for identical groupings of amino acids were the same). The cross-validation was repeated 60 times. At first, we planned 160 repetitions to ensure with probability 0.95, that every protein without signal peptide was in the learning set, but very small variance of performance measure allowed us to relax this condition.
@@ -153,7 +155,7 @@ For a good reference on HMM see~\citep{1989rabinera}.
 In regular HMM, hidden state duration -- number of observations emitted by the hidden state, has geometric distribution.
 \citep{Durbin98biologicalsequence} shows how to extend it for some different distributions without significant increase in computational 
 complexity. Similar ideas were used for signal peptide recognition, for example in~\citep{2004klla}. 
-It is, however, still not flexible enough. Empirical regional length distributions (see figure~\ref{fig:reglen})
+It is, however, still not flexible enough. Empirical regional length distributions (see Fig.~\ref{fig:reglen})
 are difficult to capture in that way.
 
 %rysunek pokazujący o co chodzi w HMM
@@ -218,7 +220,7 @@ are difficult to capture in that way.
 \end{figure}
 
 The model we use is Hidden semi-Markov Model(HSMM)~\citep{Yu2010215}. It extends HMM by allowing 
-any given hidden state duration distribution. Diagram of HSMM is presented in figure~\ref{fig:hsmm}.
+any given hidden state duration distribution. Diagram of HSMM is presented in Fig.~\ref{fig:hsmm}.
 In addition to matrices $A$ and $B$, model is given by probabilities of duration length in hidden states.
 $$\mathcal{P}(\text{duration in state} = d | \text{state is } S_i), \;\; i = 1, \dots, n, \;\; d = 1, \dots, D$$
 where $D$ is maximum allowed duration.
@@ -227,10 +229,10 @@ higher than with the regular HMM.
 
 The model we use has a very specific structure. Hidden states are signal peptide regions.
 Almost all entries in transition matrix $A$ are zeros, because regions are sequential.
-Possible transitions are depicted as arrows in figure~\ref{fig:signalHsmm}.
+Possible transitions are depicted as arrows in Fig.~\ref{fig:signalHsmm}.
 Probabilities of observations for hidden states and hidden states durations were estimated from training data.
 The advantage of HSMM model is not only a better performance but also its straightforwardness.
-Figure~\ref{fig:signalHsmm} is easy to interpret for a researcher without any mathematical background.
+Fig.~\ref{fig:signalHsmm} is easy to interpret for a researcher without any mathematical background.
 
 %model structure
 \begin{figure}
@@ -303,7 +305,7 @@ Such an extension requires defining additional hidden states.
 To find such motives we analyze n-grams (k-mers) -- vectors of n characters derived from input sequences. 
 The rigid structure of n-grams may mirror cleavage sites, which are more 
 conservative than other parts of signal peptide~\citep{2004hillerpredisi}.
-Scheme of extended HSMM can be seen in figure~\ref{fig:ngramext}.
+Scheme of extended HSMM can be seen in Fig.~\ref{fig:ngramext}.
 
 Using the biogram software~\citep{biogramPackage} we extracted n-grams from cleavage sites of signal peptides. 
 XXX n-grams were further used in the analysis
@@ -382,15 +384,25 @@ We examined more deeply encodings with the best and the worst sensitivity. In bo
 
 The amino acids belonging to the Group 2 have quite low probability of occuring in an alpha-helix, but are still very diverse, but all . Polar but uncharged serine and threonine neighbour with alyphatic glycine and proline. In the worst encoding the polar character of the group is emphasized by the addition of asparagine. The best grouping contains also highly hydrophobic tyrosine. Despite these differences, the frequency of Group 2 seems to be comparable between two encodings.
 
-The both groupings have strongly non-polar and aliphatic group 3 (see Table~\ref{tab:best}, Table~\ref{tab:best} and Figure~\ref{fig:enccomp}) containing isoleucine, leucine, methionine and valine. Hyrophobic properties of this group in the best encoding are even more pronounced by the presence of tryptophan and phenylalanine. On the contrary, to the Group 3 in the worst encoding belong also more polar histidine. Hence the hydrophobic character of this group, it is dominant over the h-region in case of both amino acid classifications.
+The both groupings have strongly non-polar and aliphatic group 3 (see Tab.~\ref{tab:best}, Tab.~\ref{tab:best} and Fig.~\ref{fig:enccomp}) containing isoleucine, leucine, methionine and valine. Hyrophobic properties of this group in the best encoding are even more pronounced by the presence of tryptophan and phenylalanine. On the contrary, to the Group 3 in the worst encoding belong also more polar histidine. Hence the hydrophobic character of this group, it is dominant over the h-region in case of both amino acid classifications.
 
 The fourth group is the most diverse among both encodings. The key is obvious in a case of the worst encoding. Phenylalanine, tryptophan and tyrosine are aromatic, highly hydrophobic amino acids. In contrast, the Group 4 in the best encoding contains only alanine and cysteine, which both are rather small amino acids and tend to appear in alpha-helices. This very unique composition seems to be typical for the c-region of signal peptide.
+
+\subsection*{Benchmark test}
+
+To provide the honest comparison, we trained our model on 2311 signal peptide-containing sequences deposited in Uniprot until 2010 year (an iteration of signalHsmm called signalHsmm-2010). The data set should correspond to the set used to train SignalP 4.1. Interestingly, our algorithm performed very well even if it was trained on a very small sets including only 336 sequences collected till 1987 year, just after the first method predicting signal peptide was published~\citep{1986vonheijnea}. The signalHsmm-1987 was able to very accurately predict a signal peptide, even better than predictors trained on richer data sets. It indicates that signalHsmm is very stable and is able to recover the structure of signal peptides from even very small data sets.
+
+To check universality of our probabilistic model, we also validated it on signal peptides belonging to specific taxonomic groups. As the example, we chose the Plasmodiidae family including malaria parasites. The testing data set extracted from UniProt data base contained 111 proteins with a signal peptide and 361 without it. We repeated the benchmark scheme for different classifiers – Tab. XXX.
 
 \section*{Discussion}
 
 Despite the presence of signal peptide predicting software, there are no exhaustive studies devoted to the analysis of the signal peptide structure and taxonomical variability. Our research focuses on a transparent model of signal peptide instead of a ‘black-box’ solution.
 
-The first set of predictive rules derived by our method lies in the encoding of amino acids. Aside from a confirmation of the accepted signal peptide model (hydrophibicity of the h-region, polarity of the n-region), we also found new relationships. We found the alanine is one of the most typical amino acids for the c-region and occurs there far more often than in the other parts of signal peptides and mature proteins. The presence of alanine in the signal peptide cleavage site~\cite{1986vonheijnea} cannot explain such overrepresentation of group containing alanine in the c-region.
+The good performance of signalHsmm confirms that properties of signal peptides do not depend on their exact sequence, but on the physicochemical features of the amino acids. Although this finding may seem to offer a minimal improvement when we consider the most popular signal peptides, this generalization pays off when we analyze more specific cases, as signal peptides of \textit{Plasmodiidae}.
+
+Aside from a confirmation of the accepted signal peptide model (hydrophibicity of the h-region, polarity of the n-region), we also found new relationships. We found the alanine is one of the most typical amino acids for the c-region and occurs there far more often than in the other parts of signal peptides and mature proteins. The presence of alanine in the signal peptide cleavage site~\cite{1986vonheijnea} cannot explain such overrepresentation of group containing alanine in the c-region.
+
+The encoding of amino acid plays crucial role in the recognition of signal peptide, but does not affect identification of proteins without a signal peptides (compare change in specificity and sensitivity on Fig.~\ref{fig:cvres}). The mature protein state in the HSMM model tends to have more uniform distribution of residues than signal peptide region, which make it more resistant to changes in amino acid groupings.
 
 The proposed algorithm recognizing various signal peptides will reduce costs and speed up searching appropriate artificial signal peptides designed for protein secretion in expensive and time-consuming laboratory experiments. Moreover, the algorithm can be applied in recognition any sequence types on the nucleotide and amino acid levels, represented by small sets. Accessible as a stand-alone and browser-based software, its useful both for researches interested in the analysis of signal peptides.
 
