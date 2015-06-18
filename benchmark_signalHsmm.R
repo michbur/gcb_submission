@@ -47,7 +47,7 @@ library(xtable)
 
 rws <- seq(1, nrow(bench_metrics) - 1, by = 2)
 col <- rep("\\rowcolor[gray]{0.85}", length(rws))
-print(xtable(bench_metrics, caption = "Performance measures for the best encoding. 60 repetitions of cross-validation.", 
+print(xtable(bench_metrics, caption = "Comparison of Area Under the Curve, Sensitivity, Specificity and Matthews Correlation Coefficient for different classifiers.", 
              label = "tab:bench2010", digits = 4), include.rownames = FALSE, booktabs = TRUE,
       add.to.row = list(pos = as.list(rws), command = col), sanitize.text.function = identity)
 
@@ -69,3 +69,19 @@ all_preds_plas <- data.frame(other_soft_plas,
 bench_metrics <- calc_mcc(HMeasure(real_labels_plas, all_preds_plas,
                                    threshold = c(rep(0.5, 4), 0.05, 0.05))[["metrics"]])
 
+bench_metrics <- data.frame(rownames(bench_metrics), bench_metrics[, c("AUC", "Sens", "Spec", "mcc")])
+colnames(bench_metrics) <- c("Software name", "AUC", "Sensitivity", "Specificity", "MCC")
+
+levels(bench_metrics[["Software name"]]) <- c("Philius \\citep{2008reynoldstransmembrane}", "Phobius \\citep{2004klla}", 
+                                              "PrediSi \\citep{2004hillerpredisi}", 
+                                              "signalHsmm-1989", 
+                                              "signalHsmm-2010", 
+                                              "signalP 4.1 (no tm) \\citep{2011petersensignalp}", 
+                                              "signalP 4.1 (tm) \\citep{2011petersensignalp}")
+
+
+rws <- seq(1, nrow(bench_metrics) - 1, by = 2)
+col <- rep("\\rowcolor[gray]{0.85}", length(rws))
+print(xtable(bench_metrics, caption = "Comparison of Area Under the Curve, H-measure and Matthews Correlation Coefficient for different classifiers considering only proteins belonging to Plasmodiidae.", 
+             label = "tab:bench2010plas", digits = 4), include.rownames = FALSE, booktabs = TRUE,
+      add.to.row = list(pos = as.list(rws), command = col), sanitize.text.function = identity)
