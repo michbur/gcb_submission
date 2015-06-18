@@ -360,7 +360,9 @@ A, E, K, Q, R \\
 
 We used four performance measures to evaluate results of cross-validation: specificity, sensitivity, Matthew's Correlation Coefficient ($\phi$ coefficient) and Area Under the Curve (AUC). All encodings provide very good AUC (0.93 -- 0.97) and specificity (0.92 -- 0.96). The encodings have the biggest impact on sensitivity, which ranges from 0.66 to 0.94. The final signalHsmm algorithm uses the encoding, that yields the highest specificity and Matthew's Correlation coefficient as well as the second best AUC (see Fig.~\ref{fig:cvres}).
 
-The best and the worst encoding share some similarities. In both cases Group 1 tends to contain polar amino acids typical with the average size of residuals. In the best encoding, all charged amino acids, both acids and even weak bases as histidine, also belong to this group. This group, nearly absent in h-region, provides very good distinction between parts of signal peptide for best encoding. In the worst encoding, where polar and charged character of the Group 1 is not that explicit, the difference in frequency between regions is also less visible.
+\subsection*{Comparision of encodings}
+
+We examined more deeply encodings with the best and the worst sensitivity. In both cases Group 1 tends to contain polar amino acids typical with the average size of residuals. In the best encoding, all charged amino acids, both acids and even weak bases as histidine, also belong to this group. This group, nearly absent in h-region, provides very good distinction between parts of signal peptide for best encoding. In the worst encoding, where polar and charged character of the Group 1 is not that explicit, the difference in frequency between regions is also less visible.
 
 The amino acids belonging to the Group 2 have quite low probability of occuring in an alpha-helix, but are still very diverse, but all . Polar but uncharged serine and threonine neighbour with alyphatic glycine and proline. In the worst encoding the polar character of the group is emphasized by the addition of asparagine. The best grouping contains also highly hydrophobic tyrosine. Despite these differences, the frequency of Group 2 seems to be comparable between two encodings.
 
@@ -371,6 +373,8 @@ The fourth group is the most diverse among both encodings. The key is obvious in
 \section*{Discussion}
 
 Despite the presence of signal peptide predicting software, there are no exhaustive studies devoted to the analysis of the signal peptide structure and taxonomical variability. Our research focuses on a transparent model of signal peptide instead of a ‘black-box’ solution.
+
+The first set of predictive rules derived by our method lies in the encoding of amino acids. Aside from a confirmation of the accepted signal peptide model (hydrophibicity of the h-region, polarity of the n-region), we also found new relationships. We found the alanine is one of the most typical amino acids for the c-region and occurs there far more often than in the other parts of signal peptides and mature proteins. The presence of alanine in the signal peptide cleavage site~\cite{1986vonheijnea} cannot explain such overrepresentation of group containing alanine in the c-region.
 
 The proposed algorithm recognizing various signal peptides will reduce costs and speed up searching appropriate artificial signal peptides designed for protein secretion in expensive and time-consuming laboratory experiments. Moreover, the algorithm can be applied in recognition any sequence types on the nucleotide and amino acid levels, represented by small sets. Accessible as a stand-alone and browser-based software, its useful both for researches interested in the analysis of signal peptides.
 
