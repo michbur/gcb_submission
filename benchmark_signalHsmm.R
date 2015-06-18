@@ -54,6 +54,7 @@ print(xtable(bench_metrics, caption = "Performance measures for the best encodin
 
 # plasmodium ------------------------------------------
 
+
 other_soft_plas <- read.csv2("benchmark_plas_other.csv")[, -1]
 
 benchmark_plas_data <- read.fasta("benchmark_plas_data.fasta", seqtype = "AA")
@@ -64,5 +65,7 @@ all_preds_plas <- data.frame(other_soft_plas,
                              signalHsmm2010 = pred2df(predict(signalHsmm2010, benchmark_plas_data))[["sp.probability"]],
                              signalHsmm1989 = pred2df(predict(signalHsmm1989, benchmark_plas_data))[["sp.probability"]])
 
+
 bench_metrics <- calc_mcc(HMeasure(real_labels_plas, all_preds_plas,
                                    threshold = c(rep(0.5, 4), 0.05, 0.05))[["metrics"]])
+
