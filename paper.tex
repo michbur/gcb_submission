@@ -318,12 +318,6 @@ XXX n-grams were further used in the analysis
 \label{fig:cvres}
 \end{figure}
 
-We used four performance measures to evaluate results of cross-validation: specificity, sensitivity, Matthew's Correlation Coefficient ($\phi$ coefficient) and Area Under the Curve (AUC). All encodings provide very good AUC (0.93 -- 0.97) and specificity (0.92 -- 0.96). The encodings have the biggest impact on sensitivity, which ranges from 0.66 to 0.94. The final signalHsmm algorithm uses the encoding, that yields the highest specificity and Matthew's Correlation coefficient as well as the second best AUC (see Fig.~\ref{fig:cvres}).
-
-The best and the worst encoding share some similarities. In both cases Group 1 tends to contain polar 
-
-The both groupings have strongly pronounced non-polar and highly hydrophobic group 3 (see Table~\ref{tab:best}, Table~\ref{tab:best} and Figure~\ref{fig:enccomp}) containing isoleucine, leucine, methionine and valine.
-
 \begin{table}[ht]
 \begin{minipage}{.5\linewidth} 
 \centering
@@ -360,9 +354,19 @@ A, E, K, Q, R \\
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.95\textwidth]{figures/enccomp.png}
-\caption{A comparision of encodings. A) Properties of amino acids in the best and the worst sensitivity encoding. B) Frequencies of amino acids beloning to the encodings in regions of signal peptide and mature protein.}
+\caption{A comparision of encodings. A) Properties of amino acids in the best and the worst sensitivity encoding. B) Frequencies of amino acids beloning to the encodings in regions of signal peptide and mature proteins.}
 \label{fig:enccomp}
 \end{figure}
+
+We used four performance measures to evaluate results of cross-validation: specificity, sensitivity, Matthew's Correlation Coefficient ($\phi$ coefficient) and Area Under the Curve (AUC). All encodings provide very good AUC (0.93 -- 0.97) and specificity (0.92 -- 0.96). The encodings have the biggest impact on sensitivity, which ranges from 0.66 to 0.94. The final signalHsmm algorithm uses the encoding, that yields the highest specificity and Matthew's Correlation coefficient as well as the second best AUC (see Fig.~\ref{fig:cvres}).
+
+The best and the worst encoding share some similarities. In both cases Group 1 tends to contain polar amino acids typical with the average size of residuals. In the best encoding, all charged amino acids, both acids and even weak bases as histidine, also belong to this group. This group, nearly absent in h-region, provides very good distinction between parts of signal peptide for best encoding. In the worst encoding, where polar and charged character of the Group 1 is not that explicit, the difference in frequency between regions is also less visible.
+
+The amino acids belonging to the Group 2 have quite low probability of occuring in an alpha-helix, but are still very diverse, but all . Polar but uncharged serine and threonine neighbour with alyphatic glycine and proline. In the worst encoding the polar character of the group is emphasized by the addition of asparagine. The best grouping contains also highly hydrophobic tyrosine. Despite these differences, the frequency of Group 2 seems to be comparable between two encodings.
+
+The both groupings have strongly non-polar and aliphatic group 3 (see Table~\ref{tab:best}, Table~\ref{tab:best} and Figure~\ref{fig:enccomp}) containing isoleucine, leucine, methionine and valine. Hyrophobic properties of this group in the best encoding are even more pronounced by the presence of tryptophan and phenylalanine. On the contrary, to the Group 3 in the worst encoding belong also more polar histidine. Hence the hydrophobic character of this group, it is dominant over the h-region in case of both amino acid classifications.
+
+The fourth group is the most diverse among both encodings. The key is obvious in a case of the worst encoding. Phenylalanine, tryptophan and tyrosine are aromatic, highly hydrophobic amino acids. In contrast, the Group 4 in the best encoding contains only alanine and cysteine, which both are rather small amino acids and tend to appear in alpha-helices. This very unique composition seems to be typical for the c-region of signal peptide.
 
 \section*{Discussion}
 
