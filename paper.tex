@@ -105,6 +105,7 @@ Instead amino acids were clustered using several criteria relevant for the archi
 
 \begin{table}[ht]
 \centering
+\caption{Properties used in clusterization.} 
 \begin{tabular}{ll}
   \toprule
 Criterion name & Property name \\ 
@@ -124,7 +125,6 @@ Size & Size~\citep{dawson1972size} \\
   Frequency in alpha-helices & Relative frequency in alpha-helix~\citep{1990prabhakaranthe} \\ 
    \bottomrule
 \end{tabular}
-\caption{Properties used in clusterization.} 
 \label{tab:aaprop}
 \end{table}
 
@@ -323,6 +323,7 @@ XXX n-grams were further used in the analysis
 \begin{table}[ht]
 \begin{minipage}{.5\linewidth} 
 \centering
+\caption{The best sensitivity (final) encoding.} 
 \begin{tabular}{l}
   \toprule
 Groups \\ 
@@ -333,11 +334,11 @@ D, E, H, K, N, Q, R \\
    \rowcolor[gray]{0.85}A, C \\ 
    \bottomrule
 \end{tabular}
-\caption{The best sensitivity (final) encoding.} 
 \label{tab:best}
 \end{minipage}
 \begin{minipage}{.5\linewidth} 
 \centering
+\caption{The worst sensitivity encoding.} 
 \begin{tabular}{l}
   \toprule
 Groups \\ 
@@ -348,7 +349,6 @@ A, E, K, Q, R \\
    \rowcolor[gray]{0.85}F, W, Y \\ 
    \bottomrule
 \end{tabular}
-\caption{The worst sensitivity encoding.} 
 \label{tab:worst}
 \end{minipage}
 \end{table}
@@ -364,6 +364,7 @@ We used four performance measures to evaluate results of cross-validation: speci
 
 \begin{table}[ht]
 \centering
+\caption{Performance measures for the best encoding. 60 repetitions of cross-validation.} 
 \begin{tabular}{lrr}
   \toprule
 Measure & Mean & SD \\ 
@@ -374,7 +375,6 @@ AUC & 0.9683 & 0.0024 \\
    \rowcolor[gray]{0.85}Specificity & 0.9269 & 0.0050 \\ 
    \bottomrule
 \end{tabular}
-\caption{Performance measures for the best encoding. 60 repetitions of cross-validation.} 
 \label{tab:perfmeas}
 \end{table}
 
@@ -394,6 +394,7 @@ To provide the honest comparison, we trained our model on 2311 signal peptide-co
 
 \begin{table}[ht]
 \centering
+\caption{Comparison of Area Under the Curve, Sensitivity, Specificity and Matthews Correlation Coefficient for different classifiers.} 
 \begin{tabular}{lrrrr}
   \toprule
 Software name & AUC & Sensitivity & Specificity & MCC \\ 
@@ -407,7 +408,6 @@ signalP 4.1 (no tm) \citep{2011petersensignalp} & 0.9424 & 0.9720 & 0.9128 & 0.8
   signalHsmm-1989 & 0.9455 & 0.9486 & 0.8945 & 0.8440 \\ 
    \bottomrule
 \end{tabular}
-\caption{Comparison of Area Under the Curve, Sensitivity, Specificity and Matthews Correlation Coefficient for different classifiers.} 
 \label{tab:bench2010}
 \end{table}
 
@@ -415,6 +415,7 @@ To check universality of our probabilistic model, we also validated it on signal
 
 \begin{table}[ht]
 \centering
+\caption{Comparison of Area Under the Curve, H-measure and Matthews Correlation Coefficient for different classifiers considering only proteins belonging to Plasmodiidae.} 
 \begin{tabular}{lrrrr}
   \toprule
 Software name & AUC & Sensitivity & Specificity & MCC \\ 
@@ -427,7 +428,6 @@ signalP 4.1 (no tm) \citep{2011petersensignalp} & 0.7928 & 0.6471 & 0.9385 & 0.6
    \rowcolor[gray]{0.85}signalHsmm-1989 & 0.9326 & 0.9216 & 0.8966 & 0.7531 \\ 
    \bottomrule
 \end{tabular}
-\caption{Comparison of Area Under the Curve, H-measure and Matthews Correlation Coefficient for different classifiers considering only proteins belonging to Plasmodiidae.} 
 \label{tab:bench2010plas}
 \end{table}
 
