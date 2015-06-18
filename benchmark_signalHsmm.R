@@ -17,7 +17,7 @@ signalHsmm1989 <- train_hsmm(read_uniprot("sp1950_1989.txt", euk = TRUE, what = 
 benchmark_data <- read.fasta("benchmark_data.fasta", seqtype = "AA")
 benchmark_data2 <- lapply(benchmark_data, function(i) i[1L:ifelse(length(i) > 80, 80, length(i))])
 
-real_labels <- c(rep(1, 218), rep(0, 218))
+real_labels <- c(rep(1, 214), rep(0, 218))
 
 all_preds <- data.frame(other_soft,
                        signalHsmm2010 = pred2df(predict(signalHsmm2010, benchmark_data2))[["sp.probability"]],
