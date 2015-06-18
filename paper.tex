@@ -129,7 +129,7 @@ Size & Size \\
 We selected 13 properties from AAIndex database~\citep{2008kawashimaaaindex} (see Table~\ref{tab:aaprop}), each attributed to a single criterion. We established 96 permutations of the properties, where each permutation contains only one property associated with a given criterion. Considering all permutations of properties, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Further, we cut the clusterings to create four-group encodings. As expected, some encodings (31\%) were identical.
 
 To compare encodings we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling a number of proteins without a signal peptide equal to the number of proteins with signal peptide.
-The analysis was carried using also redundant encodings, but results are not shown (HSMM is a deterministic algorithm and predictions for identical groupings of amino acids were the same). The cross-validation was repeated XXX times, to ensure that every negative protein was tested at least once with XXX probability.
+The analysis was carried using also redundant encodings, but results are not shown (HSMM is a deterministic algorithm and predictions for identical groupings of amino acids were the same). The cross-validation was repeated 60 times. At first, we planned 160 repetitions to ensure with probability 0.95, that every protein without signal peptide was in the learning set, but very small variance of performance measure allowed us to relax this condition.
 
 \subsection*{Hidden semi-Markov model}
 Hidden semi-Markov model (HSMM) is an extension of hidden Markov model (HMM).
@@ -314,7 +314,7 @@ XXX n-grams were further used in the analysis
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.95\textwidth]{figures/cvres.png}
-\caption{Results of cross-validation. 1. An encoding providing the best sensitivity (AUC = 0.9687, MCC = 0.8689). 2. An encoding providing the best specificity (AUC = 0.9346, MCC = 0.6479).}
+\caption{Results of cross-validation. 1. The encoding providing the best sensitivity (AUC = 0.9683, MCC = 0.8677). 2. The encoding providing the best specificity (AUC = 0.9338, MCC = 0.6474).}
 \label{fig:cvres}
 \end{figure}
 
@@ -359,6 +359,22 @@ A, E, K, Q, R \\
 \end{figure}
 
 We used four performance measures to evaluate results of cross-validation: specificity, sensitivity, Matthew's Correlation Coefficient ($\phi$ coefficient) and Area Under the Curve (AUC). All encodings provide very good AUC (0.93 -- 0.97) and specificity (0.92 -- 0.96). The encodings have the biggest impact on sensitivity, which ranges from 0.66 to 0.94. The final signalHsmm algorithm uses the encoding, that yields the highest specificity and Matthew's Correlation coefficient as well as the second best AUC (see Fig.~\ref{fig:cvres}).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrr}
+  \toprule
+Measure & Mean & SD \\ 
+  \midrule
+AUC & 0.9683 & 0.0024 \\ 
+   \rowcolor[gray]{0.85}MCC & 0.8677 & 0.0049 \\ 
+  Sensitivity & 0.9406 & 0.0008 \\ 
+   \rowcolor[gray]{0.85}Specificity & 0.9269 & 0.0050 \\ 
+   \bottomrule
+\end{tabular}
+\caption{Performance measures for the best encoding. 60 repetitions of cross-validation.} 
+\label{tab:perfmeas}
+\end{table}
 
 \subsection*{Comparision of encodings}
 
