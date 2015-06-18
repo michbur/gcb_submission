@@ -3,7 +3,7 @@ library(signalHsmm)
 library(seqinr)
 library(hmeasure)
 library(dplyr)
-other_soft <- read.csv2("benchmark_other_new.csv")
+other_soft <- read.csv2("benchmark_other.csv")
 
 group_best <- list(`1` = c("r", "n", "d", "q", "e", "h", "k"), 
      `2` = c("g", "p", "s", "t", "y"), `3` = c("i", "l", "m", "f", "w", "v"), 
@@ -50,3 +50,19 @@ col <- rep("\\rowcolor[gray]{0.85}", length(rws))
 print(xtable(bench_metrics, caption = "Performance measures for the best encoding. 60 repetitions of cross-validation.", 
              label = "tab:bench2010", digits = 4), include.rownames = FALSE, booktabs = TRUE,
       add.to.row = list(pos = as.list(rws), command = col), sanitize.text.function = identity)
+
+
+# plasmodium ------------------------------------------
+
+other_soft_plas <- read.csv2("benchmark_plas_other.csv")[, -1]
+
+benchmark_plas_data <- read.fasta("benchmark_plas_data.fasta", seqtype = "AA")
+
+real_labels_plas <- c(rep(1, 102), rep(0, 358))
+
+all_preds_plas <- data.frame(other_soft_plas,
+                             signalHsmm2010 = pred2df(predict(signalHsmm2010, benchmark_plas_data))[["sp.probability"]],
+                             signalHsmm1989 = pred2df(predict(signalHsmm1989, benchmark_plas_data))[["sp.probability"]])
+
+bench_metrics <- calc_mcc(HMeasure(real_labels_plas, all_preds_plas,
+                                   threshold = c(rep(0.5, 4), 0.05, 0.05))[["metrics"]])
