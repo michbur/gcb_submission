@@ -26,7 +26,7 @@ sum(b[,1]%in%c(3) & b[,2] %in% c(1,2,3) & b[,3]%in%c(2))/length(signalHSMM_prote
 sum(b[,2]%in%c(1,2) & b[,3] %in% c(2,4) & b[,4]==3)/length(signalHSMM_proteins)
 sum(b[,1]%in%c(2,3,4) & b[,2]%in%c(1,2,3) & b[,3] %in% c(2,4) & b[,4]%in%c(1))/length(signalHSMM_proteins)
 
-sum(b[,1]%in%c(2) & b[,2]%in%c(1,2,3) & b[,3] %in% c(2))/length(signalHSMM_proteins)
+sum(b[,1]%in%c(2) & b[,2]%in%c(1,2) & b[,3] %in% c(2,3))/length(signalHSMM_proteins)
 
 
 sum(b[,4]==3, na.rm=T)/length(signalHSMM_proteins)
@@ -153,7 +153,7 @@ auc = as.numeric(performance(ROCRpredTest, "auc")@y.values)
 auc 
   
 zle <- which(real_labels==1 & a[,1]>a[,3])
-b2 <- lapply(signalHSMM_proteins[zle], function(x){
+b2 <- lapply(benchmark_full[zle], function(x){
   cut <- attr(x, "sig")[2]
   deg_sample <- as.numeric(degenerate(toupper(x)[1L:50], group_best))
   deg_sample <- na.omit(deg_sample)
