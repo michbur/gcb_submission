@@ -310,7 +310,7 @@ Scheme of extended HSMM can be seen in Fig.~\ref{fig:ngramext}.
 Using the biogram software~\citep{biogramPackage} we extracted n-grams from cleavage sites of signal peptides. 
 XXX n-grams were further used in the analysis
 
-\section*{Results}
+\section*{Results and discussion}
 
 \subsection*{Cross-validation}
 
@@ -380,13 +380,15 @@ AUC & 0.9683 & 0.0024 \\
 
 \subsection*{Comparision of encodings}
 
-We examined more deeply encodings with the best and the worst sensitivity. In both cases Group 1 tends to contain polar amino acids typical with the average size of residuals. In the best encoding, all charged amino acids, both acids and even weak bases as histidine, also belong to this group. This group, nearly absent in h-region, provides very good distinction between parts of signal peptide for best encoding. In the worst encoding, where polar and charged character of the Group 1 is not that explicit, the difference in frequency between regions is also less visible.
+We examined more deeply encodings with the best and the worst sensitivity. In both cases Group 1 tends to contain polar amino acids typical with the average size of residuals. In the best encoding, all charged amino acids, both acids and bases (even as weak bases as histidine), also belong to this group. This group, nearly absent in h-region, provides very good distinction between parts of signal peptide for best encoding, because is nearly absent in the h-region. In the worst encoding, where polar and charged character of the Group 1 is not that explicit, the difference in frequency between regions is also less visible.
 
 The amino acids belonging to the Group 2 have quite low probability of occuring in an alpha-helix, but are still very diverse, but all . Polar but uncharged serine and threonine neighbour with alyphatic glycine and proline. In the worst encoding the polar character of the group is emphasized by the addition of asparagine. The best grouping contains also highly hydrophobic tyrosine. Despite these differences, the frequency of Group 2 seems to be comparable between two encodings.
 
 The both groupings have strongly non-polar and aliphatic group 3 (see Tab.~\ref{tab:best}, Tab.~\ref{tab:best} and Fig.~\ref{fig:enccomp}) containing isoleucine, leucine, methionine and valine. Hyrophobic properties of this group in the best encoding are even more pronounced by the presence of tryptophan and phenylalanine. On the contrary, to the Group 3 in the worst encoding belong also more polar histidine. Hence the hydrophobic character of this group, it is dominant over the h-region in case of both amino acid classifications.
 
 The fourth group is the most diverse among both encodings. The key is obvious in a case of the worst encoding. Phenylalanine, tryptophan and tyrosine are aromatic, highly hydrophobic amino acids. In contrast, the Group 4 in the best encoding contains only alanine and cysteine, which both are rather small amino acids and tend to appear in alpha-helices. This very unique composition seems to be typical for the c-region of signal peptide.
+
+The encoding of amino acid plays crucial role in the recognition of signal peptide, but does not affect identification of proteins without a signal peptides (compare change in specificity and sensitivity on Fig.~\ref{fig:cvres}). The mature protein state in the HSMM model tends to have more uniform distribution of residues than signal peptide region, which make it more resistant to changes in amino acid groupings.
 
 \subsection*{Benchmark test}
 
@@ -431,17 +433,20 @@ signalP 4.1 (no tm) \citep{2011petersensignalp} & 0.7928 & 0.6471 & 0.9385 & 0.6
 \label{tab:bench2010plas}
 \end{table}
 
-\section*{Discussion}
+\subsection*{Conclusions}
 
-Despite the presence of signal peptide predicting software, there are no exhaustive studies devoted to the analysis of the signal peptide structure and taxonomical variability. Our research focuses on a transparent model of signal peptide instead of a ‘black-box’ solution.
+Despite the presence of signal peptide predicting software, there are no exhaustive studies devoted to the analysis of the signal peptide structure and taxonomical variability. Our research focuses on a transparent model of signal peptide instead of a ‘black-box’ solution. Aside from a confirmation of the accepted signal peptide model (hydrophibicity of the h-region, polarity of the n-region), we also discovered new relationships. We found the alanine is one of the most typical amino acids for the c-region and occurs there far more often than in the other parts of signal peptides and mature proteins. The presence of alanine in the signal peptide cleavage site~\cite{1986vonheijnea} cannot explain such overrepresentation of group containing alanine in the c-region.
 
 The good performance of signalHsmm confirms that properties of signal peptides do not depend on their exact sequence, but on the physicochemical features of the amino acids. Although this finding may seem to offer a minimal improvement when we consider the most popular signal peptides, this generalization pays off when we analyze more specific cases, as signal peptides of \textit{Plasmodiidae}.
 
-Aside from a confirmation of the accepted signal peptide model (hydrophibicity of the h-region, polarity of the n-region), we also found new relationships. We found the alanine is one of the most typical amino acids for the c-region and occurs there far more often than in the other parts of signal peptides and mature proteins. The presence of alanine in the signal peptide cleavage site~\cite{1986vonheijnea} cannot explain such overrepresentation of group containing alanine in the c-region.
+The flexibility and efficient information recovery makes our model unique among similar software. The signalHsmm not only shows very good performance but also is adjustable to model properly very specific signal peptides belonging to poorly represented taxonomic groups in databases.
 
-The encoding of amino acid plays crucial role in the recognition of signal peptide, but does not affect identification of proteins without a signal peptides (compare change in specificity and sensitivity on Fig.~\ref{fig:cvres}). The mature protein state in the HSMM model tends to have more uniform distribution of residues than signal peptide region, which make it more resistant to changes in amino acid groupings.
+\subsection*{Availability and implementation}
+The signalHsmm web-server is avaible under address: \url{http://smorfland.uni.wroc.pl/signalhsmm}.
 
-The proposed algorithm recognizing various signal peptides will reduce costs and speed up searching appropriate artificial signal peptides designed for protein secretion in expensive and time-consuming laboratory experiments. Moreover, the algorithm can be applied in recognition any sequence types on the nucleotide and amino acid levels, represented by small sets. Accessible as a stand-alone and browser-based software, its useful both for researches interested in the analysis of signal peptides.
+signalHsmm is implemented as an R package freely available on CRAN: \url{http://cran.r-project.org/web/packages/signal.hsmm}.
+
+
 
 
 \section*{Acknowledgments}
