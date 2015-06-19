@@ -74,7 +74,9 @@ library(signalHsmm)
 library(seqinr)
 library(hmeasure)
 library(ggplot2)
-library(knitr)</code></pre>
+library(knitr)
+library(foreach)
+library(doMC)</code></pre>
 <p>First let us load data</p>
 <pre class="r"><code>other_soft &lt;- read.csv2(&quot;benchmark_other_new.csv&quot;)
 
@@ -384,9 +386,7 @@ lastState4 = lastState3+1+length(kMer4)</code></pre>
                                      pState4, nState4, pTrans4, d=3)
   overall_probs_log &lt;- signalHsmm2010$overall_probs_log
   maxSignal &lt;- 45</code></pre>
-<pre class="r"><code>  library(foreach)
-  library(doMC)
-registerDoMC(cores=7)
+<pre class="r"><code>registerDoMC(cores=7)
 n &lt;- length(benchmark_data2)
 results &lt;- foreach(i=1:n) %dopar% {
     prot &lt;- benchmark_data2[[i]]

@@ -39,8 +39,6 @@ benchmark_data2 <- lapply(c(benchmark_full,benchmark_data[-c(1:218)]), function(
 
 # usuniecie 4 obserwacji negatywnych
 negs <- c(432, 215, 280, 417)
-# negs <- sample(215:432, 4)
-# [1] 432 215 280 414
 benchmark_data2 <- benchmark_data2[-negs]
 other_soft <- other_soft[-negs,]
 real_labels <- c(rep(1, 214), rep(0, 214))
