@@ -29,7 +29,7 @@ colnames(aa_nvals) <- tolower(a(colnames(aa_nvals)))
 
 aa_props <- sapply(aaindex, function(i) i[["D"]])
 
-write.csv2(data.frame(property = unname(aa_props)), file = "aa_props.csv")
+#write.csv2(data.frame(property = unname(aa_props)), file = "aa_props.csv")
 
 
 traits <- list(size = c(63, 72, 109, 399),

@@ -107,7 +107,7 @@ dat_bestworst <- cbind(enc = unlist(lapply(c("best", "worst"), function(i) rep(i
 #   my_theme
 
 p1 <- ggplot(dat_bestworst, aes(x = critertion, y = value, col = enc, fill = enc)) +
-  geom_point(size = 5, shape = 21, position = position_dodge(width=0.5)) +
+  geom_point(size = 2.5, shape = 21, position = position_dodge(width=0.5)) +
   #geom_text(hjust = -1) +
   facet_grid(~group) +
   scale_x_discrete("Criterion\n", labels = c("size" = "Size","hydroph" = "Hydroph.",
@@ -117,7 +117,7 @@ p1 <- ggplot(dat_bestworst, aes(x = critertion, y = value, col = enc, fill = enc
   scale_fill_manual("Encoding: ", values = c(adjustcolor("red", 0.25), adjustcolor("blue", 0.25))) + 
   my_theme
 
-png("./figures/enccomp.png", width = 2257*0.5, height = 1201*0.85)
+cairo_ps("./figures/enccomp.eps", width = 9, height = 8, onefile = FALSE)
 print(arrangeGrob(textGrob("A", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p1, 
                   textGrob("B", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p3,
                   nrow = 2, ncol = 2, widths = c(0.05, 0.95)))

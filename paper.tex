@@ -2,6 +2,7 @@
 \usepackage{url}\urlstyle{same}
 \usepackage{booktabs}
 \usepackage{colortbl, xcolor}
+\usepackage{epstopdf}
 
 % rysunki
 \usepackage{tikz}
@@ -71,7 +72,7 @@ Having functional importance and specific features, signal peptides became the s
 The other type of software incorporates into the prediction process theoretical knowledge about the structure of signal peptides. Although these programs do not share innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their more abstract variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (Phobius, Philius and not supported SignalP 3.0) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane, 2004bendtsenimproved}, which reflect regions of signal peptides without realizing limitations of this probabilistic framework. However, the HMMs imply geometric distribution for duration of region length. We replicated the rules for extracting regions' boundaries from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the mentioned assumption is not in concordance with the reality because every region revealed the length distribution other than geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid region scheme (Fig. \ref{fig:sparch}) does not describe extremely long or short signal peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also unusual structures, but such probabilistic frameworks have not still been implemented.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.95\textwidth]{figures/reglen.png}
+\includegraphics[width=0.95\textwidth]{figures/reglen.eps}
 \caption{A) Distribution of lengths of signal peptides. B) Distribution of the lengths of signal peptide regions. The measure of the length is a number of amino acids in the subsequence. The data was extracted from 2~589 signal peptide sequences derived from UniProt database (see \textbf{Data selection} in \textbf{Methods}).}
 \label{fig:reglen}
 \end{figure}
@@ -241,15 +242,15 @@ Fig.~\ref{fig:signalHsmm} is easy to interpret for a researcher without any math
      \resizebox{6.5cm}{!}{%
     \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
     \label{fig:model_hsmm}
-      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=4.5mm, -latex']
-      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\itshape,
-         align=center,  top color=white, bottom color=blue!50!black!70 ] %font=\sffamily\small\bfseries,
+      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=3mm, -latex']
+      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\Large\itshape,
+         align=center,  ] %font=\sffamily\small\bfseries,
       %nodes
       \node[main node]            (start') 	[]						{Start};	     
-      \node[main node, bottom color=purple!70!black!70] 	(nregion') 	[right of=start',xshift=-5mm, yshift=15mm] 	{n-region};
-      \node[main node, bottom color=pink!70!black!70] 	(hregion') 	[right of=nregion',xshift=-5mm,yshift=15mm] 	{h-region};
-      \node[main node, bottom color=gray!70!black!70] 	(cregion') 	[right of=hregion',xshift=-5mm,yshift=-15mm] 	{c-region};
-      \node[main node, bottom color=green!70!black!70] 	(mature') 	[right of=cregion',xshift=-5mm, yshift=-15mm] 	{Mature protein};
+      \node[main node, fill=purple!80!black!40 ] 	(nregion') 	[right of=start',xshift=-5mm, yshift=15mm] 	{n-region};
+      \node[main node, fill=orange!70!black!40] 	(hregion') 	[right of=nregion',xshift=-5mm,yshift=15mm] 	{h-region};
+      \node[main node, fill=yellow!70!black!40] 	(cregion') 	[right of=hregion',xshift=-5mm,yshift=-15mm] 	{c-region};
+      \node[main node, fill=green!70!black!40] 	(mature') 	[right of=cregion',xshift=-5mm, yshift=-15mm] 	{Mature protein};
       
       %lines
       \path [line] (start')   edge node [left, color=black] {} (nregion');
@@ -265,19 +266,19 @@ Fig.~\ref{fig:signalHsmm} is easy to interpret for a researcher without any math
      \resizebox{6.5cm}{!}{%
     \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
     \label{fig:model_hsmm_kMer}
-      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=4.5mm, -latex']
-      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\itshape,
-         align=center,  top color=white, bottom color=blue!50!black!70 ] %font=\sffamily\small\bfseries,
+      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=3mm, -latex']
+      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\Large\itshape,
+         align=center,  ]
       %nodes
       \node[main node]            (start')   []  					{Start};	     
-      \node[main node, bottom color=purple!70!black!70] 	(nregion') 	[right of=start',xshift=-25mm, yshift=35mm] 	{n-region};
-      \node[main node, bottom color=pink!70!black!70] 	(hregion') 	[right of=nregion',xshift=-25mm,yshift=35mm] 	{h-region};
-      \node[main node, bottom color=gray!70!black!70] 	(cregion') 	[right of=hregion',xshift=-10mm,yshift=-25mm] 	{c-region};
-      \node[main node, bottom color=green!70!black!70] 	(mature') 	[below of=hregion',xshift=15mm, yshift=-90mm] 	{Mature protein};
+      \node[main node, fill=purple!80!black!40] 	(nregion') 	[right of=start',xshift=-25mm, yshift=35mm] 	{n-region};
+      \node[main node, fill=orange!70!black!40] 	(hregion') 	[right of=nregion',xshift=-15mm,yshift=35mm] 	{h-region};
+      \node[main node, fill=yellow!70!black!40] 	(cregion') 	[right of=hregion',xshift=-10mm,yshift=-10mm] 	{c-region};
+      \node[main node, fill=green!70!black!40] 	(mature') 	[below of=hregion',xshift=15mm, yshift=-110mm] 	{Mature protein};
       
-      \node[main node, bottom color=yellow!70!black!70]   (kmer1) 	[below of=cregion',xshift=35mm,yshift=30mm] 	{Aminoacid 1};
-      \node[main node, bottom color=yellow!70!black!70]   (kmer2) 	[below of=kmer1,xshift=-5mm,yshift=5mm] 	{Aminoacid 2};
-      \node[main node, bottom color=yellow!70!black!70]   (kmer3) 	[below of=kmer2,xshift=-5mm,yshift=5mm] 	{Aminoacid 3};
+      \node[main node, fill=green!50!red!60!black!20]   (kmer1) 	[below of=cregion',xshift=35mm,yshift=30mm] 	{Aminoacid 1};
+      \node[main node, fill=green!50!red!60!black!20]   (kmer2) 	[below of=kmer1,xshift=-5mm,yshift=-5mm] 	{Aminoacid 2};
+      \node[main node, fill=green!50!red!60!black!20]   (kmer3) 	[below of=kmer2,xshift=-5mm,yshift=-5mm] 	{Aminoacid 3};
       %lines
       \path [line] (start')   edge node [left, color=black] {} (nregion');
       \path [line] (nregion') edge node [below, color=black] { } (hregion');
@@ -292,7 +293,7 @@ Fig.~\ref{fig:signalHsmm} is easy to interpret for a researcher without any math
       
       %\draw [decorate,line width=3pt,decoration={brace,amplitude=10pt}] ([xshift=5mm, yshift=5mm]kmer1) -- ([yshift=-25mm]kmer3) node [black,midway,xshift=0.6cm] {\footnotesize $P_1$};
       \draw[decoration={brace,amplitude=10pt, raise=5pt},decorate, line width=2pt]  
-      ([yshift=1mm]kmer1.east) -- ([yshift=-5mm]kmer3.east) node [black,midway,xshift=0.6cm] {\large \color{black!90} n-gram};
+      ([yshift=1mm]kmer1.east) -- ([yshift=-5mm]kmer3.east) node [black,midway,xshift=0.6cm] {\LARGE \color{black!90} n-gram};
     \end{tikzpicture} }
     \caption{The diagram of signalHsmm extended with the n-gram cleavage site model.}
     \label{fig:ngramext}
@@ -310,7 +311,7 @@ Using the biogram software~\citep{biogramPackage} we extracted n-grams from clea
 \subsection*{Cross-validation}
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.95\textwidth]{figures/cvres.png}
+\includegraphics[width=0.95\textwidth]{figures/cvres.eps}
 \caption{Sensitivity and specificity of encodings after cross-validation. 1. The encoding providing the best sensitivity (AUC = 0.9683, MCC = 0.8677). 2. The encoding providing the best specificity (AUC = 0.9338, MCC = 0.6474).}
 \label{fig:cvres}
 \end{figure}
@@ -350,7 +351,7 @@ A, E, K, Q, R \\
 
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.95\textwidth]{figures/enccomp.png}
+\includegraphics[width=0.95\textwidth]{figures/enccomp.eps}
 \caption{A comparison of encodings. A) Properties of amino acids in the best and the worst sensitivity encoding. B) Frequencies of amino acids belonging to the encodings in regions of signal peptide and mature proteins.}
 \label{fig:enccomp}
 \end{figure}

@@ -134,7 +134,7 @@ source("plot_tools.R")
 
 p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding == "", fill = encoding == "")) +
   geom_point(size = 5, shape = 21) +
-  geom_text(size = 9, hjust = -0.5, vjust = 0) +
+  geom_text(size = 6, hjust = -0.75, vjust = 1) +
   scale_colour_manual(values = c("red","blue")) + 
   scale_fill_manual(values = c(adjustcolor("red", 0.25), adjustcolor("blue", 0.25))) + 
   scale_x_continuous("Sensitivity\n") +
@@ -143,8 +143,7 @@ p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding
   guides(colour = FALSE, fill = FALSE)
   
 
-
-png("./figures/cvres.png", width = 2257*0.5, height = 1201*0.5)
+cairo_ps("./figures/cvres.eps", width = 9, height = 5, onefile = FALSE)
 print(p1)
 dev.off()
 

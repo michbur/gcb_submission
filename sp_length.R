@@ -47,7 +47,7 @@ p1 <- ggplot(mlen, aes(x = value)) +
   my_theme
 
 
-png("./figures/reglen.png", width = 2257*0.5, height = 1201*0.5)
+cairo_ps("./figures/reglen.eps", width = 9, height = 5, onefile = FALSE)
 print(arrangeGrob(textGrob("A", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p2, 
                   textGrob("B", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p1, 
                   nrow = 2, ncol = 2, widths = c(0.05, 0.95)))

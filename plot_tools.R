@@ -2,7 +2,7 @@ library(ggplot2)
 library(grid)
 library(gridExtra)
 
-size_mod <- 2
+size_mod <- -5
 
 my_theme <- theme(plot.background=element_rect(fill = "transparent",
                                                colour = "transparent"),
