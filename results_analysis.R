@@ -14,9 +14,17 @@ fold_res2 <- fold_res
 load(paste0(pathway, "fold_res_PS4.RData"))
 fold_res3 <- fold_res
 
+load(paste0(pathway, "fold_res_PS3.RData"))
+fold_res4 <- fold_res
+
+load(paste0(pathway, "fold_res_PS5.RData"))
+fold_res5 <- fold_res
+
 fold_res <- c(fold_res1,
               fold_res2,
-              fold_res3)
+              fold_res3,
+              fold_res4,
+              fold_res5)
 
 source("plot_tools.R")
 
@@ -122,6 +130,8 @@ p1_dat[p1_dat[, "Spec"] > 0.955, "encoding"] <- "2"
 p1_dat[p1_dat[, "Sens"] > 0.93, "encoding"] <- "1"
 p1_dat[, "encoding"] <- as.factor(p1_dat[, "encoding"])
 
+source("plot_tools.R")
+
 p1 <- ggplot(p1_dat, aes(x = Sens, y = Spec, label = encoding, colour = encoding == "", fill = encoding == "")) +
   geom_point(size = 5, shape = 21) +
   geom_text(size = 9, hjust = -0.5, vjust = 0) +
@@ -150,7 +160,44 @@ paste0("Results of cross-validation. 1. The encoding providing the best sensitiv
        ").")
 
 
+# cv for the best encoding
+fold_res[[1]][[69]]
 
-rep_res
+perf_rep2 <- function(folds, threshold = 0.5)
+  do.call(rbind, lapply(1L:length(folds), function(repetition_id) {
+    single_fold <- folds[[repetition_id]][[69]]
+    
+    res <- rowMeans(sapply(single_fold, function(single_group) {
+      metrics <- unlist(HMeasure(as.numeric(!is.na(single_group[, "cs_real"])),
+                                 single_group[, "prob"], threshold = threshold)[["metrics"]])
+      TP <- metrics["TP"]
+      TN <- metrics["TN"]
+      FP <- metrics["FP"]
+      FN <- metrics["FN"]
+      
+      c(metrics, 
+        mcc = unname((TP*TN - FP*FN)/sqrt((TP + FP)*(TP + FN)*(TN + FP)*(TN + FN))))
+    }))
+    
+    res <- data.frame(names(res), res)
+    
+    colnames(res) <- c("measure", "value")
+    
+    cbind(repetition = factor(rep(repetition_id, nrow(res))), res)
+  }))
+
+best_perf <- perf_rep2(fold_res, 0.05)
 
 
+
+library(xtable)
+
+tab <- best_perf %>% filter(measure %in% c("AUC", "Sens", "Spec", "mcc")) %>%
+  group_by(measure) %>% summarize(m_value = mean(value), sd_value = sd(value)) %>% droplevels %>% data.frame
+levels(tab[["measure"]]) <- c("AUC", "MCC", "Sensitivity", "Specificity")
+rws <- seq(1, nrow(tab) - 1, by = 2)
+colnames(tab) <- c("Measure", "Mean", "SD")
+col <- rep("\\rowcolor[gray]{0.85}", length(rws))
+print(xtable(tab, caption = "Performance measures for the best encoding. 60 repetitions of cross-validation.", 
+             label = "tab:perfmeas", digits = 4), include.rownames = FALSE, booktabs = TRUE,
+      add.to.row = list(pos = as.list(rws), command = col))
