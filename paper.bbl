@@ -5,12 +5,6 @@ Argos, P., Rao, J.~K., and Hargrave, P.~A. (1982).
 \newblock Structural prediction of membrane-bound proteins.
 \newblock {\em European Journal of Biochemistry}, 128(2-3):565--75.
 
-\bibitem[Aydin et~al., 2006]{16571137}
-Aydin, Z., Altunbasak, Y., and Borodovsky, M. (2006).
-\newblock Protein secondary structure prediction for a single-sequence using
-  hidden semi-markov models.
-\newblock {\em BMC Bioinformatics}, 7(1):178.
-
 \bibitem[Bendtsen et~al., 2004]{2004bendtsenimproved}
 Bendtsen, J.~D., Nielsen, H., von Heijne, G., and Brunak, S. (2004).
 \newblock Improved prediction of signal peptides: Signalp 3.0.
@@ -131,17 +125,17 @@ Kerzerho, J., Schneider, A., Favry, E., Castelli, F.~A., and Maillere, B.
   cell epitopes.
 \newblock {\em J Biol Chem}, 288(19):13370--7.
 
-\bibitem[Kyte and Doolittle, 1982]{1982kytea}
-Kyte, J. and Doolittle, R.~F. (1982).
-\newblock A simple method for displaying the hydropathic character of a
-  protein.
-\newblock {\em J Mol Biol}, 157(1):105--32.
-
 \bibitem[Käll et~al., 2004]{2004klla}
 Käll, L., Krogh, A., and Sonnhammer, E. L.~L. (2004).
 \newblock A combined transmembrane topology and signal peptide prediction
   method.
 \newblock {\em Journal of molecular biology}, 338:1027--1036.
+
+\bibitem[Kyte and Doolittle, 1982]{1982kytea}
+Kyte, J. and Doolittle, R.~F. (1982).
+\newblock A simple method for displaying the hydropathic character of a
+  protein.
+\newblock {\em J Mol Biol}, 157(1):105--32.
 
 \bibitem[Ladunga, 1999]{1999ladungaphysean}
 Ladunga, I. (1999).
@@ -203,12 +197,6 @@ Nielsen, H. and Krogh, A. (1998).
   Systems for Molecular Biology ; ISMB. International Conference on Intelligent
   Systems for Molecular Biology}, 6:122--130.
 
-\bibitem[Pachter et~al., 2002]{Pachter02applicationsof}
-Pachter, L., Alexandersson, M., and Cawley, S. (2002).
-\newblock Applications of generalized pair hidden markov models to alignment
-  and gene finding problems.
-\newblock {\em J. Comput. Biol}, 9:389--399.
-
 \bibitem[Paetzel et~al., 2002]{2002paetzelsignal}
 Paetzel, M., Karla, A., Strynadka, N.~C., and Dalbey, R.~E. (2002).
 \newblock Signal peptidases.
@@ -225,13 +213,6 @@ Petersen, T.~N., Brunak, S., von Heijne, G., and Nielsen, H. (2011).
 \newblock Signalp 4.0: discriminating signal peptides from transmembrane
   regions.
 \newblock {\em Nature methods}, 8:785--786.
-
-\bibitem[Pimentel et~al., 2014]{7043102}
-Pimentel, M., Santos, M., Springer, D., and Clifford, G. (2014).
-\newblock Hidden semi-markov model-based heartbeat detection using multimodal
-  data and signal quality indices.
-\newblock In {\em Computing in Cardiology Conference (CinC), 2014}, pages
-  553--556.
 
 \bibitem[Ponnuswamy et~al., 1980]{1980ponnuswamyhydrophobic}
 Ponnuswamy, P.~K., Prabhakaran, M., and Manavalan, P. (1980).
