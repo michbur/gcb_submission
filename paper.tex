@@ -12,7 +12,7 @@
 \usetikzlibrary[topaths]
 \usetikzlibrary{decorations.pathreplacing}
 
-\title{SignalHsmm - a novel semi-Markov model of eukaryotic signal peptides}
+\title{signalHsmm - a novel semi-Markov model of eukaryotic signal peptides}
 
 \author[1]{Micha\l{}  Burdukiewicz}
 \author[2]{Piotr Sobczyk}
@@ -83,7 +83,7 @@ Eukaryotic protein sequences and their annotations were properly prepared accord
 
 \subsection*{Clustering of amino acids}
 
-SignalHsmm is not the first software which uses amino acid encoding in signal peptide prediction. BLOMAP~\citep{maetschke2005blomap} also employed the similar strategy but considered only substitution matrices. However, we applied different approach. We clustered amino acids using four properties relevant for the architecture of signal peptide: their hydrophobicity, frequency in $\alpha$-helices, polarity and size. The high hydrophobicity is a determinant of the h-region, whose $\alpha$-helix secondary structure is probably induced by the positively charged n-region. The high polarity as well as small size are important features of residues in the cleavage site~\citep{1994palzkillselection}.
+signalHsmm is not the first software which uses amino acid encoding in signal peptide prediction. BLOMAP~\citep{maetschke2005blomap} also employed the similar strategy but considered only substitution matrices. However, we applied different approach. We clustered amino acids using four properties relevant for the architecture of signal peptide: their hydrophobicity, frequency in $\alpha$-helices, polarity and size. The high hydrophobicity is a determinant of the h-region, whose $\alpha$-helix secondary structure is probably induced by the positively charged n-region. The high polarity as well as small size are important features of residues in the cleavage site~\citep{1994palzkillselection}.
 
 \begin{table}[ht]
 \small
@@ -350,14 +350,14 @@ To check universality of our probabilistic model, we also validated it on signal
 
 \subsection*{Conclusions}
 
-The architecture of existing signal peptide predicting software is usually opaque, which unables to extract decision rules and determine parameters responsible for the predictions. Considering the biological context of the problem, we see a need for a transparent model of signal peptide. SignalHsmm is the first step in this direction. 
+The architecture of existing signal peptide predicting software is usually opaque, which unables to extract decision rules and determine parameters responsible for the predictions. Considering the biological context of the problem, we see a need for a transparent model of signal peptide. signalHsmm is the first step in this direction. 
 It shows a good performance and provides clear interpretability and expendability of  the predictive algorithm. 
 The model confirmed not only the high hydrophibicity of the h-region and polarity of the n-region but also found that alanine is one of the most typical amino acids in the c-region.
 The performance of signalHsmm indicates that properties of signal peptides do not depend on their exact sequence but on the physicochemical features of the amino acids. 
-The flexibility and efficient information recovery makes our model unique among similar software. SignalHsmm is also adjustable to model properly very specific signal peptides belonging to taxonomic groups which are poorly represented in databases. Moreover, our method can effectively extract information from very small data sets, which in future may lead to new predictors specialized in recognition of atypical signaling sequences.
+The flexibility and efficient information recovery makes our model unique among similar software. signalHsmm is also adjustable to model properly very specific signal peptides belonging to taxonomic groups which are poorly represented in databases. Moreover, our method can effectively extract information from very small data sets, which in future may lead to new predictors specialized in recognition of atypical signaling sequences.
 
 \subsection*{Availability and implementation}
-The signalHsmm prediction web-server is available at: \url{http://smorfland.uni.wroc.pl/signalhsmm}. SignalHsmm is implemented as an R package available at: \url{http://cran.r-project.org/web/packages/signalHsmm}. Stand-alone version offers prediction and tools to build, train and test novel signal peptide models.
+The signalHsmm prediction web-server is available at: \url{http://smorfland.uni.wroc.pl/signalhsmm}. signalHsmm is implemented as an R package available at: \url{http://cran.r-project.org/web/packages/signalHsmm}. Stand-alone version offers prediction and tools to build, train and test novel signal peptide models.
 
 
 \bibliography{lokalizom}
