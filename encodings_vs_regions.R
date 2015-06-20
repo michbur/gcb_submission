@@ -60,6 +60,8 @@ source("plot_tools.R")
 
 levels(deg_region[["region"]]) <- c("n-region", "h-region", "c-region", "Mature\nprotein")
 levels(deg_region[["group"]]) <- paste0("Group ", levels(deg_region[["group"]]))
+levels(deg_region[["enc"]]) <- c("Best\nsensitivity", "Best\nspecificity")
+
 
 p3 <- ggplot(deg_region, aes(x = region, y = freq, fill = enc, colour = enc)) +
   geom_bar(stat = "identity", position = "dodge") + 
@@ -87,6 +89,7 @@ dat_worst <- group_properties(group_worst)
 
 dat_bestworst <- cbind(enc = unlist(lapply(c("best", "worst"), function(i) rep(i, nrow(dat_best)))),
                        rbind(dat_best, dat_worst))
+levels(dat_bestworst[["enc"]]) <- c("Best\nsensitivity", "Best\nspecificity")
 
 # p1 <- ggplot(dat_best, aes(x = critertion, y = value, label = variable)) +
 #   geom_point(size = 5, shape = 21, colour = "blue", fill = adjustcolor("blue", 0.25)) +

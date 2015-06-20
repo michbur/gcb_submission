@@ -18,14 +18,13 @@
 \author[2]{Piotr Sobczyk}
 \author[1]{Pawe\l{} B\l{}a\.{z}ej}
 \author[1]{Pawe\l{} Mackiewicz}
-\affil[1]{University of Wroc\l{}aw, Department of Genomics, Poland}
-\affil[2]{Wroc\l{}aw University of Technology, Department of Mathematics, Poland}
+\affil[1]{University of Wroc\l{}aw, Department of Genomics, Poland; michalburdukiewicz@gmail.com, blazej.pawel@gmail.com, pamac@smorfland.uni.wroc.pl}
+\affil[2]{Wroc\l{}aw University of Technology, Department of Mathematics, Poland; piotr.sobczyk@pwr.edu.pl}
 
 \keywords{eukaryote; hidden semi-Markov models; n-gram; signal peptide prediction}
 
 \begin{abstract}
-signalHsmm using universal, transparent and extendable model of signal peptides, predicts their presence in eukaryotic proteins.
-Signal peptides play important role in cell biology as they are responsible for targeting of proteins to endomembrane system and their export outside the cell. Proteins equipped with signal peptides play crucial roles in metabolism, maintenance of tissue structure, immune response and regulation of other organismal functions. They may be recognized with adequate accuracy using learning systems, that are usually 'black-box' models. Without an ability to trace decision rules, researchers cannot discover which parameters are responsible for predictions. Therefore, we designed a new, more universal probabilistic model for eukaryotic signal peptides, which includes knowledge about their organization, amino acid composition and variability. The proposed approach is based on hidden semi-Markov models (HSMMs) and uses intrinsic knowledge about signal peptides. The big advantage of the algorithm is its extensibility. By using the n-grams (k-mers), we showed that the general model can yield not only better results than other software but also more information about features of signal peptides. Our model showed the largest AUC = 0.97 in comparison to other signal peptide predictor even though it was trained on very small data sets. Moreover, it proved to be very stable regardless of types of learning data sets. Therefore, our model does not need to be permanently retrained with the continuous expansion of sequence databases. It should be emphasized, that our model is able to recognize signal peptides from medically significant malaria parasites \textsl{Plasmodium} and their relatives more accurately (with AUC = 0.92) than popular programs (0.84). The web-server of signalHsmm is available at \url{http://smorfland.uni.wroc.pl/signalhsmm}.
+Signal peptides play an essential role in targeting of proteins to endomembrane system and their export outside the cell. The proteins equipped with such peptides are of great importance in metabolism, maintenance of tissue structure, immune response and regulation of other organismal functions. These peptides may be recognized with adequate accuracy using learning systems. However, they are usually 'black-box' models therefore unable to trace decision rules and identify parameters responsible for the predictions. That is why, we designed a new more universal probabilistic model for eukaryotic signal peptides, which includes knowledge about their organization, amino acid composition and variability. The proposed approach called signalHsmm is based on hidden semi-Markov models (HSMMs) and uses intrinsic knowledge about signal peptides. The big advantage of the algorithm is its extensibility. By using the n-grams (k-mers), we showed that the general model can yield not only better results than other software but also more information about features of signal peptides. Our model showed the largest AUC = 0.97 in comparison to other signal peptide predictor even though it was trained on very small data sets. Moreover, it proved to be very stable regardless of types of learning data sets. Therefore, our model does not need to be permanently retrained with the continuous expansion of sequence databases. It should be emphasized, that our model is able to recognize signal peptides from medically significant malaria parasites \textit{Plasmodium} and their relatives more accurately (with AUC = 0.92) than popular programs (0.84). The web-server of signalHsmm is available at \url{http://smorfland.uni.wroc.pl/signalhsmm}.
 
 \end{abstract}
 
@@ -43,11 +42,11 @@ Proteins of eukaryotes are encoded in nuclear genomes and are synthesized in rib
 
 Signal peptides are responsible for targeting of proteins via the Sec61 translocation channel~\citep{2007rapoportprotein} to endomembrane system, which includes endoplasmic reticulum and Golgi apparatus. Such proteins can stay inside these compartments, can be inserted into cellular membranes or exported outside the cell. Proteins equipped with signal peptides play crucial role in metabolism ($\beta$ galactosidase, pepsins)~\citep{1991hofmannmutations}, maintenance of tissue structure (collagen)~\citep{2001chanaberrant}, immune response (interferons, interleukins)~\citep{2005zhangalteration} and regulation of other organismal functions (prolactin, glucagon)~\citep{2010huangrole}. Moreover, passing proteins through the endomembrane system is important for their correct folding and posttranslational modification such as glycosylation and phosphorylation.
 
-Despite the low sequence homology between signal peptides~\citep{1999ladungaphysean}, some general architecture were proposed~\citep{1994izardsignal, 2013vossmechanism} - Fig. \ref{fig:sparch}. It is assumed that signal peptides start with a positively charged sequence of amino acid residues, called the n-region with the length of about 5-8 residues. They probably enforce a proper topology on the polypeptide during its translocation through membrane based on the positive-inside rule~\citep{1988vonheijnetopogenic}. The first region is followed by a stretch of hydrophobic amino acids (h-region) with the length of about 8-12 residues. It constitutes a core region of signal peptide and usually forms $\alpha$-helix. The third part of a signal peptide is a polar, but uncharged c-region. It is usually 6 residues long and ends with a cleavage site, in which the signal peptidase cleaves the signal peptide, during or after translocation of the protein into the endoplasmic reticulum ~\citep{2002paetzelsignal}. The cleavage site is characterized by a variable amino acid composition. It typically contains small and neutral residues at -3 and -1 positions~\citep{1994palzkillselection}. This site is, however, absent from some membrane proteins in which the first transmembrane domain acts both as a signal peptide and signal anchor~\citep{1988szczesnaskorupapositive}. The amino acid composition and the length of these regions vary between signal peptides, which influences the efficiency of protein secretion~\citep{2006hegdethe}.
+Despite the low sequence homology between signal peptides~\citep{1999ladungaphysean}, some general architecture were proposed~\citep{1994izardsignal, 2013vossmechanism} - Fig. \ref{fig:sparch}. It is assumed that signal peptides start with a positively charged sequence of amino acid residues, called the n-region with the length of about 5-8 residues. They probably enforce a proper topology on the polypeptide during its translocation through membrane based on the positive-inside rule~\citep{1988vonheijnetopogenic}. The first region is followed by a stretch of hydrophobic amino acids (h-region) with the length of about 8-12 residues. It constitutes a core region of signal peptide and usually forms $\alpha$-helix. The third part of a signal peptide is a polar, but uncharged c-region. It is usually 6 residues long and ends with a cleavage site, in which a signal peptidase cleaves the signal peptide, during or after translocation of the protein into the endoplasmic reticulum ~\citep{2002paetzelsignal}. The cleavage site is characterized by a variable amino acid composition. It typically contains small and neutral residues at -3 and -1 positions~\citep{1994palzkillselection}. This site is, however, absent from some membrane proteins in which the first transmembrane domain acts both as a signal peptide and signal anchor~\citep{1988szczesnaskorupapositive}. The amino acid composition and the length of these regions vary between signal peptides, which influences the efficiency of protein secretion~\citep{2006hegdethe}.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.55\textwidth]{figures/SP.png}
-\caption{The organization of typical signal peptide. The figure is not drawn in scale.}
+\includegraphics[width=0.55\textwidth]{figures/SP.eps}
+\caption{The organization of typical signal peptide. The regions are not drawn in scale.}
 \label{fig:sparch}
 \end{figure}
 
@@ -57,7 +56,7 @@ Some data indicate that signal peptides may be universal. It was found, for exam
 
 \subsection*{Software predicting signal peptides}
 
-Although many experimental methods determining the subcellular localization of proteins were devised, they are time consuming and laborious. Therefore, signal peptides became the subject of many computational programs to their prediction. Many software incorporates ‘black-box’ models, such as: neural networks~\citep{2011petersensignalp}, support vector machines~\citep{2014zhangprediction}, Bayesian networks~\citep{2012zhengsignalbnf} or k-nearest neighbours~\citep{2007shensignall}. However, these models do not provide direct biological information about organization of signal peptides and are not able to predict properly atypical signal peptides. Although there are programs that do not share the innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (Phobius, Philius and SignalP 3.0) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane, 2004bendtsenimproved}, which try to reflect structure of signal peptides regions in their limited probabilistic frameworks. The HMMs they use, however, imply a geometric distribution for duration of regions length. We studied the distribution for regions from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the the length distribution for every region was not geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid scheme of signal peptide's organization (Fig. \ref{fig:sparch}) does not describe extremely long or short peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also the unusual structures, but such probabilistic frameworks have not yet been implemented.
+Although many experimental methods determining the subcellular localization of proteins were devised, they are time consuming and laborious. Therefore, signal peptides became the subject of many computational programs to their prediction. Many software incorporates ‘black-box’ models, such as: neural networks~\citep{2011petersensignalp}, support vector machines~\citep{2014zhangprediction}, Bayesian networks~\citep{2012zhengsignalbnf} or k-nearest neighbours~\citep{2007shensignall}. However, these models do not provide direct biological information about organization of signal peptides and are not able to predict properly atypical signal peptides. Although there are programs that do not share the innate flaws of ‘black-box’ models, they also demand an improvement. Some of them are based on position matrices or their variants~\citep{2014zhangprediction, 2004hillerpredisi}. Others (Phobius, Philius and SignalP 3.0) use hidden Markov models (HMMs)~\citep{2004klla, 2008reynoldstransmembrane, 2004bendtsenimproved}, which try to reflect structure of signal peptides regions in their limited probabilistic frameworks. The used HMMs, however, imply a geometric distribution for duration of regions length. We studied the distribution for regions from the first work utilizing HMMs in prediction of signal peptides~\citep{1998nielsenprediction} and found that the length distribution for every region was not geometric (Fig. \ref{fig:reglen}). Moreover, the commonly used rigid scheme of signal peptide's organization (Fig. \ref{fig:sparch}) does not describe extremely long or short peptides. Theoretically, HMMs that describe the atypical signal peptides could be developed to consider also the unusual structures but such probabilistic frameworks have not yet been implemented.
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.95\textwidth]{figures/reglen.eps}
@@ -65,9 +64,9 @@ Although many experimental methods determining the subcellular localization of p
 \label{fig:reglen}
 \end{figure}
 
-All programs used in signal peptide recognition are trained on real protein sequences. Therefore, they succeed in the recognition of peptides similar to those in the learning set but fail in the case of artificial signal peptides. Such peptides are designed to increase effectiveness of protein secretion~\citep{2010futatsumorisugaisignal}. They are especially important in industrial applications to increase yield of proteins. Therefore, only explicit knowledge about the organization of signal peptides allows creating sequences that will be the most efficient in the export of proteins~\citep{2013ngengineering}. Signal peptides have also an important application in gene therapy. Mimicking the natural mechanism of protein export, artificial signal peptides with tumor epitopes increase the antitumor immune response~\citep{2003heenhanced}. Such epitopes must be properly inserted into a signal peptide without decreasing its secretion properties through disruption of the regional structure. Instead of time-consuming and expensive laboratory experiments, it would be very useful to survey in silico many artificial peptides to select the ones that would fulfill the designed role.
+All programs used in signal peptide recognition are trained on real protein sequences. Therefore, they succeed in the recognition of peptides similar to those in the learning set but fail in the case of artificial signal peptides. Such peptides are designed to increase effectiveness of protein secretion~\citep{2010futatsumorisugaisignal}. They are especially important in industrial applications to increase yield of proteins. Therefore, only explicit knowledge about the organization of signal peptides allows creating sequences that will be the most efficient in the export of proteins~\citep{2013ngengineering}. Signal peptides have also an important application in gene therapy. Mimicking the natural mechanism of protein export, artificial signal peptides with tumor epitopes increase the antitumor immune response~\citep{2003heenhanced}. Such epitopes must be properly inserted into a signal peptide without decreasing its secretion properties through disruption of the regional structure. Instead of time-consuming and expensive laboratory experiments, it would be very useful to survey \textit{in silico} many artificial peptides to select the ones that would fulfill the designed role.
 
-Majority of the signal peptide predicting software uses the orthogonal encoding of amino acids, in which a vector of 20 digits represents every amino acid. This method of encoding, however, does not take into account relationships between amino acids and differences in their physicochemical properties. This is disadvantage of such signal peptides' models because their regions are in fact characterized by specific features of amino acid residues and not by the simple occurrence of specific amino acids. In addition to this, such sparse encoding enforces larger data sets, which hinders their management and analysis~\citep{2002linamino}. Therefore, we elaborated a new approach based on hidden semi-Markov models using grouping of amino acids into physicochemical groups characteristic of signal peptides. The new methods proved better in comparison to the current software.
+Majority of the signal peptide predicting software uses the orthogonal encoding of amino acids, in which a vector of 20 digits represents every amino acid. This method of encoding, however, does not take into account relationships between amino acids and differences in their physicochemical properties. This is disadvantage of such signal peptide models because their regions are in fact characterized by specific features of amino acid residues and not by the simple occurrence of specific amino acids. In addition to this, such sparse encoding enforces larger data sets, which hinders their management and analysis~\citep{2002linamino}. Therefore, we elaborated a new approach based on hidden semi-Markov models using grouping of amino acids into physicochemical groups characteristic of signal peptides. The new methods proved better in comparison to the current software.
 
 
 
@@ -76,15 +75,15 @@ Majority of the signal peptide predicting software uses the orthogonal encoding 
 
 \subsection*{Overview}
 
-Since the functionality of signal peptides depends on the physicochemical properties of residues in a given region, we clustered amino acids into several groups based on their characteristics. The pre-processed sequences were further analyzed by the heuristic algorithm, which determines borders between three characteristic signal peptide regions~\cite{1998nielsenprediction}. We refined some region recognition criteria to attune the algorithm to less typical signal peptides. Next, two models were trained to recognize proteins with and without a signal peptide. The first one was a hidden semi-Markov model, in which each of three signal peptide regions was represented by a different hidden state. The additional fourth hidden state represented a mature protein. Each state was described by its frequencies of amino acid groups. The distribution of hidden states durations, i.e. the number of amino acids, was based on the empirical distribution of region lengths from the training set. Furthermore, the hidden semi-Markov model was enriched with n-grams representing signal peptide cleavage sites. The second model was a simple probabilistic approach in which no association between amino acids was assumed, and probability of amino acids groups occurrence was determined by their frequencies in mature proteins.
+Since the functionality of signal peptides depends on the physicochemical properties of residues in a given region, we clustered amino acids into several groups based on their characteristics. The pre-processed sequences were further analyzed by the heuristic algorithm, which determines borders between three characteristic signal peptide regions~\citep{1998nielsenprediction}. We refined some region recognition criteria to attune the algorithm to less typical signal peptides. Next, two models were trained to recognize proteins with and without a signal peptide. The first one was a hidden semi-Markov model, in which each of three signal peptide regions was represented by a different hidden state. The additional fourth hidden state represented a mature protein. Each state was described by its frequencies of amino acid groups. The distribution of hidden states durations, i.e. the number of amino acids, was based on the empirical distribution of region lengths from the training set. Furthermore, the hidden semi-Markov model was enriched with n-grams representing signal peptide cleavage sites. The second model was a simple probabilistic approach in which no association between amino acids was assumed, and probability of amino acids groups occurrence was determined by their frequencies in mature proteins.
 
 \subsection*{Data selection}
 
-Eukaryotic protein sequences and their annotations were properly prepared according to the literature of the subject and downloaded from UniProt database release 2015\_06. The positive set contained 2~589 sequences with an experimentally confirmed signal peptide, containing its start and cleavage site information. Sequences with more than one cleavage site were excluded from the final data set. The negative set comprised 152~272 sequences without any signal peptide annotation. Protein sequences with ambiguous symbols: X, J, Z, B and selenocysteine (U) were removed from the final sets.
+Eukaryotic protein sequences and their annotations were properly prepared according to the literature of the subject and downloaded from UniProt database release 2015\_06. The positive set contained 2~589 sequences with an experimentally confirmed signal peptide, containing its start and cleavage site information. Sequences with more than one cleavage site were excluded from the final data set. The negative set comprised 152~272 sequences without any signal peptide annotation. Protein sequences with ambiguous symbols: X, J, Z, B and selenocysteine (U) were finally removed.
 
 \subsection*{Clustering of amino acids}
 
-SignalHsmm is not the first software which uses amino acid encoding in signal peptide prediction. BLOMAP~\citep{maetschke2005blomap} also employed the similar strategy but considered only substitution matrices. However, we applied different approach. We clustered amino acids using four properties relevant for the architecture of signal peptide: their hydrophobicity, frequency in $\alpha$-helices, polarity and size. The high hydrophobicity is determinant of the h-region, whose $\alpha$-helix secondary structure is probably induced by the positively charged n-region. The high polarity as well as small size are important features of residues in the cleavage site~\citep{1994palzkillselection}.
+SignalHsmm is not the first software which uses amino acid encoding in signal peptide prediction. BLOMAP~\citep{maetschke2005blomap} also employed the similar strategy but considered only substitution matrices. However, we applied different approach. We clustered amino acids using four properties relevant for the architecture of signal peptide: their hydrophobicity, frequency in $\alpha$-helices, polarity and size. The high hydrophobicity is a determinant of the h-region, whose $\alpha$-helix secondary structure is probably induced by the positively charged n-region. The high polarity as well as small size are important features of residues in the cleavage site~\citep{1994palzkillselection}.
 
 \begin{table}[ht]
 \small
@@ -112,7 +111,7 @@ Size & Size~\citep{dawson1972size} \\
 \label{tab:aaprop}
 \end{table}
 
-We considered in total 13 amino acid scales from AAIndex database~\citep{2008kawashimaaaindex} (Tab.~\ref{tab:aaprop}). We selected one scale per property and carried out all possible 96 permutations of them. Based on that, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Next, we cut the clusterings to create four group of amino acids. In 31\% of cases, the groupings were identical. To compare the usefulness of encodings, we performed a 5-fold cross-validation training a new instance of signalHsmm on every encoding. We created balanced data sets by subsampling proteins without a signal peptide to equal the number of proteins with a signal peptide. The cross-validation was repeated 60 times to ensure that every protein without signal peptide was included in the learning set with probability higher than 0.5. Very small variance of performance measures (for example see Tab.~\ref{tab:perfmeas})  confirms credibility of cross-validation.
+We considered in total 13 amino acid scales from AAIndex database~\citep{2008kawashimaaaindex} (Tab.~\ref{tab:aaprop}). We selected one scale per property and carried out all possible 96 permutations of them. Based on that, we created 96 possible clusterings of amino acids using Euclidean distance and Ward's method. Next, we cut the clusterings to create four group of amino acids. In 31\% of cases, the groupings were identical. To compare the usefulness of encodings, we performed a 5-fold cross-validation training the new instance of signalHsmm on every encoding. We created balanced data sets by subsampling proteins without a signal peptide to equal the number of proteins with a signal peptide. The cross-validation was repeated 60 times to ensure that every protein without signal peptide was included in the learning set with the probability higher than 0.5. Very small variance of performance measures (for example see Tab.~\ref{tab:perfmeas})  confirmed the credibility of cross-validation.
 
 \subsection*{Hidden semi-Markov model}
 Hidden semi-Markov model (HSMM) is an extension of hidden Markov model (HMM). 
@@ -122,32 +121,32 @@ HMM aims to answer that question assuming a specific and yet flexible structure 
 HMM consists of two stochastic processes. The first is a discrete Markov chain $X_{t=1}^T$ on the set of so called hidden states $\{S_1, \dots S_n\}$.
 They are "the cause" of the observations. At every step $t$, hidden state might change according to a transition matrix
 $A= (a)_{i,j=1}^n$, where $a_{i,j} = \mathcal{P}(X_{t+1} = S_j | X_t = S_i)$. In our application, hidden states are signal peptide regions.
-The second process $E_{t=1}^T$ is an observation process defined on the set of possible observations $\{O_1, \dots, O_m\}$,. They are assumed to occur independently conditionally on the hidden state which emits it. 
-Their distribution probabilities are given by a matrix $B$, $b_{i,k} = \mathcal{P}(E_t = O_k | X_t = S_i)$.
-In our case, observations are (encoded) amino acids.
-The main goal in signalHsmm is to find for a given peptide most probable regions boundaries. This is achieved with Viterbi algorithm.
+The second process $E_{t=1}^T$ is an observation process defined on the set of possible observations $\{O_1, \dots, O_m\}$. They are assumed to occur independently and conditionally on the hidden state that emits it. 
+Their distribution are given by a matrix $B$, $b_{i,k} = \mathcal{P}(E_t = O_k | X_t = S_i)$.
+In our case, the observations are (encoded) amino acids.
+The main goal in signalHsmm is to find the most probable regions boundaries for a given peptide. This is achieved with Viterbi algorithm.
 For a good reference on HMM see~\citep{1989rabinera}.
 
-In the regular HMM, the hidden state duration, i.e. the number of observations emitted by the hidden state, has a geometric distribution. \citep{Durbin98biologicalsequence} showed how to extend it for different distributions without significant increase in computational 
-complexity. Similar ideas were used for signal peptide recognition, for example by~\citep{2004klla}. 
+In the regular HMM, the hidden state duration, i.e. the number of observations emitted by the hidden state, has a geometric distribution. \cite{Durbin98biologicalsequence} showed how to extend it for different distributions without significant increase in computational 
+complexity. Similar ideas were used for signal peptide recognition, for example by~\cite{2004klla}. 
 However, it is still not flexible enough because the empirical regional length distributions (see Fig.~\ref{fig:reglen})
 are difficult to capture in this way.
 
 %rysunek pokazujący o co chodzi w HMM
 \begin{figure}[h]
 \centering
-\tikzstyle{block} = [draw,shape=circle, top color=white, bottom color=green!50!red!70 ,minimum size=4em]
-\tikzstyle{blockComp} = [draw,shape=circle, top color=white, bottom color=red!50!black!70 ,minimum size=2.5em]
+\tikzstyle{block} = [draw,shape=circle, top color=green!50!white!70, bottom color=green!50!white!70 ,minimum size=4em]
+\tikzstyle{blockComp} = [draw,shape=circle, top color=red!50!white!70, bottom color=red!50!white!70 ,minimum size=2.5em]
 % diameter of semicircle used to indicate that two lines are not connected
 \def\radius{.7mm} 
-\tikzstyle{branch}=[shape=rectangle, top color=white, bottom color=green!50!red!70 ,minimum size=3pt,inner sep=0pt]
-\tikzstyle{branch2}=[shape=rectangle, top color=white, bottom color=red!50!black!70 ,minimum size=3pt,inner sep=0pt]
+\tikzstyle{branch}=[shape=rectangle, top color=white, bottom color=white ,minimum size=3pt,inner sep=0pt]
+\tikzstyle{branch2}=[shape=rectangle, top color=white, bottom color=white ,minimum size=3pt,inner sep=0pt]
 \def\n{11}
- \tikzstyle{line} = [draw=black, color=black!30!white!50, line width=1.5mm, -latex'] 
- \tikzstyle{line2} = [draw=black, color=red!30!black!50, line width=1.5mm, -latex']
+ \tikzstyle{line} = [draw=black, color=black!70!white!50, line width=1.5mm, -latex'] 
+ \tikzstyle{line2} = [draw=black, color=red!30!white!70, line width=1.5mm, -latex']
 \tikzstyle{frame}=[text=black,above, bottom color=white, top color=blue!50!black!70  ]
-\tikzstyle{frameComp}=[text=black,below, bottom color=white, top color=red!50!black!70  ]
- \tikzstyle{line3} = [color=green!50!red!70, line width=1.5mm]
+\tikzstyle{frameComp}=[text=black,below, bottom color=red!50!white!70, top color=red!50!white!70  ]
+ \tikzstyle{line3} = [color=green!50!black!70, line width=1.5mm]
 \def\names{{"$O_{1,1}$","...","$O_{1,d_1}$", "...","$O_{k, 1}$", "...", "$O_{k, d_k}$"}}%
 \begin{tikzpicture}[>=latex']
 %wąsate nawiasy
@@ -164,14 +163,14 @@ are difficult to capture in this way.
 \draw[line,->]  (block1) --  (komp1);
 \draw[line,->]  (block1) --  (komp2);
 \draw[line,->]  (block1) --  (komp3);
-\draw[line3,->] (block1.east) -- +(2,0) node [branch,midway,yshift=0.2cm,xshift=-0.2cm,color=black] {\footnotesize \textbf{transition}};
+\draw[line3,->] (block1.east) -- +(2,0) node [branch,midway,yshift=0.3cm,xshift=-0.2cm,color=black] {\footnotesize \textbf{transition}};
 
-\node[block, bottom color=green!50!red!80,] at (4.5+2,0) (block2) {...};
-\draw[line3,->] (block2.east) -- +(2,0) node [branch,midway,yshift=0.2cm,xshift=-0.2cm,color=black] {\footnotesize \textbf{transition}};
+\node[block, bottom color=green!50!white!80,] at (4.5+2,0) (block2) {...};
+\draw[line3,->] (block2.east) -- +(2,0) node [branch,midway,yshift=0.3cm,xshift=-0.2cm,color=black] {\footnotesize \textbf{transition}};
 \node[blockComp] at (4.5+2,-2)  (komp4) {\footnotesize \pgfmathparse{\names[3]}\pgfmathresult};
 \draw[line,->]  (block2) --  (komp4) ;
 
-\node[block,text width=3em, bottom color=green!50!red!90] at (8+2,0) (block3) {\footnotesize $k^{th}$ hidden state};
+\node[block,text width=3em, bottom color=green!50!white!70] at (8+2,0) (block3) {\footnotesize $k^{th}$ hidden state};
 \node[blockComp] at (6.5+2,-2)  (komp5) {\footnotesize \pgfmathparse{\names[4]}\pgfmathresult};
 \node[blockComp] at (8+2,-2)  (komp6) {\footnotesize \pgfmathparse{\names[5]}\pgfmathresult};
 \node[blockComp] at (9.5+2,-2)  (komp7) {\footnotesize \pgfmathparse{\names[6]}\pgfmathresult};
@@ -181,20 +180,21 @@ are difficult to capture in this way.
 
 % \draw[<->, color=red!30!black!50, line width=1.5mm] (komp1) |- +(5,-1.5) node[line2, yshift=-0.5cm] {\textbf{Observations}} -| (komp7); 
 
-\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
+\draw [color=red!50!black!70, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
 (1,-1.8) -- (5,-1.8) node [branch2, midway, yshift=-1cm,color=black] {\textbf{Duration of length $d_1$}};
 
-\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
+\draw [color=red!50!black!70, line width=1.5mm, decorate,decoration={brace,amplitude=10pt,mirror,raise=10pt},yshift=-10pt]
 (8,-1.8) -- (12,-1.8) node [branch2, midway, yshift=-1cm,color=black] {\textbf{Duration of length $d_k$}};
 
-\draw [color=red!30!black!50, line width=1.5mm, decorate,decoration={brace,amplitude=15pt,mirror,raise=10pt},yshift=-10pt]
+\draw [color=red!50!black!70, line width=1.5mm, decorate,decoration={brace,amplitude=15pt,mirror,raise=10pt},yshift=-10pt]
 (1,-2.6) -- (12,-2.6) node [branch2, midway, yshift=-1.3cm,color=black] {\textbf{Observations, $\sum_{i=1}^k d_i = T$}};
 \end{tikzpicture}
 \caption{General scheme of hidden semi-Markov model.}
 \label{fig:hsmm}
 \end{figure}
 
-The model we used is Hidden semi-Markov Model(HSMM)~\citep{Yu2010215}. It extends HMM by allowing any given hidden state duration distribution (Fig.~\ref{fig:hsmm}).
+
+The model we used is Hidden semi-Markov Model (HSMM)~\citep{Yu2010215}. It extends HMM by allowing any given hidden state duration distribution (Fig.~\ref{fig:hsmm}).
 In addition to matrices $A$ and $B$, the model is given by probabilities of duration length in hidden states.
 $$\mathcal{P}(\text{duration in state} = d | \text{state is } S_i), \;\; i = 1, \dots, n, \;\; d = 1, \dots, D$$
 where $D$ is the maximum allowed duration.
@@ -203,78 +203,23 @@ higher than in the regular HMM.
 
 Our model has a very specific structure. The hidden states represent signal peptide regions.
 Almost all entries in the transition matrix $A$ are zeros because regions are sequential.
-Possible transitions are depicted as arrows in Fig.~\ref{fig:signalHsmm}.
+Possible transitions are depicted as arrows in Fig.~\ref{fig:ngramext}.
 Probabilities of observations for the hidden states and hidden states durations were estimated from training data.
 The advantage of HSMM model is not only a better performance but also its straightforwardness.
-Fig.~\ref{fig:signalHsmm} is easy to interpret for a researcher without any mathematical background.
+Fig.~\ref{fig:ngramext} is easy to interpret for a researcher without any mathematical background.
 
 %model structure
-\begin{figure}
- \begin{minipage}{.5\linewidth} 
-     \resizebox{6.5cm}{!}{%
-    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
-    \label{fig:model_hsmm}
-      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=4.5mm, -latex']
-      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\itshape,
-         align=center,  top color=white, bottom color=blue!50!black!70 ] %font=\sffamily\small\bfseries,
-      %nodes
-      \node[main node]            (start') 	[]						{Start};	     
-      \node[main node, bottom color=purple!70!black!70] 	(nregion') 	[right of=start',xshift=-5mm, yshift=15mm] 	{n-region};
-      \node[main node, bottom color=pink!70!black!70] 	(hregion') 	[right of=nregion',xshift=-5mm,yshift=15mm] 	{h-region};
-      \node[main node, bottom color=gray!70!black!70] 	(cregion') 	[right of=hregion',xshift=-5mm,yshift=-15mm] 	{c-region};
-      \node[main node, bottom color=green!70!black!70] 	(mature') 	[right of=cregion',xshift=-5mm, yshift=-15mm] 	{Mature protein};
-      
-      %lines
-      \path [line] (start')   edge node [left, color=black] {} (nregion');
-      \path [line] (nregion') edge node [below, color=black] { } (hregion');
-      \path [line] (hregion') edge node [below, color=black] { } (cregion');
-      \path [line] (cregion') edge node [left, color=black] { } (mature');
-      \draw [line] (start') to[out=340,in=200] (mature');
-    \end{tikzpicture} }
-    \caption{The diagram of signalHsmm.}
-    \label{fig:signalHsmm}
-\end{minipage}
- \begin{minipage}{.5\linewidth}
-     \resizebox{6.5cm}{!}{%
-    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4.5cm, thick]
-    \label{fig:model_hsmm_kMer}
-      \tikzstyle{line} = [draw=black, color=blue!30!black!50, line width=4.5mm, -latex']
-      \tikzstyle{main node} = [circle,fill=blue!20,draw, minimum size = 2.2cm, font=\itshape,
-         align=center,  top color=white, bottom color=blue!50!black!70 ] %font=\sffamily\small\bfseries,
-      %nodes
-      \node[main node]            (start')   []  					{Start};	     
-      \node[main node, bottom color=purple!70!black!70] 	(nregion') 	[right of=start',xshift=-25mm, yshift=35mm] 	{n-region};
-      \node[main node, bottom color=pink!70!black!70] 	(hregion') 	[right of=nregion',xshift=-25mm,yshift=35mm] 	{h-region};
-      \node[main node, bottom color=gray!70!black!70] 	(cregion') 	[right of=hregion',xshift=-10mm,yshift=-25mm] 	{c-region};
-      \node[main node, bottom color=green!70!black!70] 	(mature') 	[below of=hregion',xshift=15mm, yshift=-90mm] 	{Mature protein};
-      
-      \node[main node, bottom color=yellow!70!black!70]   (kmer1) 	[below of=cregion',xshift=35mm,yshift=30mm] 	{Aminoacid 1};
-      \node[main node, bottom color=yellow!70!black!70]   (kmer2) 	[below of=kmer1,xshift=-5mm,yshift=5mm] 	{Aminoacid 2};
-      \node[main node, bottom color=yellow!70!black!70]   (kmer3) 	[below of=kmer2,xshift=-5mm,yshift=5mm] 	{Aminoacid 3};
-      %lines
-      \path [line] (start')   edge node [left, color=black] {} (nregion');
-      \path [line] (nregion') edge node [below, color=black] { } (hregion');
-      \path [line] (hregion') edge node [below, color=black] { } (cregion');
-      \path [line] (cregion') to[out=230,in=90] (mature');
-      \draw [line] (start') to[out=300,in=180] (mature');
-      
-      \draw [line] (cregion') edge node [below, color=black] { } (kmer1);
-      \draw [line] (kmer1) edge node [left, color=black] {} (kmer2);
-      \draw [line] (kmer2) edge node [left, color=black] {} (kmer3);
-      \draw [line] (kmer3) edge node [left, color=black] {} (mature');
-      
-      %\draw [decorate,line width=3pt,decoration={brace,amplitude=10pt}] ([xshift=5mm, yshift=5mm]kmer1) -- ([yshift=-25mm]kmer3) node [black,midway,xshift=0.6cm] {\footnotesize $P_1$};
-      \draw[decoration={brace,amplitude=10pt, raise=5pt},decorate, line width=2pt]  
-      ([yshift=1mm]kmer1.east) -- ([yshift=-5mm]kmer3.east) node [black,midway,xshift=0.6cm] {\large \color{black!90} n-gram};
-    \end{tikzpicture} }
-    \caption{The diagram of signalHsmm extended with the n-gram cleavage site model.}
-    \label{fig:ngramext}
-    \end{minipage}
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.51\textwidth]{figures/HSMMs.eps}
+\caption{The diagram of simple (A) and extended version of signalHsmm with the n-gram cleavage site model (B).}
+\label{fig:ngramext}
 \end{figure}
+
     
 \subsection*{Extension of n-grams}
 
-Hidden semi-Markov models may be flexibly enhanced by adding additional hidden states. To improve our model, we added few supplementary states representing specific motives that might occur in the proximity of cleavage site. The structure of cleavage sites, more conserved than other parts of signal peptide~\citep{2004hillerpredisi}, may be mirrored by n-grams (k-mers), short vectors of $n$ characters derived from input sequences. Using the biogram software~\citep{biogramPackage}, we extracted n-grams from cleavage sites of signal peptides. The analyzed sequences were already encoded using amino acid classification providing the best sensitivity of the general model (see Tab.\ref{tab:best}. Selected n-grams representing less common cleavage site motifs were included in the HSMM model as alternative paths at the end of c-region (Fig.~\ref{fig:ngramext}).
+Hidden semi-Markov models may be flexibly enhanced by adding additional hidden states. To improve our model, we added few supplementary states representing specific motives that might occur in the proximity of cleavage site. The structure of cleavage sites, more conserved than other parts of signal peptide~\citep{2004hillerpredisi}, may be reflected by n-grams (k-mers), short vectors of $n$ characters derived from input sequences. Using the biogram software~\citep{biogramPackage}, we extracted n-grams from cleavage sites of signal peptides. The analyzed sequences were already encoded using amino acid classification providing the best sensitivity of the general model (Tab. \ref{tab:best}). Selected n-grams representing less common cleavage site motifs were included in the HSMM model as alternative paths at the end of c-region (Fig.~\ref{fig:ngramext}B).
 
 \section*{Results and discussion}
 
@@ -324,12 +269,11 @@ A, E, K, Q, R \\
 \begin{figure}[ht]\centering
 \includegraphics[width=0.95\textwidth]{figures/enccomp.eps}
 \caption{Comparison of amino acid encodings with the best sensitivity and the best
-specificity in different regions of signal peptide and mature proteins according to: A) the normalized value of
-properties for particular amino acids (points) and B) frequencies of amino acids in the given region.}
+specificity in different regions of signal peptide and mature proteins according to: A) the normalized value of properties for particular amino acids (points) and B) frequencies of amino acids in the given region.}
 \label{fig:enccomp}
 \end{figure}
 
-We used four performance measures to evaluate results of cross-validation: specificity, sensitivity, Matthew's Correlation Coefficient ($\phi$ coefficient) and Area Under the Curve (AUC). All encodings provided very good AUC (0.93 -- 0.97) and specificity (0.92 -- 0.96). The classification of amino acids has the biggest impact on sensitivity, which ranges from 0.66 to 0.94. The final signalHsmm algorithm uses the encoding that yields the highest specificity and Matthew's Correlation coefficient as well as the second best AUC (see Fig.~\ref{fig:cvres}).
+We used four performance measures to evaluate results of cross-validation: specificity, sensitivity, Matthew's Correlation Coefficient ($\phi$ coefficient) and Area Under the Curve (AUC). All encodings provided very good AUC (0.93 -- 0.97) and specificity (0.92 -- 0.96). The classification of amino acids had the biggest impact on sensitivity, which ranges from 0.66 to 0.94. The final signalHsmm algorithm uses the encoding that yields the highest specificity and Matthew's Correlation coefficient as well as the second best AUC (Fig.~\ref{fig:cvres}).
 
 \begin{table}[ht]
 \small
@@ -350,7 +294,7 @@ AUC & 0.9683 & 0.0024 \\
 
 \subsection*{Comparison of encodings}
 
-We examined in more detail encodings with the best sensitivity and the best specificity (Tab.~\ref{tab:best}, Tab.~\ref{tab:best} and Fig.~\ref{fig:enccomp}). In both cases, the group 1 tends to contain average-sized polar amino acids. In the best sensitivity encoding, all charged amino acids, both acidic and basic (also weakly basic histidine)belong to this group. These amino acids are nearly absent from h-region and provide very good distinction between regions of signal peptide. In the best specificity encoding, where polar and charged character of the group 1 is not so explicit, the difference in its distribution between the regions is also less visible.
+We examined in detail encodings with the best sensitivity and the best specificity (Tab.~\ref{tab:best}, Tab.~\ref{tab:worst} and Fig.~\ref{fig:enccomp}). In both cases, the group 1 tends to contain average-sized polar amino acids. In the best sensitivity encoding, all charged amino acids, both acidic and basic (also weakly basic histidine)   belong to this group. These amino acids are nearly absent from h-region and provide very good distinction between regions of signal peptide (Fig.~\ref{fig:enccomp}). In the best specificity encoding, where polar and charged character of the group 1 is not so explicit, the difference in its distribution between the regions is also less visible.
 The amino acids belonging to the group 2 have a quite low probability of occurrence in $\alpha$-helix and are very diverse. This group includes polar but uncharged serine and threonine as well as hydrophobic tyrosine, aliphatic glycine and proline. In the best specificity encoding, the polar character of this group is emphasized by the addition of asparagine and aspartic acid. Despite these differences, the distribution of group 2 seems to be comparable in two encodings. The both groupings have strongly non-polar and aliphatic group 3 containing isoleucine, leucine, methionine and valine. The hydrophobic property of this group in the best sensitivity encoding are even more pronounced by the presence of tryptophan and phenylalanine. On the contrary, more polar histidine belongs to the group 3 in the best specificity encoding. Because of the hydrophobic character, this group dominates in the h-region in the case of both amino acid classifications.
 The fourth group is the most diverse in both encodings. In the case of the best specificity encoding, this group comprises aromatic amino acids: phenylalanine, tryptophan and tyrosine. In contrast, the group 4 in the best sensitivity encoding contains only alanine and cysteine, which both are rather small amino acids and tend to appear in $\alpha$-helices. This very unique composition seems to be typical of the c-region of signal peptide.
 
@@ -358,7 +302,7 @@ The encoding of amino acid plays crucial role in the recognition of signal pepti
 
 \subsection*{Benchmark tests}
 
-To provide the honest comparison, we trained our model on 2311 signal peptide-containing sequences deposited in Uniprot until 2010 year (an iteration of signalHsmm called signalHsmm-2010). The data set should correspond to the set used to train SignalP 4.1. Interestingly, our algorithm performed very well even if it was trained on a very small sets including only 336 sequences collected till 1987 year, just after the first method predicting signal peptide was published~\citep{1986vonheijnea}. The signalHsmm-1987 was able to very accurately predict a signal peptide, even better than predictors trained on richer data sets. It indicates that signalHsmm is very stable and is able to recover the structure of signal peptides from even very small data sets (see Tab.~\ref{tab:bench2010}).
+To provide the honest comparison, we trained our model on 2311 signal peptide-containing sequences deposited in Uniprot until 2010 year (an iteration of signalHsmm called signalHsmm-2010). The data set should correspond to the set used to train SignalP 4.1. Interestingly, our algorithm performed very well even if it was trained on a very small sets including only 336 sequences collected till 1987 year, just after the first method predicting signal peptide was published~\citep{1986vonheijnea}. The signalHsmm-1987 was able to very accurately predict a signal peptide, even better than predictors trained on richer data sets. It indicates that signalHsmm is very stable and able to recover the structure of signal peptides from even very small data sets (Tab.~\ref{tab:bench2010}).
 
 \begin{table}[ht]
 \small
@@ -384,7 +328,7 @@ signalP 4.1 (no tm) \citep{2011petersensignalp} & 0.9416 & \textbf{0.9720} & 0.9
 \begin{table}[ht]
 \small
 \centering
-\caption{Comparison of Area Under the Curve, H-measure and Matthews Correlation Coefficient for different classifiers considering only proteins belonging to \textsl{Plasmodiidae}.} 
+\caption{Comparison of Area Under the Curve, H-measure and Matthews Correlation Coefficient for different classifiers considering only proteins belonging to \textit{Plasmodiidae}.} 
 \begin{tabular}{lrrrr}
   \toprule
 Software name & AUC & Sensitivity & Specificity & MCC \\ 
@@ -401,16 +345,16 @@ signalP 4.1 (no tm) \citep{2011petersensignalp} & 0.7928 & 0.6471 & 0.9385 & 0.6
 \label{tab:bench2010plas}
 \end{table}
 
-To check universality of our probabilistic model, we also validated it on signal peptides belonging to specific taxonomic groups. As an example, we chose the \textsl{Plasmodiidae} family including malaria parasites because of their medical significance. The testing data set extracted from UniProt data base contained 102 sequences with a signal peptide and 358 sequences without it. Interestingly, signalHsmm showed much better performance than other algorithms (Tab.~\ref{tab:bench2010plas}). Since our algorithm considers more general decision rules, it is able to recognize also atypical signal peptides.
+To check universality of our probabilistic model, we also validated it on signal peptides belonging to specific taxonomic groups. As an example, we chose the \textit{Plasmodiidae} family including malaria parasites because of their medical significance. The testing data set extracted from UniProt data base contained 102 sequences with a signal peptide and 358 sequences without it. Interestingly, signalHsmm showed much better performance than other algorithms (Tab.~\ref{tab:bench2010plas}). Since our algorithm considers more general decision rules, it is able to recognize also atypical signal peptides.
 
 
 \subsection*{Conclusions}
 
-The architecture of existing signal peptide predicting software is usually opaque which makes analysis of how its decisions are made impossible. Researchers cannot discover which parameters are responsible for the predictions. Considering the biological context of the problem, we see a need for a transparent model of signal peptide. SignalHsmm is the first step in this direction. 
-It provides users good performance as well as interpretability and expendability of predictive model. 
-Aside from the confirmation of the accepted signal peptide model (hydrophibicity of the h-region and polarity of the n-region), we also found that the alanine is one of the most typical amino acids in the c-region in comparison to others.
-The performance of signalHsmm confirms that properties of signal peptides do not depend on their exact sequence but on the physicochemical features of the amino acids. 
-The flexibility and efficient information recovery makes our model unique among similar software. signalHsmm is also adjustable enough to model properly very specific signal peptides belonging to taxonomic groups which are poorly represented in databases. Moreover, our method can effectively extract information from very small data sets, which in future may lead to new predictors able to recognize atypical signaling sequences.
+The architecture of existing signal peptide predicting software is usually opaque, which unables to extract decision rules and determine parameters responsible for the predictions. Considering the biological context of the problem, we see a need for a transparent model of signal peptide. SignalHsmm is the first step in this direction. 
+It shows a good performance and provides clear interpretability and expendability of  the predictive algorithm. 
+The model confirmed not only the high hydrophibicity of the h-region and polarity of the n-region but also found that alanine is one of the most typical amino acids in the c-region.
+The performance of signalHsmm indicates that properties of signal peptides do not depend on their exact sequence but on the physicochemical features of the amino acids. 
+The flexibility and efficient information recovery makes our model unique among similar software. SignalHsmm is also adjustable to model properly very specific signal peptides belonging to taxonomic groups which are poorly represented in databases. Moreover, our method can effectively extract information from very small data sets, which in future may lead to new predictors specialized in recognition of atypical signaling sequences.
 
 \subsection*{Availability and implementation}
 The signalHsmm prediction web-server is available at: \url{http://smorfland.uni.wroc.pl/signalhsmm}. SignalHsmm is implemented as an R package available at: \url{http://cran.r-project.org/web/packages/signalHsmm}. Stand-alone version offers prediction and tools to build, train and test novel signal peptide models.
