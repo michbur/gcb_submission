@@ -125,17 +125,17 @@ Kerzerho, J., Schneider, A., Favry, E., Castelli, F.~A., and Maillere, B.
   cell epitopes.
 \newblock {\em J Biol Chem}, 288(19):13370--7.
 
-\bibitem[Käll et~al., 2004]{2004klla}
-Käll, L., Krogh, A., and Sonnhammer, E. L.~L. (2004).
-\newblock A combined transmembrane topology and signal peptide prediction
-  method.
-\newblock {\em Journal of molecular biology}, 338:1027--1036.
-
 \bibitem[Kyte and Doolittle, 1982]{1982kytea}
 Kyte, J. and Doolittle, R.~F. (1982).
 \newblock A simple method for displaying the hydropathic character of a
   protein.
 \newblock {\em J Mol Biol}, 157(1):105--32.
+
+\bibitem[Käll et~al., 2004]{2004klla}
+Käll, L., Krogh, A., and Sonnhammer, E. L.~L. (2004).
+\newblock A combined transmembrane topology and signal peptide prediction
+  method.
+\newblock {\em Journal of molecular biology}, 338:1027--1036.
 
 \bibitem[Ladunga, 1999]{1999ladungaphysean}
 Ladunga, I. (1999).
