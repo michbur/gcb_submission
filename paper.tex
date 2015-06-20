@@ -323,7 +323,9 @@ A, E, K, Q, R \\
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.95\textwidth]{figures/enccomp.eps}
-\caption{Comparison of encodings. A) Properties of amino acids in the best and the worst sensitivity encoding. B) Frequencies of amino acids belonging to the encodings in regions of signal peptide and mature proteins.}
+\caption{Comparison of amino acid encodings with the best sensitivity and the best
+specificity in different regions of signal peptide and mature proteins according to: A) the normalized value of
+property; points represent amino acids; B) frequencies of amino acids in the given region.}
 \label{fig:enccomp}
 \end{figure}
 
@@ -408,7 +410,7 @@ The architecture of existing signal peptide predicting software is usually opaqu
 It provides users good performance as well as interpretability and expendability of predictive model. 
 Aside from the confirmation of the accepted signal peptide model (hydrophibicity of the h-region and polarity of the n-region), we also found that the alanine is one of the most typical amino acids in the c-region in comparison to others.
 The performance of signalHsmm confirms that properties of signal peptides do not depend on their exact sequence but on the physicochemical features of the amino acids. 
-The flexibility and efficient information recovery makes our model unique among similar software. The signalHsmm is also adjustable enough to model properly very specific signal peptides belonging to taxonomic groups which are poorly represented in databases. Moreover, our method can effectively extract information from very small data sets, which in future may lead to new predictors able to recognize atypical signaling sequences.
+The flexibility and efficient information recovery makes our model unique among similar software. signalHsmm is also adjustable enough to model properly very specific signal peptides belonging to taxonomic groups which are poorly represented in databases. Moreover, our method can effectively extract information from very small data sets, which in future may lead to new predictors able to recognize atypical signaling sequences.
 
 \subsection*{Availability and implementation}
 The signalHsmm prediction web-server is available at: \url{http://smorfland.uni.wroc.pl/signalhsmm}. SignalHsmm is implemented as an R package available at: \url{http://cran.r-project.org/web/packages/signalHsmm}. Stand-alone version offers prediction and tools to build, train and test novel signal peptide models.
