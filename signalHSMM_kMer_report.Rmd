@@ -22,7 +22,7 @@ library(doMC)
 
 First let us load data
 ```{r, cache=TRUE}
-other_soft <- read.csv2("benchmark_other_new.csv")
+other_soft <- read.csv2("benchmark_other.csv")
 
 group_best <- list(`1` = c("r", "n", "d", "q", "e", "h", "k"), 
      `2` = c("g", "p", "s", "t", "y"), `3` = c("i", "l", "m", "f", "w", "v"), 
@@ -35,7 +35,7 @@ signalHsmm1989 <- train_hsmm(read_uniprot("sp1950_1989.txt", euk = TRUE, what = 
 signalHSMM_proteins <- read_uniprot("sp1950_2010.txt", euk = TRUE, what = "signal")
 benchmark_full <- read_uniprot("sp2010_2015.txt", euk = TRUE, what = "signal")
 benchmark_data <- read.fasta("benchmark_data.fasta", seqtype = "AA")
-benchmark_data2 <- lapply(c(benchmark_full,benchmark_data[-c(1:218)]), function(i) i[1L:ifelse(length(i) > 80, 80, length(i))])
+benchmark_data2 <- lapply(c(benchmark_full,benchmark_data[-c(1:214)]), function(i) i[1L:ifelse(length(i) > 80, 80, length(i))])
 
 # usuniecie 4 obserwacji negatywnych
 negs <- c(432, 215, 280, 417)
@@ -212,4 +212,92 @@ kable(data.frame(probs[zle,], seq=apply(b2, 1, function(x) paste0(x, collapse=""
 kable(data.frame(which(real_labels==0 & probs[,2]>0.5),
       probs[which(real_labels==0 & probs[,2]>0.5),1],
       probs[which(real_labels==0 & probs[,2]>0.5),2]))
+```
+
+Now, what happens when we use kernel density estimation?
+```{r}
+params = structure(c(0.00345173057742305216, 0.16303340280710845733, 0.18328936325298567089, 0.32191072063759601507, 0.12710730373689624328, 0.19479707117476749434, 0.07149501410718961392, 0.05102665325739586671, 0.02061953603483871952, 0.01232173478541280856, 0.00339291179532653139, 0.00314522392528060902, 0.00050543218629833602, 0.00000944936698432368, 0.00000000009143740374, 0.00000000000000000000, 0.00000000000000000004, 0.00000000000000000321, 0.00000000000000000290, 0.00000000000000000501, 0.00000000000000000835, 0.00000000000000000088, 0.00000000000000000146, 0.00000000000000000000, 0.00000000000000000592, 0.00000000000000000000, 0.00000000000000000345, 0.00000000000000000036, 0.00000000000000000132, 0.00000000000000000276, 0.00000000000000000001, 0.00000000000000000462, 0.00119575265523844728, 0.00135312474054827118, 0.00278142092346731536, 0.00184134527771419310, 0.00400555470679759759, 0.01737188174042058122, 0.04070639179659169687, 0.06492241958211328323, 0.10486627831232180064, 0.13185802303839422311, 0.16522286797419358240, 0.14092085504016543807, 0.13473723690401800956, 0.08898241528270439682, 0.05443355717845509839, 0.04403282913502165608, 0.02561338612799781561, 0.01320007003819387639, 0.01069067991482806901, 0.00517725596697340799, 0.00181848832708673882, 0.00093206572991894022, 0.00156817541687766086, 0.00051169053398325657, 0.00077312532731958154, 0.00004559742198773287, 0.00000001037808743568, 0.00000000000000871706, 0.00000000000000000000, 0.00000000000000000000, 0.00000000000000000000, 0.00000000000000000000, 0.00345173057742305216, 0.16303340280710845733, 0.18328936325298567089, 0.32191072063759601507, 0.12710730373689624328, 0.19479707117476749434, 0.07149501410718961392, 0.05102665325739586671, 0.02061953603483871952, 0.01232173478541280856, 0.00339291179532653139, 0.00314522392528060902, 0.00050543218629833602, 0.00000944936698432368, 0.00000000009143740374, 0.00000000000000000000, 0.00000000000000000004, 0.00000000000000000321, 0.00000000000000000290, 0.00000000000000000501, 0.00000000000000000835, 0.00000000000000000088, 0.00000000000000000146, 0.00000000000000000000, 0.00000000000000000592, 0.00000000000000000000, 0.00000000000000000345, 0.00000000000000000036, 0.00000000000000000132, 0.00000000000000000276, 0.00000000000000000001, 0.00000000000000000462, 0.03125, 0.03125, 0.03125,
+0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125,
+0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125,
+0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125,
+0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125, 0.03125,
+0.03125), .Dim = c(32L, 4L),
+.Dimnames = list(NULL, c("n", "h","c", "")))
+
+  parametersSet2 <- add_k_mer_state2(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
+                                     params, pState1, nState1, pTrans1, d=3)
+  parametersSet3 <- add_k_mer_state2(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
+                                     od = parametersSet2$od, params = parametersSet2$params,
+                                     pState2, nState2, pTrans2, d=3)
+  parametersSet4 <- add_k_mer_state2(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
+                                     od = parametersSet3$od, params = parametersSet3$params, 
+                                     pState3, nState3, pTrans3, d=3)
+  parametersSet5 <- add_k_mer_state2(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
+                                     od = parametersSet4$od, params = parametersSet4$params, 
+                                     pState4, nState4, pTrans4, d=3)
+  overall_probs_log <- signalHsmm2010$overall_probs_log
+  maxSignal <- 45
+```
+
+
+```{r}
+registerDoMC(cores=7)
+n <- length(benchmark_data2)
+results <- foreach(i=1:n) %dopar% {
+    prot <- benchmark_data2[[i]]
+    deg_sample <- na.omit(as.numeric(degenerate(toupper(prot)[1L:min(maxSignal, length(prot))], group_best)))
+    
+    viterbi_res <- duration_viterbi2(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
+                                     signalHsmm2010$od, signalHsmm2010$params)
+    viterbi_path <- viterbi_res[["path"]]+1
+    c_site <- ifelse(any(viterbi_path == 4), 
+                     max(which(viterbi_path == 3)), 
+                     length(deg_sample))
+    prob.signal <- viterbi_res[["viterbi"]][c_site, viterbi_path[c_site]]
+    prob.non <- Reduce(function(x, y) x + overall_probs_log[y], deg_sample[1L:c_site], 0)
+    prob.total <- exp(prob.signal - prob.non)
+    
+    viterbi_res5 <- duration_viterbi2(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
+                                      parametersSet5$od, parametersSet5$params)
+    viterbi_path5 <- viterbi_res5[["path"]]+1
+    c_site5 <- ifelse(any(viterbi_path5 == 4), 
+                      min(which(viterbi_path5 == 4))-1, 
+                      length(deg_sample))
+    c_site5 <- ifelse(any(viterbi_path5 == lastState1), 
+                      min(which(viterbi_path5 == lastState1)), 
+                      c_site5)
+    c_site5 <- ifelse(any(viterbi_path5 == lastState2), 
+                      min(which(viterbi_path5 == lastState2)), 
+                      c_site5)
+    c_site5 <- ifelse(any(viterbi_path5 == lastState3), 
+                      min(which(viterbi_path5 == lastState3)), 
+                      c_site5)
+    c_site5 <- ifelse(any(viterbi_path5 == lastState4), 
+                      min(which(viterbi_path5 == lastState4)), 
+                      c_site5)
+    #get probabilities of signal peptide model
+    prob.signal5 <- viterbi_res5[["viterbi"]][c_site5, viterbi_path5[c_site5]]
+    #get probabilities of no signal peptide model
+    prob.non5 <- Reduce(function(x, y) x + overall_probs_log[y], deg_sample[1L:c_site5], 0)
+    prob.total5 <- exp(prob.signal5 - prob.non5)
+    
+    c(1 - 1/(1 + prob.total), 1 - 1/(1 + prob.total5), c_site, c_site5)
+}
+probs <- t(sapply(results, function (x) head(x, 2)))
+cut <- t(sapply(results, function (x) tail(x, 2)))
+```
+
+```{r, echo=FALSE}
+ggplot(data.frame(noMer=probs[,1],kMer=probs[,2], sig = factor(real_labels)), aes(x=noMer,y=kMer, color=sig)) +
+  geom_point() + xlab("No k-mer") + ylab("with k-mer") + 
+  scale_color_discrete("Signal peptide") +geom_abline(slope=1)
+```
+
+```{r, echo=FALSE}
+all_preds2 = all_preds
+all_preds2$signalKmer = probs[,2]
+
+bench_metrics2 <- HMeasure(real_labels, all_preds2,
+                             threshold = c(rep(0.5, 5), 0.1, 0.1, 0.5))[["metrics"]]
+kable(bench_metrics2)
 ```
