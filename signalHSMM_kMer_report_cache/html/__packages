@@ -1,0 +1,13 @@
+base
+dplyr
+slam
+biogram
+signalHsmm
+ade4
+seqinr
+hmeasure
+ggplot2
+knitr
+foreach
+iterators
+doMC

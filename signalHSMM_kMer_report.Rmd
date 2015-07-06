@@ -117,15 +117,15 @@ lastState4 = lastState3+1+length(kMer4)
 
 Now let us build a new model on **signalHsmm2010**
 ```{r}
-  parametersSet2 <- add_k_mer_state2(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
+  parametersSet2 <- add_k_mer_state(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
                                      signalHsmm2010$params, pState1, nState1, pTrans1, d=3)
-  parametersSet3 <- add_k_mer_state2(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
+  parametersSet3 <- add_k_mer_state(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
                                      od = parametersSet2$od, params = parametersSet2$params,
                                      pState2, nState2, pTrans2, d=3)
-  parametersSet4 <- add_k_mer_state2(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
+  parametersSet4 <- add_k_mer_state(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
                                      od = parametersSet3$od, params = parametersSet3$params, 
                                      pState3, nState3, pTrans3, d=3)
-  parametersSet5 <- add_k_mer_state2(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
+  parametersSet5 <- add_k_mer_state(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
                                      od = parametersSet4$od, params = parametersSet4$params, 
                                      pState4, nState4, pTrans4, d=3)
   overall_probs_log <- signalHsmm2010$overall_probs_log
@@ -140,7 +140,7 @@ results <- foreach(i=1:n) %dopar% {
     prot <- benchmark_data2[[i]]
     deg_sample <- na.omit(as.numeric(degenerate(toupper(prot)[1L:min(maxSignal, length(prot))], group_best)))
     
-    viterbi_res <- duration_viterbi2(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
+    viterbi_res <- duration_viterbi(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
                                      signalHsmm2010$od, signalHsmm2010$params)
     viterbi_path <- viterbi_res[["path"]]+1
     c_site <- ifelse(any(viterbi_path == 4), 
@@ -150,7 +150,7 @@ results <- foreach(i=1:n) %dopar% {
     prob.non <- Reduce(function(x, y) x + overall_probs_log[y], deg_sample[1L:c_site], 0)
     prob.total <- exp(prob.signal - prob.non)
     
-    viterbi_res5 <- duration_viterbi2(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
+    viterbi_res5 <- duration_viterbi(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
                                       parametersSet5$od, parametersSet5$params)
     viterbi_path5 <- viterbi_res5[["path"]]+1
     c_site5 <- ifelse(any(viterbi_path5 == 4), 
@@ -224,15 +224,15 @@ params = structure(c(0.00345173057742305216, 0.16303340280710845733, 0.183289363
 0.03125), .Dim = c(32L, 4L),
 .Dimnames = list(NULL, c("n", "h","c", "")))
 
-  parametersSet2 <- add_k_mer_state2(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
+  parametersSet2 <- add_k_mer_state(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
                                      params, pState1, nState1, pTrans1, d=3)
-  parametersSet3 <- add_k_mer_state2(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
+  parametersSet3 <- add_k_mer_state(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
                                      od = parametersSet2$od, params = parametersSet2$params,
                                      pState2, nState2, pTrans2, d=3)
-  parametersSet4 <- add_k_mer_state2(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
+  parametersSet4 <- add_k_mer_state(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
                                      od = parametersSet3$od, params = parametersSet3$params, 
                                      pState3, nState3, pTrans3, d=3)
-  parametersSet5 <- add_k_mer_state2(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
+  parametersSet5 <- add_k_mer_state(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
                                      od = parametersSet4$od, params = parametersSet4$params, 
                                      pState4, nState4, pTrans4, d=3)
   overall_probs_log <- signalHsmm2010$overall_probs_log
@@ -247,7 +247,7 @@ results <- foreach(i=1:n) %dopar% {
     prot <- benchmark_data2[[i]]
     deg_sample <- na.omit(as.numeric(degenerate(toupper(prot)[1L:min(maxSignal, length(prot))], group_best)))
     
-    viterbi_res <- duration_viterbi2(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
+    viterbi_res <- duration_viterbi(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
                                      signalHsmm2010$od, signalHsmm2010$params)
     viterbi_path <- viterbi_res[["path"]]+1
     c_site <- ifelse(any(viterbi_path == 4), 
@@ -257,7 +257,7 @@ results <- foreach(i=1:n) %dopar% {
     prob.non <- Reduce(function(x, y) x + overall_probs_log[y], deg_sample[1L:c_site], 0)
     prob.total <- exp(prob.signal - prob.non)
     
-    viterbi_res5 <- duration_viterbi2(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
+    viterbi_res5 <- duration_viterbi(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
                                       parametersSet5$od, parametersSet5$params)
     viterbi_path5 <- viterbi_res5[["path"]]+1
     c_site5 <- ifelse(any(viterbi_path5 == 4), 
@@ -296,6 +296,8 @@ ggplot(data.frame(noMer=probs[,1],kMer=probs[,2], sig = factor(real_labels)), ae
 ```{r, echo=FALSE}
 all_preds2 = all_preds
 all_preds2$signalKmer = probs[,2]
+
+save(benchmark_data2, file = "clean_data.RData")
 
 bench_metrics2 <- HMeasure(real_labels, all_preds2,
                              threshold = c(rep(0.5, 5), 0.1, 0.1, 0.5))[["metrics"]]
