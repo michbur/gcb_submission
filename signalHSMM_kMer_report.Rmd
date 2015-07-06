@@ -297,8 +297,6 @@ ggplot(data.frame(noMer=probs[,1],kMer=probs[,2], sig = factor(real_labels)), ae
 all_preds2 = all_preds
 all_preds2$signalKmer = probs[,2]
 
-save(benchmark_data2, file = "clean_data.RData")
-
 bench_metrics2 <- HMeasure(real_labels, all_preds2,
                              threshold = c(rep(0.5, 5), 0.1, 0.1, 0.5))[["metrics"]]
 kable(bench_metrics2)
