@@ -4,7 +4,7 @@ library(seqinr)
 library(hmeasure)
 library(dplyr)
 library(foreach)
-library(doMC)
+#library(doMC)
 other_soft <- read.csv2("benchmark_other.csv")
 
 group_best <- list(`1` = c("r", "n", "d", "q", "e", "h", "k"), 
@@ -66,27 +66,27 @@ lastState2 = lastState1+1+length(kMer2)
 lastState3 = lastState2+1+length(kMer3)
 lastState4 = lastState3+1+length(kMer4)
 
-parametersSet2 <- add_k_mer_state2(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
+parametersSet2 <- add_k_mer_state(kMer1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, signalHsmm2010$od, 
                                    signalHsmm2010$params, pState1, nState1, pTrans1, d=3)
-parametersSet3 <- add_k_mer_state2(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
+parametersSet3 <- add_k_mer_state(kMer2, pipar = parametersSet2$pipar, tpmpar = parametersSet2$tpmpar, 
                                    od = parametersSet2$od, params = parametersSet2$params,
                                    pState2, nState2, pTrans2, d=3)
-parametersSet4 <- add_k_mer_state2(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
+parametersSet4 <- add_k_mer_state(kMer3, pipar = parametersSet3$pipar, tpmpar = parametersSet3$tpmpar, 
                                    od = parametersSet3$od, params = parametersSet3$params, 
                                    pState3, nState3, pTrans3, d=3)
-parametersSet5 <- add_k_mer_state2(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
+parametersSet5 <- add_k_mer_state(kMer4, pipar = parametersSet4$pipar, tpmpar = parametersSet4$tpmpar, 
                                    od = parametersSet4$od, params = parametersSet4$params, 
                                    pState4, nState4, pTrans4, d=3)
 overall_probs_log <- signalHsmm2010$overall_probs_log
 maxSignal <- 45
 
-registerDoMC(cores=4)
+#registerDoMC(cores=4)
 n <- length(benchmark_data2)
-results <- foreach(i=1:n) %dopar% {
+results <- foreach(i=1:n) %do% {
   prot <- benchmark_data2[[i]]
   deg_sample <- na.omit(as.numeric(degenerate(toupper(prot)[1L:min(maxSignal, length(prot))], group_best)))
   
-  viterbi_res <- duration_viterbi2(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
+  viterbi_res <- duration_viterbi(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
                                    signalHsmm2010$od, signalHsmm2010$params)
   viterbi_path <- viterbi_res[["path"]]+1
   c_site <- ifelse(any(viterbi_path == 4), max(which(viterbi_path == 3)), length(deg_sample))
@@ -94,7 +94,7 @@ results <- foreach(i=1:n) %dopar% {
   prob.non <- Reduce(function(x, y) x + overall_probs_log[y], deg_sample[1L:c_site], 0)
   prob.total <- exp(prob.signal - prob.non)
   
-  viterbi_res5 <- duration_viterbi2(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
+  viterbi_res5 <- duration_viterbi(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
                                     parametersSet5$od, parametersSet5$params)
   viterbi_path5 <- viterbi_res5[["path"]]+1
   c_site5 <- ifelse(any(viterbi_path5 == 4), min(which(viterbi_path5 == 4))-1, length(deg_sample))
@@ -148,7 +148,7 @@ print(xtable(bench_metrics, caption = "Comparison of Area Under the Curve, Sensi
 # plasmodium ------------------------------------------
 
 
-other_soft_plas <- read.csv2("benchmark_plas_other.csv")[, -1]
+other_soft_plas <- read.csv2("benchmark_plas_other.csv")
 
 benchmark_plas_data <- read.fasta("benchmark_plas_data.fasta", seqtype = "AA")
 
@@ -158,13 +158,13 @@ all_preds_plas <- data.frame(other_soft_plas,
                              signalHsmm2010 = pred2df(predict(signalHsmm2010, benchmark_plas_data))[["sp.probability"]],
                              signalHsmm1989 = pred2df(predict(signalHsmm1989, benchmark_plas_data))[["sp.probability"]])
 
-registerDoMC(cores=4)
+#registerDoMC(cores=4)
 n <- length(benchmark_plas_data)
-results <- foreach(i=1:n) %dopar% {
+results <- foreach(i=1:n) %do% {
   prot <- benchmark_plas_data[[i]]
   deg_sample <- na.omit(as.numeric(degenerate(toupper(prot)[1L:min(maxSignal, length(prot))], group_best)))
   
-  viterbi_res <- duration_viterbi2(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
+  viterbi_res <- duration_viterbi(deg_sample-1, signalHsmm2010$pipar, signalHsmm2010$tpmpar, 
                                    signalHsmm2010$od, signalHsmm2010$params)
   viterbi_path <- viterbi_res[["path"]]+1
   c_site <- ifelse(any(viterbi_path == 4), max(which(viterbi_path == 3)), length(deg_sample))
@@ -172,7 +172,7 @@ results <- foreach(i=1:n) %dopar% {
   prob.non <- Reduce(function(x, y) x + overall_probs_log[y], deg_sample[1L:c_site], 0)
   prob.total <- exp(prob.signal - prob.non)
   
-  viterbi_res5 <- duration_viterbi2(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
+  viterbi_res5 <- duration_viterbi(deg_sample-1, parametersSet5$pipar, parametersSet5$tpmpar, 
                                     parametersSet5$od, parametersSet5$params)
   viterbi_path5 <- viterbi_res5[["path"]]+1
   c_site5 <- ifelse(any(viterbi_path5 == 4), min(which(viterbi_path5 == 4))-1, length(deg_sample))
@@ -193,7 +193,7 @@ all_preds_plas$signalKmer = probs[,2]
 
 
 bench_metrics <- calc_mcc(HMeasure(real_labels_plas, all_preds_plas,
-                                   threshold = c(rep(0.5, 4), 0.05, 0.05, 0.05))[["metrics"]])
+                                   threshold = c(rep(0.5, 5), 0.05, 0.05, 0.05))[["metrics"]])
 
 bench_metrics <- data.frame(rownames(bench_metrics), bench_metrics[, c("AUC", "Sens", "Spec", "mcc")])
 colnames(bench_metrics) <- c("Software name", "AUC", "Sensitivity", "Specificity", "MCC")
