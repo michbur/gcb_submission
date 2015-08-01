@@ -1,0 +1,95 @@
+These contributions are orthogonal; it would be possible to test the HSMM using normal amino acid indicators as observations. Likewise, an HMM could be used with the cluster indicator observations. I believe extending the evaluation to include these combinations would greatly clarify the relative importance of each.
+
+
+Of course, the HSMM state model is specific for signal peptides. Since the model does not perform much better than existing techniques, I doubt it would significantly alter existing workflows. The authors briefly mention interpreting the parameters in order to create artificial signal peptides, but it is not clear how practical that would really be.
+
+
+The use of the cluster indicators does seem that it could be used not only as input for other models (as mentioned in Novelty), but also in other application domains such as protein folding.
+
+
+
+The paper omits key details of preprocessing that would be necessary for reproducing the current work. The authors mention “pre-processed sequences” which were “properly prepared according to the literature”, a “heuristic algorithm” for determining borders of the signal peptide regions, and further “attun[ing]” of the algorithm for the dataset at hand. These details are important. Furthermore, depending on how these steps were carried out, from a machine learning perspective, these steps could count as “cheating” in some sense if they are only used for the proposed method.
+
+
+
+The background “section” is incomplete. The relation between this model and the other HMMs needs to be clarified. Especially since the empirical performance is not much difference (and, indeed, worse by several measures), the theory behind these approaches needs to be clarified.
+
+
+
+The paper does not clearly state how true positives, etc., are calculated. Is this at bp resolution?
+
+
+
+I found the discussion about artificial signal peptides a bit contrived. First, other methods could be trained on known artificial signal peptides if the goal were to identify/predict these. Second, most of the graphical models could be analyzed in a manner similar to Figure 6 for interpretability. Finally, this motivation was given, but there is no discussion which really links back to it. I believe the Introduction already contained sufficient biological motivation, so this is unnecessary.
+
+
+
+A geometric distribution could be fit to the various region lengths and drawn in Figure 2. That would clearly show how different the true distributions are from those assumed by HMMs.
+
+
+
+The complete joint distribution of the HSMM should be given.
+
+
+
+The methods mention a simple probabilistic model, but the discussion makes no reference to it.
+
+
+
+The construction of the negative set is not given.
+
+
+The authors mention that a “sparse encoding enforces larger datasets.” What is meant by this? It seems likely (or would at least be more reasonable) that the authors were actually referring to the number of parameters that need to be estimated if using 20 amino acids compared to 4 clusters.
+
+
+The authors mention 96 possible permutations of the amino acid properties. This appears to be 4*4*2*3, which corresponds to selecting one “scale” from each of the amino acid properties. While the text does mention this, it is not clear on first reading.
+
+
+What is Ward’s method? and what is “cut[ting] the clusterings”? Typically, a clustering already implies the clusters.
+
+
+The repeated cross-fold validation is good, but why not just ensure that all negatives are selected? (while still doing the repeated cv)
+
+
+Is the entire mature protein modeled? If so, what is meant by “D is small -- around 30”? Clearly, many proteins have more than 30 amino acids.
+
+
+The n-gram extension needs more explanation. For example, it is not clear if those states will always be used for cleavage sites.
+
+
+What is (no tm) and (tm) for signalP?
+
+
+What was used as the training set for the Plasmodiidae experiments? On the entire set, the evaluation metrics were similar for all of the software; however, the AUC and sensitivity were much lower for the other methods compared to signalHsmm for this dataset. Is there something special about these proteins which explain this result?
+
+
+
+We only have one major concern: from the model it seems necessary, that the start of the signal peptide has to be located at the first position of the protein sequence. Signal peptides in the middle of the sequence or multiple signal peptides are not recognized. We propose that the hidden semi-Markov model should be extended by implementing the transition from the mature protein to the n-region (Fig. 4).
+
+
+Both, the webserver and the R package, are nicely designed and easy to use. They rely on relatively fast calculations, also in the case of the simultaneous analysis of several proteins. In both cases, visualization of the signal peptide subsequences represents a nice overview of the statistical results. A probability (pr) of actually representing a signal peptide is assigned to each sequence. Benchmark examples are further provided to verify the analysis. Here, 229 of the 428 sequences deliver a probability of pr>=0.05, i.e. positive and negative examples are implied. Hereby, the visualisation indicates signal peptides even if the probability is very small (e.g. pr=0.00019). One might discuss the setting of a meaningful probability threshold beneath which the signal peptide is not visualised.
+
+
+
+Page 1:
+1, However, [these learning systems] are usually ’black-box’ models[,] therefore unable to trace decision rules and identify parameters responsible for the predictions. That is why [ ] we designed a new more universal probabilistic model for eukaryotic signal peptides, which includes knowledge about their organization, amino acid composition and variability.
+2, Signal peptides are responsible for targeting of proteins via the Sec61 translocation channel (Rapoport, 2007) to endomembrane system, which includes endoplasmic reticulum and Golgi apparatus.
+› This might be explained more clearly: The translocation channel only occurs in the endoplasmatic reticulum; then, the protein is processed to the Golgi apparatus; further, the endomembrane system also includes the endosomes of the cell.
+3, Despite the low sequence homology between signal peptides (Ladunga, 1999), some general architecture [was] proposed (Izard and Kendall, 1994; Voss et al., 2013) - Fig. 1.
+
+Page 2:
+4, However, these models do not provide direct biological information about organization 
+Review
+
+- In the Abstract the authors state that the "model is able to recognize signal peptides from medically significant malaria parasites Plasmodium and their relatives more accurately (with AUC = 0.92) than popular programs (0.84)" while in Table 6 the best AUC for the authors approach is 0.9340 and for other approaches it is 0.7963.
+SOLVED
+
+- The author provide Table 5 and 6. In Table 5, the second best approach seems to be "signalP 4.1 (tm) (Petersen et al., 2011)" with best MCC and Specificity as well as the second best AUC. However this model is not included in Table 6. SOLVED
+- What does "tm" stand for? (cf. Table 5 and 6)
+SOLVED
+
+- In Table 4, the authors provide mean and sd. However, in Table 5 and 6 no sd is provided, which could help to judge what is a significant improvement and what not.
+
+- Why do the authors use AUC-ROC instead of AUC-PR? AUC-PR should be better suited for imbalanced data sets as used in this study.
+
+- The authors use different clusterings of amino acids. The authors perform a cross validation but do not finally assess the performance on an independent test data set.
