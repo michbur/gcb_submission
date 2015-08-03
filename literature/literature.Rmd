@@ -1,0 +1,44 @@
+---
+title: "Literature"
+bibliography: "kmer_filo.bib"
+output:
+  html_document:
+    toc: true
+    theme: united
+---
+
+# One by one
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+library(knitcitations)
+library(RefManageR)
+cleanbib()
+BibOptions(sorting = "none", check.entries = FALSE)
+refs <- read.bibtex("kmer_filo.bib", .Encoding = "UTF-8")
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["saha_brief_2013"]])))
+```
+
+They mention few investigations, most of them uses n-grams. The `r citet(refs[["wang_application_2000"]])` was the most appealing.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["wang_application_2000"]])))
+```
+
+Uses aggregating of amino acids (called exchange group). Do not state why they created such clusterings. 'Exchange groups represent conservative re- placements through evolution.' They also sport a 'distance measure', which is more like the IG in the QuiPT.
+
+Cool idea: 'To compensate for the possible loss of information due to
+ignoring the other 2-gram patterns, a linear correlation coefficient (LCC) between the values of the 436 2-gram patterns
+with respect to the protein sequence S and the mean value
+of the 436 2-gram patterns in the positive training dataset
+is calculated and used as another input feature value for S.'
+
+They have quite expanded motif usage for the bayesian neural network.
+
+# References
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+sort(refs, sorting = "ynt")
+```

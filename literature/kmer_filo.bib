@@ -1,0 +1,709 @@
+
+@article{leimeister_kmacs:_2014,
+	title = {kmacs: the k-mismatch average common substring approach to alignment-free sequence comparison},
+	volume = {30},
+	issn = {1367-4803, 1460-2059},
+	shorttitle = {kmacs},
+	url = {http://bioinformatics.oxfordjournals.org/content/30/14/2000},
+	doi = {10.1093/bioinformatics/btu331},
+	abstract = {Motivation: Alignment-based methods for sequence analysis have various limitations if large datasets are to be analysed. Therefore, alignment-free approaches have become popular in recent years. One of the best known alignment-free methods is the average common substring approach that defines a distance measure on sequences based on the average length of longest common words between them. Herein, we generalize this approach by considering longest common substrings with k mismatches. We present a greedy heuristic to approximate the length of such k-mismatch substrings, and we describe kmacs, an efficient implementation of this idea based on generalized enhanced suffix arrays.
+Results: To evaluate the performance of our approach, we applied it to phylogeny reconstruction using a large number of DNA and protein sequence sets. In most cases, phylogenetic trees calculated with kmacs were more accurate than trees produced with established alignment-free methods that are based on exact word matches. Especially on protein sequences, our method seems to be superior. On simulated protein families, kmacs even outperformed a classical approach to phylogeny reconstruction using multiple alignment and maximum likelihood.
+Availability and implementation: kmacs is implemented in C++, and the source code is freely available at http://kmacs.gobics.de/
+Contact: chris.leimeister@stud.uni-goettingen.de
+Supplementary information: Supplementary data are available at Bioinformatics online.},
+	language = {en},
+	number = {14},
+	urldate = {2015-07-31},
+	journal = {Bioinformatics},
+	author = {Leimeister, Chris-Andre and Morgenstern, Burkhard},
+	month = jul,
+	year = {2014},
+	pmid = {24828656},
+	pages = {2000--2008}
+}
+
+@inproceedings{hofmeister_ngphylo:_2013,
+	address = {New York, NY, USA},
+	series = {{BCB}'13},
+	title = {{ngPhylo}: {N}-{Gram} {Modeled} {Proteins} with {Substitution} {Matrices} for {Phylogenetic} {Analysis}},
+	isbn = {978-1-4503-2434-2},
+	shorttitle = {{ngPhylo}},
+	url = {http://doi.acm.org/10.1145/2506583.2506679},
+	doi = {10.1145/2506583.2506679},
+	abstract = {Phylogenetic tree constructions are important for understanding evolution and species relatedness. Most methods require a multiple sequence alignment (MSA) to be performed prior to inducing the phylogenetic tree. MSAs, however, are computationally expensive and increasingly error prone as the number of sequences increase, as the average sequence length increases, and as the sequences in the set become more divergent. We introduce a new method called ngPhylo, an n-gram based method that addresses many of the limitations of MSA-based phylogenetic methods, and computes alignment-free phylogenetic analyses on large sets of proteins that also have long sequences. Unlike other methods, we incorporate the use of standard substitution matrices to improve similarity measures between sequences. Our results show that highly similar phylogenies are produced to existing MSA-based methods with less computational resources required.},
+	urldate = {2015-07-31},
+	booktitle = {Proceedings of the {International} {Conference} on {Bioinformatics}, {Computational} {Biology} and {Biomedical} {Informatics}},
+	publisher = {ACM},
+	author = {Hofmeister, Brigitte and King, Brian R.},
+	year = {2013},
+	keywords = {n-gram model, Phylogeny, Sequence Analysis},
+	pages = {676:676--676:677}
+}
+
+@article{pride_evolutionary_2003,
+	title = {Evolutionary implications of microbial genome tetranucleotide frequency biases},
+	volume = {13},
+	issn = {1088-9051},
+	doi = {10.1101/gr.335003},
+	abstract = {We compared nucleotide usage pattern conservation for related prokaryotes by examining the representation of DNA tetranucleotide combinations in 27 representative microbial genomes. For each of the organisms studied, tetranucleotide usage departures from expectations (TUD) were shared between related organisms using both Markov chain analysis and a zero-order Markov method. Individual strains, multiple chromosomes, plasmids, and bacteriophages share TUDs within a species. TUDs varied between coding and noncoding DNA. Grouping prokaryotes based on TUD profiles resulted in relationships with important differences from those based on 16S rRNA phylogenies, which may reflect unequal rates of evolution of nucleotide usage patterns following divergence of particular organisms from a common ancestor. By both symmetrical tree distance and likelihood analysis, phylogenetic trees based on TUD profiles demonstrate a level of congruence with 16S rRNA trees similar to that of both RpoA and RecA trees. Congruence of these trees indicates that there exists phylogenetic signal in TUD patterns, most prominent in coding region DNA. Because relationships demonstrated in TUD-based analyses utilize whole genomes, they should be considered complementary to phylogenies based on single genetic elements, such as 16S rRNA.},
+	language = {eng},
+	number = {2},
+	journal = {Genome Research},
+	author = {Pride, David T. and Meinersmann, Richard J. and Wassenaar, Trudy M. and Blaser, Martin J.},
+	month = feb,
+	year = {2003},
+	pmid = {12566393},
+	pmcid = {PMC420360},
+	keywords = {Chromosome Mapping, Chromosomes, Archaeal, Chromosomes, Bacterial, Cluster Analysis, DNA, Archaeal, DNA, Bacterial, Gene Transfer, Horizontal, Genome, Archaeal, Genome, Bacterial, Gram-Negative Bacteria, Gram-Positive Bacteria, Microsatellite Repeats, Phylogeny, Plasmids, RNA, Archaeal, RNA, Bacterial, RNA, Ribosomal, 16S, Spirochaeta},
+	pages = {145--158}
+}
+
+@article{vinga_alignment-free_2003,
+	title = {Alignment-free sequence comparison—a review},
+	volume = {19},
+	issn = {1367-4803, 1460-2059},
+	url = {http://bioinformatics.oxfordjournals.org/content/19/4/513},
+	doi = {10.1093/bioinformatics/btg005},
+	abstract = {Motivation: Genetic recombination and, in particular, genetic shuffling are at odds with sequence comparison by alignment, which assumes conservation of contiguity between homologous segments. A variety of theoretical foundations are being used to derive alignment-free methods that overcome this limitation. The formulation of alternative metrics for dissimilarity between sequences and their algorithmic implementations are reviewed.
+Results: The overwhelming majority of work on alignment-free sequence has taken place in the past two decades, with most reports published in the past 5 years. Two main categories of methods have been proposed—methods based on word (oligomer) frequency, and methods that do not require resolving the sequence with fixed word length segments. The first category is based on the statistics of word frequency, on the distances defined in a Cartesian space defined by the frequency vectors, and on the information content of frequency distribution. The second category includes the use of Kolmogorov complexity and Chaos Theory. Despite their low visibility, alignment-free metrics are in fact already widely used as pre-selection filters for alignment-based querying of large applications. Recent work is furthering their usage as a scale-independent methodology that is capable of recognizing homology when loss of contiguity is beyond the possibility of alignment.
+Availability: Most of the alignment-free algorithms reviewed were implemented in MATLAB code and are available at http://bioinformatics.musc.edu/resources.html
+Contact: almeidaj@musc.edu; svinga@itqb.unl.pt},
+	language = {en},
+	number = {4},
+	urldate = {2015-07-31},
+	journal = {Bioinformatics},
+	author = {Vinga, Susana and Almeida, Jonas},
+	month = mar,
+	year = {2003},
+	pmid = {12611807},
+	pages = {513--523}
+}
+
+@article{srinivasan_mining_2013,
+	title = {Mining for class-specific motifs in protein sequence classification},
+	volume = {14},
+	copyright = {2013 Srinivasan et al.; licensee BioMed Central Ltd.},
+	issn = {1471-2105},
+	url = {http://www.biomedcentral.com/1471-2105/14/96/abstract},
+	doi = {10.1186/1471-2105-14-96},
+	abstract = {PMID: 23496846},
+	language = {en},
+	number = {1},
+	urldate = {2015-07-31},
+	journal = {BMC Bioinformatics},
+	author = {Srinivasan, Satish M. and Vural, Suleyman and King, Brian R. and Guda, Chittibabu},
+	month = mar,
+	year = {2013},
+	pmid = {23496846},
+	keywords = {-gram model, -grams, Amino acid substitutions, Class-specific motifs, Discriminative, Protein subcellular localization signals, Scoring function},
+	pages = {96}
+}
+
+@article{bonham-carter_alignment-free_2014,
+	title = {Alignment-free genetic sequence comparisons: a review of recent approaches by word analysis},
+	volume = {15},
+	issn = {1477-4054},
+	shorttitle = {Alignment-free genetic sequence comparisons},
+	doi = {10.1093/bib/bbt052},
+	abstract = {Modern sequencing and genome assembly technologies have provided a wealth of data, which will soon require an analysis by comparison for discovery. Sequence alignment, a fundamental task in bioinformatics research, may be used but with some caveats. Seminal techniques and methods from dynamic programming are proving ineffective for this work owing to their inherent computational expense when processing large amounts of sequence data. These methods are prone to giving misleading information because of genetic recombination, genetic shuffling and other inherent biological events. New approaches from information theory, frequency analysis and data compression are available and provide powerful alternatives to dynamic programming. These new methods are often preferred, as their algorithms are simpler and are not affected by synteny-related problems. In this review, we provide a detailed discussion of computational tools, which stem from alignment-free methods based on statistical analysis from word frequencies. We provide several clear examples to demonstrate applications and the interpretations over several different areas of alignment-free analysis such as base-base correlations, feature frequency profiles, compositional vectors, an improved string composition and the D2 statistic metric. Additionally, we provide detailed discussion and an example of analysis by Lempel-Ziv techniques from data compression.},
+	language = {eng},
+	number = {6},
+	journal = {Briefings in Bioinformatics},
+	author = {Bonham-Carter, Oliver and Steele, Joe and Bastola, Dhundy},
+	month = nov,
+	year = {2014},
+	pmid = {23904502},
+	pmcid = {PMC4296134},
+	keywords = {Algorithms, Animals, computational biology, Information Theory, Phylogeography, Sequence Alignment, Sequence Analysis, DNA},
+	pages = {890--905}
+}
+
+@article{sims_whole-genome_2011,
+	title = {Whole-genome phylogeny of {Escherichia} coli/{Shigella} group by feature frequency profiles ({FFPs})},
+	volume = {108},
+	issn = {0027-8424, 1091-6490},
+	url = {http://www.pnas.org/content/108/20/8329},
+	doi = {10.1073/pnas.1105168108},
+	abstract = {A whole-genome phylogeny of the Escherichia coli/Shigella group was constructed by using the feature frequency profile (FFP) method. This alignment-free approach uses the frequencies of l-mer features of whole genomes to infer phylogenic distances. We present two phylogenies that accentuate different aspects of E. coli/Shigella genomic evolution: (i) one based on the compositions of all possible features of length l = 24 (∼8.4 million features), which are likely to reveal the phenetic grouping and relationship among the organisms and (ii) the other based on the compositions of core features with low frequency and low variability (∼0.56 million features), which account for ∼69\% of all commonly shared features among 38 taxa examined and are likely to have genome-wide lineal evolutionary signal. Shigella appears as a single clade when all possible features are used without filtering of noncore features. However, results using core features show that Shigella consists of at least two distantly related subclades, implying that the subclades evolved into a single clade because of a high degree of convergence influenced by mobile genetic elements and niche adaptation. In both FFP trees, the basal group of the E. coli/Shigella phylogeny is the B2 phylogroup, which contains primarily uropathogenic strains, suggesting that the E. coli/Shigella ancestor was likely a facultative or opportunistic pathogen. The extant commensal strains diverged relatively late and appear to be the result of reductive evolution of genomes. We also identify clade distinguishing features and their associated genomic regions within each phylogroup. Such features may provide useful information for understanding evolution of the groups and for quick diagnostic identification of each phylogroup.},
+	language = {en},
+	number = {20},
+	urldate = {2015-06-29},
+	journal = {Proceedings of the National Academy of Sciences},
+	author = {Sims, Gregory E. and Kim, Sung-Hou},
+	month = may,
+	year = {2011},
+	pmid = {21536867},
+	keywords = {commensal minimalism, Jensen-Shannon Divergence, phylotyping, prokaryotic phylogeny},
+	pages = {8329--8334}
+}
+
+@article{hohl_is_2007,
+	title = {Is {Multiple}-{Sequence} {Alignment} {Required} for {Accurate} {Inference} of {Phylogeny}?},
+	volume = {56},
+	issn = {1063-5157, 1076-836X},
+	url = {http://sysbio.oxfordjournals.org/content/56/2/206},
+	doi = {10.1080/10635150701294741},
+	abstract = {The process of inferring phylogenetic trees from molecular sequences almost always starts with a multiple alignment of these sequences but can also be based on methods that do not involve multiple sequence alignment. Very little is known about the accuracy with which such alignment-free methods recover the correct phylogeny or about the potential for increasing their accuracy. We conducted a large-scale comparison of ten alignment-free methods, among them one new approach that does not calculate distances and a faster variant of our pattern-based approach; all distance-based alignment-free methods are freely available from http://www.bioinformatics.org.au (as Python package decaf+py). We show that most methods exhibit a higher overall reconstruction accuracy in the presence of high among-site rate variation. Under all conditions that we considered, variants of the pattern-based approach were significantly better than the other alignment-free methods. The new pattern-based variant achieved a speed-up of an order of magnitude in the distance calculation step, accompanied by a small loss of tree reconstruction accuracy. A method of Bayesian inference from k-mers did not improve on classical alignment-free (and distance-based) methods but may still offer other advantages due to its Bayesian nature. We found the optimal word length k of word-based methods to be stable across various data sets, and we provide parameter ranges for two different alphabets. The influence of these alphabets was analyzed to reveal a trade-off in reconstruction accuracy between long and short branches. We have mapped the phylogenetic accuracy for many alignment-free methods, among them several recently introduced ones, and increased our understanding of their behavior in response to biologically important parameters. In all experiments, the pattern-based approach emerged as superior, at the expense of higher resource consumption. Nonetheless, no alignment-free method that we examined recovers the correct phylogeny as accurately as does an approach based on maximum-likelihood distance estimates of multiply aligned sequences.},
+	language = {en},
+	number = {2},
+	urldate = {2015-06-29},
+	journal = {Systematic Biology},
+	author = {Höhl, Michael and Ragan, Mark A.},
+	month = apr,
+	year = {2007},
+	pmid = {17454975},
+	keywords = {Alignment-free methods, Bayesian, distance estimation, phylogenetics, tree reconstruction},
+	pages = {206--221}
+}
+
+@inproceedings{subramanian_reference-free_2014,
+	title = {Reference-free inference of tumor phylogenies from single-cell sequencing data},
+	doi = {10.1109/ICCABS.2014.6863944},
+	abstract = {Effective management and treatment of cancer is greatly complicated by the rapid evolution and resulting heterogeneity of tumors. In prior work, we showed that phylogenetic study of cell populations in single tumors provides a way to make sense of this heterogeneity and identify robust features of evolutionary processes of single tumors. The introduction of single-cell sequencing has shown great promise for advancing single-tumor phylogenetics, but the volume and high noise of these data present many challenges for studying tumor evolution, especially with regard to the chromosome abnormalities that typically dominate tumor evolution. We propose a reference-free approach to mining genome sequence reads to allow predictive classification of tumors into heterogeneous types and reconstruct models of their evolution. The approach extracts k-mer counts from single-cell tumor sequences, using differences in normalized k-mer frequencies as a proxy for overall evolutionary distance between distinct cells. The approach is computationally more efficient in time and space than standard protocols for deriving phylogenetic markers, which rely on first aligning sequence reads to a reference genome and then processing the data downstream to extract meaningful progression markers and use them to construct phylogenetic trees. The approach also provides a way to bypass some of the challenges that massive genome rearrangement typical of tumor genomes present for reference-based methods. To handle the unique challenges of single-cell sequencing data, we have applied a series of noise correction measures intended to account for biases due to the sequencing technology. We illustrate the method using publicly available tumor single cell sequencing data. Phylogenies built from these k-mer spectrum distance matrices yield splits that are statistically significant when tested for their ability to partition cells at different stages of cancer.},
+	booktitle = {2014 {IEEE} 4th {International} {Conference} on {Computational} {Advances} in {Bio} and {Medical} {Sciences} ({ICCABS})},
+	author = {Subramanian, A. and Schwartz, R.},
+	month = jun,
+	year = {2014},
+	keywords = {bioinformatics, cancer, cancer stages, cancer treatment, cell partitioning, cell populations, cellular biophysics, chromosome abnormalities, data downstream, data mining, evolutionary processes, evolutionary trees, evolution (biological), first aligning sequence reads, genetics, genome sequence mining, Genomics, heterogeneous types, k-mer counts, k-mer spectrum distance matrices, massive genome rearrangement, meaningful progression markers, noise correction measures, normalized k-mer frequencies, overall evolutionary distance, phylogenetic markers, phylogenetic study, phylogenetic trees, Phylogeny, predictive classification, proxy, reference-based methods, reference-free inference, reference genome, sequencing technology, Sequential analysis, single cell sequencing, single-cell sequencing data, single-cell tumor sequences, single-tumor phylogenetics, single tumors, standard protocols, tumor evolution, tumor genomes, tumor heterogeneity, tumor phylogeny, Tumors, tumor single cell sequencing data, tumours, using},
+	pages = {1--1}
+}
+
+@article{haubold_alignment-free_2014,
+	title = {Alignment-free phylogenetics and population genetics},
+	volume = {15},
+	issn = {1477-4054},
+	doi = {10.1093/bib/bbt083},
+	abstract = {Phylogenetics and population genetics are central disciplines in evolutionary biology. Both are based on comparative data, today usually DNA sequences. These have become so plentiful that alignment-free sequence comparison is of growing importance in the race between scientists and sequencing machines. In phylogenetics, efficient distance computation is the major contribution of alignment-free methods. A distance measure should reflect the number of substitutions per site, which underlies classical alignment-based phylogeny reconstruction. Alignment-free distance measures are either based on word counts or on match lengths, and I apply examples of both approaches to simulated and real data to assess their accuracy and efficiency. While phylogeny reconstruction is based on the number of substitutions, in population genetics, the distribution of mutations along a sequence is also considered. This distribution can be explored by match lengths, thus opening the prospect of alignment-free population genomics.},
+	language = {eng},
+	number = {3},
+	journal = {Briefings in Bioinformatics},
+	author = {Haubold, Bernhard},
+	month = may,
+	year = {2014},
+	pmid = {24291823},
+	keywords = {Animals, computational biology, Evolution, Molecular, Genetics, Population, Genome, Mitochondrial, Humans, Models, Genetic, Mutation, Phylogeny, Recombination, Genetic, Selection, Genetic, Sequence Alignment, Sequence Analysis, DNA},
+	pages = {407--418}
+}
+
+@article{xie_discriminative_2015,
+	title = {A discriminative method for protein remote homology detection based on {N}-{Gram}},
+	volume = {14},
+	issn = {1676-5680},
+	doi = {10.4238/2015.January.15.9},
+	abstract = {Protein remote homology detection refers to detecting structural homology in proteins with an extremely low rate of sequence similarity. Such detection is primarily conducted using 3 methods: pairwise sequence comparisons, generative models for protein families, and discriminative classifiers. In this study, a discriminative classification method involving N-Grams was adopted to extract features using a random forest algorithm to classify data sets. Experiments in the SCOP 1.53 data set showed that our approach improved the receiver operating characteristic by 6\% compared with well-known methods. To determine a score threshold that could be used to divide the data set, we also used a heuristic method through which the precision of positive examples and recall rate reached 0.5647 and 0.8647, respectively. Few other studies have investigated the recall and precision of such examples.},
+	language = {eng},
+	number = {1},
+	journal = {Genetics and molecular research: GMR},
+	author = {Xie, S. and Li, P. and Jiang, Y. and Zhao, Y.},
+	year = {2015},
+	pmid = {25729937},
+	pages = {69--78}
+}
+
+@article{fiannaca_k-mer-based_????,
+	title = {A k-mer-based barcode {DNA} classification methodology based on spectral representation and a neural gas network},
+	volume = {0},
+	issn = {0933-3657},
+	url = {http://www.aiimjournal.com/article/S0933365715000810/abstract},
+	doi = {10.1016/j.artmed.2015.06.002},
+	abstract = {Objectives
+In this paper, an alignment-free method for DNA barcode classification that is based on both a spectral representation and a neural gas network for unsupervised clustering is proposed.
+Methods
+In the proposed methodology, distinctive words are identified from a spectral representation of DNA sequences. A taxonomic classification of the DNA sequence is then performed using the sequence signature, i.e., the smallest set of k-mers that can assign a DNA sequence to its proper taxonomic category. Experiments were then performed to compare our method with other supervised machine learning classification algorithms, such as support vector machine, random forest, ripper, naïve Bayes, ridor, and classification tree, which also consider short DNA sequence fragments of 200 and 300 base pairs (bp). The experimental tests were conducted over 10 real barcode datasets belonging to different animal species, which were provided by the on-line resource “Barcode of Life Database”.
+Results
+The experimental results showed that our k-mer-based approach is directly comparable, in terms of accuracy, recall and precision metrics, with the other classifiers when considering full-length sequences. In addition, we demonstrate the robustness of our method when a classification is performed task with a set of short DNA sequences that were randomly extracted from the original data. For example, the proposed method can reach the accuracy of 64.8\% at the species level with 200-bp fragments. Under the same conditions, the best other classifier (random forest) reaches the accuracy of 20.9\%.
+Conclusions
+Our results indicate that we obtained a clear improvement over the other classifiers for the study of short DNA barcode sequence fragments.},
+	language = {English},
+	number = {0},
+	urldate = {2015-07-31},
+	journal = {Artificial Intelligence in Medicine},
+	author = {Fiannaca, Antonino and La Rosa, Massimo and Rizzo, Riccardo and Urso, Alfonso},
+	keywords = {Alignment-free analysis, DNA barcode classification, k-Mer representation, Neural gas}
+}
+
+@article{tomovic_n-gram-based_2006,
+	title = {n-{Gram}-based classification and unsupervised hierarchical clustering of genome sequences},
+	volume = {81},
+	issn = {0169-2607},
+	url = {http://www.sciencedirect.com/science/article/pii/S0169260705002361},
+	doi = {10.1016/j.cmpb.2005.11.007},
+	abstract = {In this paper we address the problem of automated classification of isolates, i.e., the problem of determining the family of genomes to which a given genome belongs. Additionally, we address the problem of automated unsupervised hierarchical clustering of isolates according only to their statistical substring properties. For both of these problems we present novel algorithms based on nucleotide n-grams, with no required preprocessing steps such as sequence alignment. Results obtained experimentally are very positive and suggest that the proposed techniques can be successfully used in a variety of related problems. The reported experiments demonstrate better performance than some of the state-of-the-art methods. We report on a new distance measure between n-gram profiles, which shows superior performance compared to many other measures, including commonly used Euclidean distance.},
+	number = {2},
+	urldate = {2015-07-31},
+	journal = {Computer Methods and Programs in Biomedicine},
+	author = {Tomović, Andrija and Janičić, Predrag and Kešelj, Vlado},
+	month = feb,
+	year = {2006},
+	keywords = {Classification, Genome sequence, Hierarchical clustering, n-Gram},
+	pages = {137--153}
+}
+
+@article{kurtz_versatile_2004,
+	title = {Versatile and open software for comparing large genomes},
+	volume = {5},
+	copyright = {2004 Kurtz et al.; licensee BioMed Central Ltd. This is an Open Access article: verbatim copying and redistribution of this article are permitted in all media for any purpose, provided this notice is preserved along with the article's original URL.},
+	issn = {1465-6906},
+	url = {http://genomebiology.com/2004/5/2/R12/abstract},
+	doi = {10.1186/gb-2004-5-2-r12},
+	abstract = {PMID: 14759262},
+	language = {en},
+	number = {2},
+	urldate = {2015-06-29},
+	journal = {Genome Biology},
+	author = {Kurtz, Stefan and Phillippy, Adam and Delcher, Arthur L. and Smoot, Michael and Shumway, Martin and Antonescu, Corina and Salzberg, Steven L.},
+	month = jan,
+	year = {2004},
+	pmid = {14759262},
+	pages = {R12}
+}
+
+@article{wen_k-mer_2014,
+	title = {k-mer {Sparse} matrix model for genetic sequence and its applications in sequence comparison},
+	volume = {363},
+	issn = {0022-5193},
+	url = {http://www.sciencedirect.com/science/article/pii/S0022519314004895},
+	doi = {10.1016/j.jtbi.2014.08.028},
+	abstract = {Based on the k-mer model for genetic sequence, a k-mer sparse matrix representation is proposed to denote the types and sites of k-mers appearing in a genetic sequence, and there exists a one-to-one relationship between a genetic sequence and its associated k-mer sparse matrix. With the singular value decomposition of the k-mer sparse matrix, the k-mer singular value vector is constructed and utilized to numerically quantify the characteristics of a genetic sequence. We investigate and evaluate the optimum value k⁎ chosen for our k-mer sparse matrix model for genetic sequence. To show the usefulness of our k-mer sparse matrix model method, it is applied to the comparison of genetic sequences, and the results obtained fully demonstrate that our proposed method is very powerful in analyzing and determining the relationships of genetic sequences.},
+	urldate = {2015-06-28},
+	journal = {Journal of Theoretical Biology},
+	author = {Wen, Jia and Zhang, YuYan and Yau, Stephen S. T.},
+	month = dec,
+	year = {2014},
+	keywords = {k-mer Model, Optimum value, Phylogenetic analysis, Singular value decomposition},
+	pages = {145--150}
+}
+
+@article{gardner_when_2013,
+	title = {When {Whole}-{Genome} {Alignments} {Just} {Won}'t {Work}: {kSNP} v2 {Software} for {Alignment}-{Free} {SNP} {Discovery} and {Phylogenetics} of {Hundreds} of {Microbial} {Genomes}},
+	volume = {8},
+	shorttitle = {When {Whole}-{Genome} {Alignments} {Just} {Won}'t {Work}},
+	url = {http://dx.doi.org/10.1371/journal.pone.0081760},
+	doi = {10.1371/journal.pone.0081760},
+	abstract = {Effective use of rapid and inexpensive whole genome sequencing for microbes requires fast, memory efficient bioinformatics tools for sequence comparison. The kSNP v2 software finds single nucleotide polymorphisms (SNPs) in whole genome data. kSNP v2 has numerous improvements over kSNP v1 including SNP gene annotation; better scaling for draft genomes available as assembled contigs or raw, unassembled reads; a tool to identify the optimal value of k; distribution of packages of executables for Linux and Mac OS X for ease of installation and user-friendly use; and a detailed User Guide. SNP discovery is based on k-mer analysis, and requires no multiple sequence alignment or the selection of a single reference genome. Most target sets with hundreds of genomes complete in minutes to hours. SNP phylogenies are built by maximum likelihood, parsimony, and distance, based on all SNPs, only core SNPs, or SNPs present in some intermediate user-specified fraction of targets. The SNP-based trees that result are consistent with known taxonomy. kSNP v2 can handle many gigabases of sequence in a single run, and if one or more annotated genomes are included in the target set, SNPs are annotated with protein coding and other information (UTRs, etc.) from Genbank file(s). We demonstrate application of kSNP v2 on sets of viral and bacterial genomes, and discuss in detail analysis of a set of 68 finished E. coli and Shigella genomes and a set of the same genomes to which have been added 47 assemblies and four “raw read” genomes of H104:H4 strains from the recent European E. coli outbreak that resulted in both bloody diarrhea and hemolytic uremic syndrome (HUS), and caused at least 50 deaths.},
+	number = {12},
+	urldate = {2015-07-31},
+	journal = {PLoS ONE},
+	author = {Gardner, Shea N. and Hall, Barry G.},
+	month = dec,
+	year = {2013},
+	pages = {e81760}
+}
+
+@article{behnam_geometric_2013,
+	title = {A {Geometric} {Interpretation} for {Local} {Alignment}-{Free} {Sequence} {Comparison}},
+	volume = {20},
+	issn = {1066-5277},
+	url = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3704055/},
+	doi = {10.1089/cmb.2012.0280},
+	abstract = {Local alignment-free sequence comparison arises in the context of identifying similar segments of sequences that may not be alignable in the traditional sense. We propose a randomized approximation algorithm that is both accurate and efficient. We show that under D2 and its important variant {\textbackslash}documentclass\{aastex\}{\textbackslash}usepackage\{amsbsy\}{\textbackslash}usepackage\{amsfonts\}{\textbackslash}usepackage\{amssymb\}{\textbackslash}usepackage\{bm\}{\textbackslash}usepackage\{mathrsfs\}{\textbackslash}usepackage\{pifont\}{\textbackslash}usepackage\{stmaryrd\}{\textbackslash}usepackage\{textcomp\}{\textbackslash}usepackage\{portland, xspace\}{\textbackslash}usepackage\{amsmath, amsxtra\}{\textbackslash}pagestyle\{empty\}{\textbackslash}DeclareMathSizes\{10\}\{9\}\{7\}\{6\}{\textbackslash}begin\{document\}
+\$\$D\_2{\textasciicircum}*\$\$
+{\textbackslash}end\{document\} as the similarity measure, local alignment-free comparison between a pair of sequences can be formulated as the problem of finding the maximum bichromatic dot product between two sets of points in high dimensions. We introduce a geometric framework that reduces this problem to that of finding the bichromatic closest pair (BCP), allowing the properties of the underlying metric to be leveraged. Local alignment-free sequence comparison can be solved by making a quadratic number of alignment-free substring comparisons. We show both theoretically and through empirical results on simulated data that our approximation algorithm requires a subquadratic number of such comparisons and trades only a small amount of accuracy to achieve this efficiency. Therefore, our algorithm can extend the current usage of alignment-free–based methods and can also be regarded as a substitute for local alignment algorithms in many biological studies.},
+	number = {7},
+	urldate = {2015-07-31},
+	journal = {Journal of Computational Biology},
+	author = {Behnam, Ehsan and Waterman, Michael S. and Smith, Andrew D.},
+	month = jul,
+	year = {2013},
+	pmid = {23829649},
+	pmcid = {PMC3704055},
+	pages = {471--485}
+}
+
+@incollection{saha_brief_2013,
+	series = {Advances in {Intelligent} {Systems} and {Computing}},
+	title = {A {Brief} {Review} of {Data} {Mining} {Application} {Involving} {Protein} {Sequence} {Classification}},
+	copyright = {©2013 Springer-Verlag Berlin Heidelberg},
+	isbn = {978-3-642-31551-0 978-3-642-31552-7},
+	url = {http://link.springer.com/chapter/10.1007/978-3-642-31552-7_48},
+	abstract = {Data mining techniques have been used by researchers for analyzing protein sequences. In protein analysis, especially in protein sequence classification, selection of feature is most important. Popular protein sequence classification techniques involve extraction of specific features from the sequences. Researchers apply some well-known classification techniques like neural networks, Genetic algorithm, Fuzzy ARTMAP, Rough Set Classifier etc for accurate classification. This paper presents a review is with three different classification models such as neural network model, fuzzy ARTMAP model and Rough set classifier model. A new technique for classifying protein sequences have been proposed in the end. The proposed technique tries to reduce the computational overheads encountered by earlier approaches and increase the accuracy of classification.},
+	language = {en},
+	number = {177},
+	urldate = {2015-07-31},
+	booktitle = {Advances in {Computing} and {Information} {Technology}},
+	publisher = {Springer Berlin Heidelberg},
+	author = {Saha, Suprativ and Chaki, Rituparna},
+	editor = {Meghanathan, Natarajan and Nagamalai, Dhinaharan and Chaki, Nabendu},
+	year = {2013},
+	keywords = {Computational Intelligence, Computer Applications, data mining, Electrical Engineering, Fuzzy ARTMAP Model, Image Processing and Computer Vision, Neural Network Model, Rough Set Classifier},
+	pages = {469--477},
+	file = {Snapshot:C\:\\Users\\Mihal\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\trn36pjl.default\\zotero\\storage\\MPEWH6MM\\10.html:text/html}
+}
+
+@article{maetschke_visual_2010,
+	title = {A visual framework for sequence analysis using n-grams and spectral rearrangement},
+	volume = {26},
+	issn = {1367-4803, 1460-2059},
+	url = {http://bioinformatics.oxfordjournals.org/content/26/6/737},
+	doi = {10.1093/bioinformatics/btq042},
+	abstract = {Motivation: Protein sequences are often composed of regions that have distinct evolutionary histories as a consequence of domain shuffling, recombination or gene conversion. New approaches are required to discover, visualize and analyze these sequence regions and thus enable a better understanding of protein evolution.
+Results: Here, we have developed an alignment-free and visual approach to analyze sequence relationships. We use the number of shared n-grams between sequences as a measure of sequence similarity and rearrange the resulting affinity matrix applying a spectral technique. Heat maps of the affinity matrix are employed to identify and visualize clusters of related sequences or outliers, while n-gram-based dot plots and conservation profiles allow detailed analysis of similarities among selected sequences. Using this approach, we have identified signatures of domain shuffling in an otherwise poorly characterized family, and homology clusters in another. We conclude that this approach may be generally useful as a framework to analyze related, but highly divergent protein sequences. It is particularly useful as a fast method to study sequence relationships prior to much more time-consuming multiple sequence alignment and phylogenetic analysis.
+Availability: A software implementation (MOSAIC) of the framework described here can be downloaded from http://bioinformatics.org.au/mosaic/
+Contact: m.ragan@uq.edu.au
+Supplementary information: Supplementary data are available at Bioinformatics online.},
+	language = {en},
+	number = {6},
+	urldate = {2015-07-31},
+	journal = {Bioinformatics},
+	author = {Maetschke, Stefan R. and Kassahn, Karin S. and Dunn, Jasmyn A. and Han, Siew-Ping and Curley, Eva Z. and Stacey, Katryn J. and Ragan, Mark A.},
+	month = mar,
+	year = {2010},
+	pmid = {20130028},
+	pages = {737--744}
+}
+
+@article{nakashima_genes_1998,
+	title = {Genes from nine genomes are separated into their organisms in the dinucleotide composition space},
+	volume = {5},
+	issn = {1340-2838},
+	abstract = {A set of 16 kinds of dinucleotide compositions was used to analyze the protein-encoding nucleotide sequences in nine complete genomes: Escherichia coli, Haemophilus influenzae, Helicobacter pylori, Mycoplasma genitalium, Mycoplasma pneumoniae, Synechocystis sp., Methanococcus jannaschii, Archaeoglobus fulgidus, and Saccharomyces cerevisiae. The dinucleotide composition was significantly different between the organisms. The distribution of genes from an organism was clustered around its center in the dinucleotide composition space. The genes from closely related organisms such as Gram-negative bacteria, mycoplasma species and eukaryotes showed some overlap in the space. The genes from nine complete genomes together with those from human were discriminated into respective clusters with 80\% accuracy using the dinucleotide composition alone. The composition data estimated from a whole genome was close to that obtained from genes, indicating that the characteristic feature of dinucleotides holds not only for protein coding regions but also noncoding regions. When a dendrogram was constructed from the disposition of the clusters in the dinucleotide space, it resembled the real phylogenetic tree. Thus, the distinct feature observed in the dinucleotide composition may reflect the phylogenetic relationship of organisms.},
+	language = {eng},
+	number = {5},
+	journal = {DNA research: an international journal for rapid publication of reports on genes and genomes},
+	author = {Nakashima, H. and Ota, M. and Nishikawa, K. and Ooi, T.},
+	month = oct,
+	year = {1998},
+	pmid = {9872449},
+	keywords = {Amino acids, Archaea, Archaeal Proteins, Bacteria, Bacterial Proteins, Base Composition, Fungal Proteins, Gene Frequency, Genes, Archaeal, Genes, Bacterial, Genes, Fungal, Genome, Human, Humans, Oligodeoxyribonucleotides, Phylogeny, Proteins, Saccharomyces cerevisiae, Sequence Analysis, DNA, Species Specificity},
+	pages = {251--259}
+}
+
+@article{pettengill_evaluation_2014,
+	title = {An evaluation of alternative methods for constructing phylogenies from whole genome sequence data: a case study with \textit{{Salmonella}}},
+	volume = {2},
+	issn = {2167-8359},
+	shorttitle = {An evaluation of alternative methods for constructing phylogenies from whole genome sequence data},
+	url = {https://peerj.com/articles/620},
+	doi = {10.7717/peerj.620},
+	language = {en},
+	urldate = {2015-07-31},
+	journal = {PeerJ},
+	author = {Pettengill, James B. and Luo, Yan and Davis, Steven and Chen, Yi and Gonzalez-Escalona, Narjol and Ottesen, Andrea and Rand, Hugh and Allard, Marc W. and Strain, Errol},
+	month = oct,
+	year = {2014},
+	pages = {e620}
+}
+
+@article{wen_k-mer_2014-1,
+	title = {K-mer natural vector and its application to the phylogenetic analysis of genetic sequences},
+	volume = {546},
+	issn = {0378-1119},
+	url = {http://www.sciencedirect.com/science/article/pii/S0378111914006064},
+	doi = {10.1016/j.gene.2014.05.043},
+	abstract = {Based on the well-known k-mer model, we propose a k-mer natural vector model for representing a genetic sequence based on the numbers and distributions of k-mers in the sequence. We show that there exists a one-to-one correspondence between a genetic sequence and its associated k-mer natural vector. The k-mer natural vector method can be easily and quickly used to perform phylogenetic analysis of genetic sequences without requiring evolutionary models or human intervention. Whole or partial genomes can be handled more effective with our proposed method. It is applied to the phylogenetic analysis of genetic sequences, and the obtaining results fully demonstrate that the k-mer natural vector method is a very powerful tool for analysing and annotating genetic sequences and determining evolutionary relationships both in terms of accuracy and efficiency.},
+	number = {1},
+	urldate = {2015-07-31},
+	journal = {Gene},
+	author = {Wen, Jia and Chan, Raymond H. F. and Yau, Shek-Chung and He, Rong L. and Yau, Stephen S. T.},
+	month = aug,
+	year = {2014},
+	keywords = {k-mer Model, Natural vector, Phylogenetic analysis},
+	pages = {25--34}
+}
+
+@article{leimeister_fast_2014,
+	title = {Fast alignment-free sequence comparison using spaced-word frequencies},
+	volume = {30},
+	issn = {1367-4803, 1460-2059},
+	url = {http://bioinformatics.oxfordjournals.org/content/30/14/1991},
+	doi = {10.1093/bioinformatics/btu177},
+	abstract = {Motivation: Alignment-free methods for sequence comparison are increasingly used for genome analysis and phylogeny reconstruction; they circumvent various difficulties of traditional alignment-based approaches. In particular, alignment-free methods are much faster than pairwise or multiple alignments. They are, however, less accurate than methods based on sequence alignment. Most alignment-free approaches work by comparing the word composition of sequences. A well-known problem with these methods is that neighbouring word matches are far from independent.
+Results: To reduce the statistical dependency between adjacent word matches, we propose to use ‘spaced words’, defined by patterns of ‘match’ and ‘don’t care’ positions, for alignment-free sequence comparison. We describe a fast implementation of this approach using recursive hashing and bit operations, and we show that further improvements can be achieved by using multiple patterns instead of single patterns. To evaluate our approach, we use spaced-word frequencies as a basis for fast phylogeny reconstruction. Using real-world and simulated sequence data, we demonstrate that our multiple-pattern approach produces better phylogenies than approaches relying on contiguous words.
+Availability and implementation: Our program is freely available at http://spaced.gobics.de/.
+Contact: chris.leimeister@stud.uni-goettingen.de
+Supplementary information: Supplementary data are available at Bioinformatics online.},
+	language = {en},
+	number = {14},
+	urldate = {2015-07-31},
+	journal = {Bioinformatics},
+	author = {Leimeister, Chris-Andre and Boden, Marcus and Horwege, Sebastian and Lindner, Sebastian and Morgenstern, Burkhard},
+	month = jul,
+	year = {2014},
+	pmid = {24700317},
+	pages = {1991--1999}
+}
+
+@article{chor_genomic_2009,
+	title = {Genomic {DNA} k-mer spectra: models and modalities},
+	volume = {10},
+	copyright = {2009 Chor et al.; licensee BioMed Central Ltd.},
+	issn = {1465-6906},
+	shorttitle = {Genomic {DNA} k-mer spectra},
+	url = {http://genomebiology.com/2009/10/10/R108/abstract},
+	doi = {10.1186/gb-2009-10-10-r108},
+	abstract = {PMID: 19814784},
+	language = {en},
+	number = {10},
+	urldate = {2015-07-31},
+	journal = {Genome Biology},
+	author = {Chor, Benny and Horn, David and Goldman, Nick and Levy, Yaron and Massingham, Tim},
+	month = oct,
+	year = {2009},
+	pmid = {19814784},
+	pages = {R108}
+}
+
+@incollection{bogan-marta_statistical_2006,
+	series = {{IFIP} {International} {Federation} for {Information} {Processing}},
+	title = {Statistical {Method} of {Context} {Evaluation} for {Biological} {Sequence} {Similarity}},
+	copyright = {©2006 International Federation for Information Processing},
+	isbn = {978-0-387-34654-0 978-0-387-34747-9},
+	url = {http://link.springer.com/chapter/10.1007/978-0-387-34747-9_11},
+	abstract = {Within this paper we are proposing and testing a new strategy for detection and measurement of similarity between sequences of proteins. Our approach has its roots in computational linguistics and the related techniques for quantifying and comparing content in strings of characters. The pairwise comparison of proteins relies on the content regularities expected to uniquely characterize each sequence. These regularities are captured by n-gram based modelling techniques and exploited by cross-entropy related measures. In this new attempt to incorporate theoretical ideas from computational linguistics into the field of bioinformatics, we experimented using two implementations having always as ultimate goal the development of practical, computationally efficient algorithms for expressing protein similarity. The experimental analysis reported herein provides evidence for the usefulness of the proposed approach and motivates the further development of linguistics-related tools as a means of analysing biological sequences.},
+	language = {en},
+	number = {217},
+	urldate = {2015-07-31},
+	booktitle = {Artificial {Intelligence} in {Theory} and {Practice}},
+	publisher = {Springer US},
+	author = {Bogan-Marta, Alina and Pitas, Ioannis and Lyroudia, Kleoniki},
+	editor = {Bramer, Max},
+	year = {2006},
+	keywords = {Artificial Intelligence (incl. Robotics)},
+	pages = {99--108}
+}
+
+@article{blaisdell_measure_1986,
+	title = {A measure of the similarity of sets of sequences not requiring sequence alignment.},
+	volume = {83},
+	issn = {0027-8424},
+	url = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC323909/},
+	abstract = {Determination of first- and second-order Markov chain homogeneity of sets of nuclear eukaryotic DNA sequences, both coding and noncoding, finds similarities imperceptible to the standard Needleman-Wunsch base matching or dot-matrix algorithms. These measures of the similarities of the distributions of adjacent pairs or triplets are in agreement with accepted evolutionary-tree topologies. Hierarchical clustering of the distributions of doublets of 30 miscellaneous coding sequences gives clusters in reasonable agreement with accepted biological classifications. In addition to similarity by homology, there is also observed similarity of disparate genes in the same organism--for example, all three disparate yeast genes (two enzymes and actin) form a well-distinguished cluster.},
+	number = {14},
+	urldate = {2015-06-28},
+	journal = {Proceedings of the National Academy of Sciences of the United States of America},
+	author = {Blaisdell, B E},
+	month = jul,
+	year = {1986},
+	pmid = {3460087},
+	pmcid = {PMC323909},
+	pages = {5155--5159}
+}
+
+@article{kalafus_pash:_2004,
+	title = {Pash: {Efficient} {Genome}-{Scale} {Sequence} {Anchoring} by {Positional} {Hashing}},
+	volume = {14},
+	issn = {1088-9051, 1549-5469},
+	shorttitle = {Pash},
+	url = {http://genome.cshlp.org/content/14/4/672},
+	doi = {10.1101/gr.1963804},
+	abstract = {Pash is a computer program for efficient, parallel, all-against-all comparison of very long DNA sequences. Pash implements Positional Hashing, a novel parallelizable method for sequence comparison based on k-mer representation of sequences. The Positional Hashing method breaks the comparison problem in a unique way that avoids the quadratic penalty encountered with other sensitive methods and confers inherent low-level parallelism. Furthermore, Positional Hashing allows one to readily and predictably trade between sensitivity and speed. In a simulated comparison task, anchoring computationally mutated reads onto a genome, the sensitivity of Pash was equal to or greater than that of BLAST and BLAT, with Pash outperforming these programs as the reads became shorter and less similar to the genome. Using modest computing resources, we employed Pash for two large-scale sequence comparison tasks: comparison of three mammalian genomes, and anchoring millions of chimpanzee whole-genome shotgun sequencing reads onto the human genome. The results of these comparisons by Pash agree with those computed by other methods that use more than an order of magnitude more computing resources. These results confirm the sensitivity of Positional Hashing.},
+	language = {en},
+	number = {4},
+	urldate = {2015-07-31},
+	journal = {Genome Research},
+	author = {Kalafus, Ken J. and Jackson, Andrew R. and Milosavljevic, Aleksandar},
+	month = apr,
+	year = {2004},
+	pmid = {15060009},
+	pages = {672--678}
+}
+
+@article{qi_whole_2004,
+	title = {Whole proteome prokaryote phylogeny without sequence alignment: a {K}-string composition approach},
+	volume = {58},
+	issn = {0022-2844},
+	shorttitle = {Whole proteome prokaryote phylogeny without sequence alignment},
+	doi = {10.1007/s00239-003-2493-7},
+	abstract = {A systematic way of inferring evolutionary relatedness of microbial organisms from the oligopeptide content, i.e., frequency of amino acid K-strings in their complete proteomes, is proposed. The new method circumvents the ambiguity of choosing the genes for phylogenetic reconstruction and avoids the necessity of aligning sequences of essentially different length and gene content. The only "parameter" in the method is the length K of the oligopeptides, which serves to tune the "resolution power" of the method. The topology of the trees converges with K increasing. Applied to a total of 109 organisms, including 16 Archaea, 87 Bacteria, and 6 Eukarya, it yields an unrooted tree that agrees with the biologists' "tree of life" based on SSU rRNA comparison in a majority of basic branchings, and especially, in all lower taxa.},
+	language = {eng},
+	number = {1},
+	journal = {Journal of Molecular Evolution},
+	author = {Qi, Ji and Wang, Bin and Hao, Bai-Iin},
+	month = jan,
+	year = {2004},
+	pmid = {14743310},
+	keywords = {Algorithms, Archaea, Bacteria, Classification, Databases, Nucleic Acid, Oligopeptides, Phylogeny},
+	pages = {1--11}
+}
+
+@article{borozan_integrating_2015,
+	title = {Integrating alignment-based and alignment-free sequence similarity measures for biological sequence classification},
+	issn = {1367-4803, 1460-2059},
+	url = {http://bioinformatics.oxfordjournals.org/content/early/2015/02/04/bioinformatics.btv006},
+	doi = {10.1093/bioinformatics/btv006},
+	abstract = {Motivation: Alignment-based sequence similarity searches, while accurate for some type of sequences, can produce incorrect results when used on more divergent but functionally related sequences that have undergone the sequence rearrangements observed in many bacterial and viral genomes. Here, we propose a classification model that exploits the complementary nature of alignment-based and alignment-free similarity measures with the aim to improve the accuracy with which DNA and protein sequences are characterized.
+Results: Our model classifies sequences using a combined sequence similarity score calculated by adaptively weighting the contribution of different sequence similarity measures. Weights are determined independently for each sequence in the test set and reflect the discriminatory ability of individual similarity measures in the training set. Because the similarity between some sequences is determined more accurately with one type of measure rather than another, our classifier allows different sets of weights to be associated with different sequences. Using five different similarity measures, we show that our model significantly improves the classification accuracy over the current composition- and alignment-based models, when predicting the taxonomic lineage for both short viral sequence fragments and complete viral sequences. We also show that our model can be used effectively for the classification of reads from a real metagenome dataset as well as protein sequences.
+Availability and implementation: All the datasets and the code used in this study are freely available at https://collaborators.oicr.on.ca/vferretti/borozan\_csss/csss.html.
+Contact: ivan.borozan@gmail.com
+Supplementary information: Supplementary data are available at Bioinformatics online.},
+	language = {en},
+	urldate = {2015-07-31},
+	journal = {Bioinformatics},
+	author = {Borozan, Ivan and Watt, Stuart and Ferretti, Vincent},
+	month = jan,
+	year = {2015},
+	pmid = {25573913},
+	pages = {btv006}
+}
+
+@article{horwege_spaced_2014,
+	title = {Spaced words and kmacs: fast alignment-free sequence comparison based on inexact word matches},
+	issn = {0305-1048, 1362-4962},
+	shorttitle = {Spaced words and kmacs},
+	url = {http://nar.oxfordjournals.org/content/early/2014/05/14/nar.gku398},
+	doi = {10.1093/nar/gku398},
+	abstract = {In this article, we present a user-friendly web interface for two alignment-free sequence-comparison methods that we recently developed. Most alignment-free methods rely on exact word matches to estimate pairwise similarities or distances between the input sequences. By contrast, our new algorithms are based on inexact word matches. The first of these approaches uses the relative frequencies of so-called spaced words in the input sequences, i.e. words containing ‘don't care’ or ‘wildcard’ symbols at certain pre-defined positions. Various distance measures can then be defined on sequences based on their different spaced-word composition. Our second approach defines the distance between two sequences by estimating for each position in the first sequence the length of the longest substring at this position that also occurs in the second sequence with up to k mismatches. Both approaches take a set of deoxyribonucleic acid (DNA) or protein sequences as input and return a matrix of pairwise distance values that can be used as a starting point for clustering algorithms or distance-based phylogeny reconstruction. The two alignment-free programmes are accessible through a web interface at ‘Göttingen Bioinformatics Compute Server (GOBICS)’: http://spaced.gobics.de http://kmacs.gobics.de and the source codes can be downloaded.},
+	language = {en},
+	urldate = {2015-07-31},
+	journal = {Nucleic Acids Research},
+	author = {Horwege, Sebastian and Lindner, Sebastian and Boden, Marcus and Hatje, Klas and Kollmar, Martin and Leimeister, Chris-André and Morgenstern, Burkhard},
+	month = may,
+	year = {2014},
+	pmid = {24829447},
+	pages = {gku398}
+}
+
+@article{tekaia_amino_2002,
+	title = {Amino acid composition of genomes, lifestyles of organisms, and evolutionary trends: a global picture with correspondence analysis},
+	volume = {297},
+	issn = {0378-1119},
+	shorttitle = {Amino acid composition of genomes, lifestyles of organisms, and evolutionary trends},
+	abstract = {Can we infer the lifestyle of an organism from the characteristic properties of its genome? More precisely, what are the relations between easily quantifiable properties from genomic sequences, such as amino-acid compositions, and more subtle characteristics concerning for example lifestyles or evolutionary trends? Here, we seek a global picture for such properties, based on a large number (56) of complete genomes, including significant numbers of representatives from the three domains of life. We consider the amino acid compositions of the predicted proteomes, and we use correspondence analysis, as a multivariate method to extract the relevant information from the large-scale data. From these analyses we derive a series of conclusions, concerning lifestyles, as well as physico-chemical and evolutionary trends: (1) correspondence analysis of the amino acid compositions permits discrimination between the three known lifestyles (mesophily/thermophily/hyperthermophily). (2) For various organisms, amino-acid composition properties are essentially driven by GC content, and to a significantly lesser extent by growth temperatures associated with lifestyles. Roughly speaking, the respective contributions of these two components are 57 and 20\%. It is notable that these proportions are essentially unchanged with respect to a previous analysis (Nature 393 (1998) 537), which involved only 15 genomes, available at the time. (3) In terms of amino acid compositional biases, two specific 'signatures' for thermophily (in a broad sense, including hyperthermophily) can be detected. First, thermophilic species display a relative abundance in glutamic acid (Glu), concomitantly with the depletion in glutamine. Second, in thermophilic species, the relative abundance in Glu (negative charge) is significantly correlated (Pearson correlation coefficient r=0.83 with P{\textless}0.0001), with the increase in the lumped 'pool' lysine+arginine (positive charges). This correlation (absent in mesophiles) could be interpreted on a physico-chemical basis, relevant to the thermostability of proteins. (4) Statistically significant differences are observed between the average lengths of the genes in the surveyed species, which follow their distribution between the three domains of life. Also a significant difference is observed between the average lengths of thermophilic (283.0+/-5.8) versus mesophilic (340+/-9.4) genes. It is thus possible that the 'general' shortening of the primary sequences in thermophilic proteins plays a role in thermostability. (5) Considering various combinations of conservation properties (genes conserved exclusively in eukaryotes, in archaea, in bacteria, in combinations of two domains, etc.) correspondence analysis reveals a trend towards thermophilic-hyperthermophilic profiles for the most conserved subset of genes (ancient genes). (6) When limited to the subset of species-specific genes, correspondence analysis leads to a different picture for the clustering of genomes following amino-acid compositions: for example, the 'core' specific part of a genome can bear lifestyle signatures different from those of the complete genome.Various results are discussed both on methodological and biological grounds. The evolutionary perspectives opened by our analyses are noted.},
+	language = {eng},
+	number = {1-2},
+	journal = {Gene},
+	author = {Tekaia, Fredj and Yeramian, Edouard and Dujon, Bernard},
+	month = sep,
+	year = {2002},
+	pmid = {12384285},
+	keywords = {Amino acids, Animals, Base Composition, Evolution, Molecular, Gene Expression Regulation, Genome, Humans, Species Specificity, Temperature},
+	pages = {51--60}
+}
+
+@article{kelil_cluss:_2007,
+	title = {{CLUSS}: {Clustering} of protein sequences based on a new similarity measure},
+	volume = {8},
+	copyright = {2007 Kelil et al; licensee BioMed Central Ltd.},
+	issn = {1471-2105},
+	shorttitle = {{CLUSS}},
+	url = {http://www.biomedcentral.com/1471-2105/8/286/abstract},
+	doi = {10.1186/1471-2105-8-286},
+	abstract = {PMID: 17683581},
+	language = {en},
+	number = {1},
+	urldate = {2015-07-31},
+	journal = {BMC Bioinformatics},
+	author = {Kelil, Abdellali and Wang, Shengrui and Brzezinski, Ryszard and Fleury, Alain},
+	month = aug,
+	year = {2007},
+	pmid = {17683581},
+	pages = {286}
+}
+
+@article{yang_alignment_2013,
+	title = {Alignment free comparison: k word voting model and its applications},
+	volume = {335},
+	issn = {0022-5193},
+	shorttitle = {Alignment free comparison},
+	url = {http://www.sciencedirect.com/science/article/pii/S0022519313003202},
+	doi = {10.1016/j.jtbi.2013.06.037},
+	abstract = {Alignment free sequence comparison is widely used in sequence analysis, especially in computational biology for large scale similarity comparison. In this paper, we propose a word voting model to compare the biological sequences without alignment. Unlike many comparison methods based on the k word, this model does not use the k word frequency or statistics. Thus there is no limitation on the choice of k. Instead, we used information entropy of gamma distribution to characterize the differences among biological sequences in this model. Finally, we employed the model to do the similarity search and phylogenetic tree construction to further validate the model.},
+	urldate = {2015-07-31},
+	journal = {Journal of Theoretical Biology},
+	author = {Yang, Lianping and Zhang, Xiangde and Zhu, Hegui},
+	month = oct,
+	year = {2013},
+	keywords = {Gamma distribution, Information entropy, Large scale comparison},
+	pages = {276--282}
+}
+
+@inproceedings{ganapathiraju_comparative_2002,
+	address = {San Francisco, CA, USA},
+	series = {{HLT} '02},
+	title = {Comparative {N}-gram {Analysis} of {Whole}-genome {Protein} {Sequences}},
+	url = {http://dl.acm.org/citation.cfm?id=1289189.1289259},
+	abstract = {A current barrier for successful rational drug design is the lack of understanding of the structure space provided by the proteins in a cell that is determined by their sequence space. The protein sequences capable of folding to functional three-dimensional shapes of the proteins are clearly different for different organisms, since sequences obtained from human proteins often fail to form correct three-dimensional structures in bacterial organisms. In analogy to the question "What kind of things do people say?" we therefore need to ask the question "What kind of amino acid sequences occur in the proteins of an organism?" An understanding of the sequence space occupied by proteins in different organisms would have important applications for "translation" of proteins from the language of one organism into that of another and design of drugs that target sequences that might be unique or preferred by pathogenic organisms over those in human hosts. Here we describe the development of a biological language modeling toolkit (BLMT) for genome-wide statistical amino acid n-gram analysis and comparison across organisms (freely accessible at www.cs.cmu.edu/{\textasciitilde}blmt). Its functions were applied to 44 different bacterial, archaeal and the human genome. Amino acid n-gram distribution was found to be characteristic of organisms, as evidenced by (1) the ability of simple Markovian unigram models to distinguish organisms, (2) the marked variation in n-gram distributions across organisms above random variation, and (3) identification of organism-specific phrases in protein sequences that are greater than an order of magnitude standard deviations away from the mean. These lines of evidence suggest that different organisms utilize different "vocabularies" and "phrases", an observation that may provide novel approaches to drug development by specifically targeting these phrases. The results suggest that further detailed analysis of n-gram statistics of protein sequences from whole genomes will likely - in analogy to word n-gram analysis - result in powerful models for prediction, topic classification and information extraction of bilogical sequences.},
+	urldate = {2015-07-31},
+	booktitle = {Proceedings of the {Second} {International} {Conference} on {Human} {Language} {Technology} {Research}},
+	publisher = {Morgan Kaufmann Publishers Inc.},
+	author = {Ganapathiraju, M. and Weisser, D. and Rosenfeld, R. and Carbonell, J. and Reddy, R. and Klein-Seetharaman, J.},
+	year = {2002},
+	keywords = {biological language modeling toolkit, genome signatures},
+	pages = {76--81}
+}
+
+@article{liu_using_2014,
+	title = {Using distances between {Top}-n-gram and residue pairs for protein remote homology detection},
+	volume = {15},
+	copyright = {2014 Liu et al.; licensee BioMed Central Ltd.},
+	issn = {1471-2105},
+	url = {http://www.biomedcentral.com/1471-2105/15/S2/S3/abstract},
+	doi = {10.1186/1471-2105-15-S2-S3},
+	abstract = {PMID: 24564580},
+	language = {en},
+	number = {Suppl 2},
+	urldate = {2015-07-31},
+	journal = {BMC Bioinformatics},
+	author = {Liu, Bin and Xu, Jinghao and Zou, Quan and Xu, Ruifeng and Wang, Xiaolong and Chen, Qingcai},
+	month = jan,
+	year = {2014},
+	pmid = {24564580},
+	pages = {S3}
+}
+
+@article{yi_co-phylog:_2013,
+	title = {Co-phylog: an assembly-free phylogenomic approach for closely related organisms},
+	volume = {41},
+	issn = {1362-4962},
+	shorttitle = {Co-phylog},
+	doi = {10.1093/nar/gkt003},
+	abstract = {With the advent of high-throughput sequencing technologies, the rapid generation and accumulation of large amounts of sequencing data pose an insurmountable demand for efficient algorithms for constructing whole-genome phylogenies. The existing phylogenomic methods all use assembled sequences, which are often not available owing to the difficulty of assembling short-reads; this obstructs phylogenetic investigations on species without a reference genome. In this report, we present co-phylog, an assembly-free phylogenomic approach that creates a 'micro-alignment' at each 'object' in the sequence using the 'context' of the object and calculates pairwise distances before reconstructing the phylogenetic tree based on those distances. We explored the parameters' usages and the optimal working range of co-phylog, assessed co-phylog using the simulated next-generation sequencing (NGS) data and the real NGS raw data. We also compared co-phylog method with traditional alignment and alignment-free methods and illustrated the advantages and limitations of co-phylog method. In conclusion, we demonstrated that co-phylog is efficient algorithm and that it delivers high resolution and accurate phylogenies using whole-genome unassembled sequencing data, especially in the case of closely related organisms, thereby significantly alleviating the computational burden in the genomic era.},
+	language = {eng},
+	number = {7},
+	journal = {Nucleic Acids Research},
+	author = {Yi, Huiguang and Jin, Li},
+	month = apr,
+	year = {2013},
+	pmid = {23335788},
+	pmcid = {PMC3627563},
+	keywords = {Algorithms, Computer Simulation, Enterobacteriaceae, Escherichia, Gammaproteobacteria, Genome, Bacterial, Genomics, High-Throughput Nucleotide Sequencing, Phylogeny, Sequence Alignment, Shigella, Software},
+	pages = {e75}
+}
+
+@article{mitic_could_2008,
+	title = {Could n-gram analysis contribute to genomic island determination?},
+	volume = {41},
+	issn = {1532-0464},
+	url = {http://www.sciencedirect.com/science/article/pii/S1532046408000403},
+	doi = {10.1016/j.jbi.2008.03.007},
+	abstract = {There are two approaches to identifying genomic and pathogenesis islands (GI/PAIs) in bacterial genomes: the compositional and the functional, based on DNA or protein level composition and gene function, respectively. We applied n-gram analysis in addition to other compositional features, combined them by union and intersection and defined two measures for evaluating the results—recall and precision. Using the best criteria (by training on the Escherichia coli O157:H7 EDL933 genome), we predicted GIs for 14 Enterobacteriaceae family members and for 21 randomly selected bacterial genomes. These predictions were compared with results obtained from HGT DB (based on the compositional approach) and PAI DB (based on the combined approach). The results obtained show that intersecting n-grams with other compositional features improves relative precision by up to 10\% in case of HGT DB and up to 60\% in case of PAI DB. In addition, it was demonstrated that the union of all compositional features results in maximum recall (up to 37\%). Thus, the application of n-gram analysis alongside existing or newly developed methods may improve the prediction of GI/PAIs.},
+	number = {6},
+	urldate = {2015-07-31},
+	journal = {Journal of Biomedical Informatics},
+	author = {Mitić, Nenad S. and Pavlović-Lažetić, Gordana M. and Beljanski, Miloš V.},
+	month = dec,
+	year = {2008},
+	keywords = {Bacteria, Escherichia coli, Genomic islands, n-Grams},
+	pages = {936--943}
+}
+
+@article{otu_new_2003,
+	title = {A new sequence distance measure for phylogenetic tree construction},
+	volume = {19},
+	issn = {1367-4803, 1460-2059},
+	url = {http://bioinformatics.oxfordjournals.org/content/19/16/2122},
+	doi = {10.1093/bioinformatics/btg295},
+	abstract = {Motivation: Most existing approaches for phylogenetic inference use multiple alignment of sequences and assume some sort of an evolutionary model. The multiple alignment strategy does not work for all types of data, e.g. whole genome phylogeny, and the evolutionary models may not always be correct. We propose a new sequence distance measure based on the relative information between the sequences using Lempel–Ziv complexity. The distance matrix thus obtained can be used to construct phylogenetic trees.
+Results: The proposed approach does not require sequence alignment and is totally automatic. The algorithm has successfully constructed consistent phylogenies for real and simulated data sets.
+Availability: Available on request from the authors.},
+	language = {en},
+	number = {16},
+	urldate = {2015-06-29},
+	journal = {Bioinformatics},
+	author = {Otu, Hasan H. and Sayood, Khalid},
+	month = nov,
+	year = {2003},
+	pmid = {14594718},
+	pages = {2122--2130}
+}
+
+@inproceedings{wang_application_2000,
+	title = {Application of {Neural} {Networks} to {Biological} {Data} {Mining}: {A} {Case} {Study} in {Protein} {Sequence} {Classification}},
+	shorttitle = {Application of {Neural} {Networks} to {Biological} {Data} {Mining}},
+	abstract = {Biological data mining aims to extract significant information from DNA, RNA and proteins. The significant information may refer to motifs, functional sites, clustering and classification rules. This paper presents an example of biological data mining: the classification of protein sequences using neural networks. We propose new techniques to extract features from protein data and use them in combination with the Bayesian neural network to classify protein sequences obtained from the PIR protein database maintained at the National Biomedical Research Foundation. To evaluate the performance of the proposed approach, we compare it with other protein classifiers built based on sequence alignment and machine learning methods. Experimental results show the high precision of the proposed classifier and the complementarity of the tools studied in the paper.  Keywords  Bioinformatics, biological data mining, machine learning, neural networks, sequence alignment, feature extraction from  protei...},
+	booktitle = {In {Proceedings} of the {Sixth} {ACM} {SIGKDD} {International} {Conference} on {Knowledge} {Discovery} and {Data} {Mining}},
+	author = {Wang, Jason T. L. and Qicheng, Jason Wang and Shasha, Dennis and Wu, Cathy H.},
+	year = {2000},
+	pages = {305--309},
+	file = {Citeseer - Full Text PDF:C\:\\Users\\Mihal\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\trn36pjl.default\\zotero\\storage\\2I3NAAQE\\Wang et al. - 2000 - Application of Neural Networks to Biological Data .pdf:application/pdf;Citeseer - Snapshot:C\:\\Users\\Mihal\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\trn36pjl.default\\zotero\\storage\\8KMTS7QM\\summary.html:text/html}
+}
