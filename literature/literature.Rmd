@@ -52,6 +52,27 @@ HGT as the example of phenomenon missed by alignment-based phylogenetics.
 Critique of $D^2$ statistic and introduction of its variant. Introduction of bichromatic closest
 pair. Article focused on the speed.
 
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["behnam_geometric_2013"]])))
+```
+
+HGT as the example of phenomenon missed by alignment-based phylogenetics.
+
+Critique of $D^2$ statistic and introduction of its variant. Introduction of bichromatic closest
+pair. Article focused on the speed.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["yang_alignment_2013"]])))
+```
+
+Don't understand. K0mer based, may be used for phylogenetics. Does not require specyfying $k$.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["bonham-carter_alignment-free_2014"]])))
+```
+
+Good review. Description of: factor frequencies, BBC (mutual information of DNA 2-grams), FFP (number of words commong among two sequences), Jensen-Shannon Divergence test (a test using Kullback-Leibler Divergence), suffix trees by k-mer frequencies (Euclidean distance between frequency counts, get optimum $k$ called $l$), improved complete composition vector (distance between normalized frequency of positioned k-mers with different $k$),
+
 # References
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
