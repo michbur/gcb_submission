@@ -37,6 +37,21 @@ is calculated and used as another input feature value for S.'
 
 They have quite expanded motif usage for the bayesian neural network.
 
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["xie_discriminative_2015"]])))
+```
+
+Consecutive n-grams + random forests. Good n-gram reference: Manning and Schuetze, 1999. Benchmark with other methods.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
+cat(paste0("##", citet(refs[["behnam_geometric_2013"]])))
+```
+
+HGT as the example of phenomenon missed by alignment-based phylogenetics.
+
+Critique of $D^2$ statistic and introduction of its variant. Introduction of bichromatic closest
+pair. Article focused on the speed.
+
 # References
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
