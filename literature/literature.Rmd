@@ -21,7 +21,7 @@ refs <- read.bibtex("kmer_filo.bib", .Encoding = "UTF-8")
 cat(paste0("##", citet(refs[["saha_brief_2013"]])))
 ```
 
-They mention few investigations, most of them uses n-grams. The `r citet(refs[["wang_application_2000"]])` was the most appealing.
+They mention few investigations, most of them uses n-grams. The `r tmp <- citet(refs[["wang_application_2000"]])` was the most appealing.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
 cat(paste0("##", citet(refs[["wang_application_2000"]])))
@@ -62,7 +62,7 @@ Critique of $D^2$ statistic and introduction of its variant. Introduction of bic
 pair. Article focused on the speed.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
-cat(paste0("##", citet(refs[["yang_alignment_2013"]])))
+cat(paste0("##", citet(refs["yang_alignment_2013"])))
 ```
 
 Don't understand. K0mer based, may be used for phylogenetics. Does not require specyfying $k$.
@@ -73,8 +73,11 @@ cat(paste0("##", citet(refs[["bonham-carter_alignment-free_2014"]])))
 
 Good review. Description of: factor frequencies, BBC (mutual information of DNA 2-grams), FFP (number of words commong among two sequences), Jensen-Shannon Divergence test (a test using Kullback-Leibler Divergence), suffix trees by k-mer frequencies (Euclidean distance between frequency counts, get optimum $k$ called $l$), improved complete composition vector (distance between normalized frequency of positioned k-mers with different $k$),
 
+```{r, echo=FALSE,message=FALSE,warning=FALSE,results='markup'}
+search()
+
+works.cited
+```
+
 # References
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,results='asis'}
-sort(refs, sorting = "ynt")
-```
