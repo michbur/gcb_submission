@@ -62,7 +62,7 @@ levels(deg_region[["region"]]) <- c("n-region", "h-region", "c-region", "Mature\
 levels(deg_region[["group"]]) <- paste0("Group ", levels(deg_region[["group"]]))
 levels(deg_region[["enc"]]) <- c("Best\nsensitivity", "Best\nspecificity")
 
-
+#save("deg_region", file = "signalHsmm_groups.RData")
 p3 <- ggplot(deg_region, aes(x = region, y = freq, fill = enc, colour = enc)) +
   geom_bar(stat = "identity", position = "dodge") + 
   facet_wrap(~ group, nrow = 1) + 
@@ -119,6 +119,8 @@ p1 <- ggplot(dat_bestworst, aes(x = critertion, y = value, col = enc, fill = enc
   scale_colour_manual("Encoding: ", values = c("red", "blue")) +
   scale_fill_manual("Encoding: ", values = c(adjustcolor("red", 0.25), adjustcolor("blue", 0.25))) + 
   my_theme
+
+save()
 
 cairo_ps("./figures/enccomp.eps", width = 9, height = 8, onefile = FALSE)
 print(arrangeGrob(textGrob("A", x = 0.75, y = 0.9, gp=gpar(fontsize=22)), p1, 
